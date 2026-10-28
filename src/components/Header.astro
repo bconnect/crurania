@@ -1,0 +1,38 @@
+---
+/* 顶栏 —— 字标 + 细线 + 状态 */
+const { current = '' } = Astro.props;
+---
+<header>
+  <a class="wordmark" href="/">CRURANIA</a>
+  <nav>
+    <a href="/photography" class={current === 'photography' ? 'on' : ''}>摄影</a>
+    <a href="/reading" class={current === 'reading' ? 'on' : ''}>读书笔记</a>
+    <a href="/travel" class={current === 'travel' ? 'on' : ''}>旅游纪实</a>
+    <a href="/timeline" class={current === 'timeline' ? 'on' : ''}>大事记</a>
+    <a href="/works" class={current === 'works' ? 'on' : ''}>作品</a>
+  </nav>
+  <div class="est">EST. 2026 — A DIGITAL GARDEN</div>
+</header>
+
+<style>
+  header {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 28px 48px 20px;
+    border-bottom: 1px solid var(--ink);
+    flex-wrap: wrap; gap: 12px;
+  }
+  .wordmark { font-family: var(--serif); font-size: 20px; letter-spacing: .35em; font-weight: 700; }
+  nav { display: flex; gap: 28px; }
+  nav a {
+    font-size: 13px; letter-spacing: .12em; color: var(--gray);
+    padding-bottom: 3px; border-bottom: 1px solid transparent;
+    transition: color .2s, border-color .2s;
+  }
+  nav a:hover { color: var(--ink); }
+  nav a.on { color: var(--dawn); border-bottom-color: var(--dawn); }
+  .est { font-family: var(--mono); font-size: 11px; color: var(--gray); letter-spacing: .12em; }
+  @media (max-width: 860px) {
+    header { padding: 20px 22px 14px; }
+    nav { order: 3; width: 100%; justify-content: space-between; gap: 10px; }
+  }
+</style>

@@ -1,0 +1,18 @@
+---
+/* 页脚 —— 备案号 + 邮箱 */
+---
+<footer>
+  <span>© 2026 CRURANIA · 保留所有权利</span>
+  <span>京ICP备XXXXXXXX号-1 · <a href="mailto:stjoue@163.com">stjoue@163.com</a></span>
+</footer>
+
+<style>
+  footer {
+    padding: 36px 48px;
+    display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
+    font-family: var(--mono); font-size: 11px; color: var(--gray); letter-spacing: .08em;
+    flex-wrap: wrap;
+  }
+  footer a { color: var(--ink); border-bottom: 1px solid var(--dawn); }
+  @media (max-width: 860px) { footer { padding: 28px 22px; } }
+</style>

@@ -1,0 +1,103 @@
+# ============================================================
+# CRURANIA 内容管理后台配置（Decap CMS）
+# 你日常维护网站，只需要访问 https://crurania.com/admin
+# ============================================================
+
+backend:
+  # 部署阶段二选一：
+  # 方案A（推荐）：GitHub 仓库 —— 需要把仓库名改成你自己的
+  name: github
+  repo: your-username/crurania      # ← 改成你的 GitHub 仓库
+  branch: main
+  # 方案B：自建 git-gateway（阿里云自托管 GoTrue，国内访问最快）
+  # name: git-gateway
+
+# 媒体文件：在后台上传的照片会存到这里，自动提交到仓库
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+# 中文界面
+locale: zh_Hans
+
+# 编辑体验：预览样式用网站同款字体
+site_url: https://crurania.com
+display_url: https://crurania.com
+logo_url: /favicon.svg
+search: true
+
+collections:
+
+  # ---------- 01 摄影 ----------
+  - name: "photography"
+    label: "📷 摄影"
+    folder: "src/content/photography"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "标题", name: "title", widget: "string" }
+      - { label: "拍摄日期", name: "date", widget: "datetime", format: "YYYY-MM-DD" }
+      - { label: "地点", name: "location", widget: "string", required: false }
+      - { label: "一句话描述", name: "description", widget: "text", required: false }
+      - { label: "封面图", name: "cover", widget: "image", required: false, hint: "首页目录显示的缩略图" }
+      - { label: "标签", name: "tags", widget: "list", required: false }
+      - { label: "正文", name: "body", widget: "markdown" }
+
+  # ---------- 02 读书笔记 ----------
+  - name: "reading"
+    label: "📖 读书笔记"
+    folder: "src/content/reading"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "笔记标题", name: "title", widget: "string" }
+      - { label: "书名", name: "book", widget: "string" }
+      - { label: "作者", name: "author", widget: "string", required: false }
+      - { label: "阅读日期", name: "date", widget: "datetime", format: "YYYY-MM-DD" }
+      - { label: "评分", name: "rating", widget: "select", options: [1, 2, 3, 4, 5], required: false }
+      - { label: "状态", name: "status", widget: "select", options: ["在读", "读完", "搁置"], default: "在读" }
+      - { label: "标签", name: "tags", widget: "list", required: false }
+      - { label: "笔记正文", name: "body", widget: "markdown" }
+
+  # ---------- 03 旅游纪实 ----------
+  - name: "travel"
+    label: "✈️ 旅游纪实"
+    folder: "src/content/travel"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "标题", name: "title", widget: "string" }
+      - { label: "旅行日期", name: "date", widget: "datetime", format: "YYYY-MM-DD" }
+      - { label: "地点", name: "location", widget: "string", required: false, hint: "如：日本 · 京都" }
+      - { label: "一句话描述", name: "description", widget: "text", required: false }
+      - { label: "封面图", name: "cover", widget: "image", required: false }
+      - { label: "标签", name: "tags", widget: "list", required: false }
+      - { label: "游记正文", name: "body", widget: "markdown" }
+
+  # ---------- 04 大事记 ----------
+  - name: "timeline"
+    label: "📍 大事记"
+    folder: "src/content/timeline"
+    create: true
+    slug: "{{year}}-{{slug}}"
+    fields:
+      - { label: "年份", name: "year", widget: "number", value_type: "int" }
+      - { label: "事件标题", name: "title", widget: "string" }
+      - { label: "高亮显示", name: "highlight", widget: "boolean", default: false, hint: "时间轴上显示为实心琥珀色节点" }
+      - { label: "同年内排序", name: "order", widget: "number", default: 0, required: false }
+      - { label: "补充说明（可空）", name: "body", widget: "markdown", required: false }
+
+  # ---------- 05 作品 ----------
+  - name: "works"
+    label: "🎨 作品"
+    folder: "src/content/works"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "标题", name: "title", widget: "string" }
+      - { label: "创作日期", name: "date", widget: "datetime", format: "YYYY-MM-DD" }
+      - { label: "媒介", name: "medium", widget: "string", required: false, hint: "如：布面油画 / 数字 / 摄影" }
+      - { label: "作品年份", name: "year", widget: "number", required: false }
+      - { label: "一句话描述", name: "description", widget: "text", required: false }
+      - { label: "作品图", name: "cover", widget: "image", required: false }
+      - { label: "标签", name: "tags", widget: "list", required: false }
+      - { label: "作品说明", name: "body", widget: "markdown" }

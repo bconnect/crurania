@@ -1,0 +1,42 @@
+---
+/* 大事记时间轴预告 —— 首页底部横向节点 */
+interface Node { year: string; ev: string; hot: boolean; }
+const { nodes = [] }: { nodes?: Node[] } = Astro.props;
+---
+<section class="timeline-teaser">
+  <div class="section-label">大事记 · 时间轴预览 / Timeline Preview</div>
+  <div class="axis">
+    {nodes.slice(0, 5).map((n) => (
+      <div class={`node${n.hot ? ' hot' : ''}`}>
+        <div class="yr" set:html={n.year} />
+        <div class="ev">{n.ev}</div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .timeline-teaser { padding: 56px 48px 64px; border-bottom: 1px solid var(--line); }
+  .section-label {
+    font-family: var(--mono); font-size: 11px; color: var(--gray);
+    letter-spacing: .3em; text-transform: uppercase; margin-bottom: 32px;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .section-label::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+  .axis { display: flex; justify-content: space-between; position: relative; padding-top: 18px; gap: 16px; }
+  .axis::before { content: ""; position: absolute; top: 6px; left: 0; right: 0; height: 1px; background: var(--ink); }
+  .node { position: relative; width: 17%; }
+  .node::before {
+    content: ""; position: absolute; top: -16px; left: 0;
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--paper); border: 1.5px solid var(--ink);
+  }
+  .node.hot::before { background: var(--dawn); border-color: var(--dawn); }
+  .node .yr { font-family: var(--mono); font-size: 12px; font-weight: 600; letter-spacing: .08em; }
+  .node .ev { font-size: 12px; color: #55524c; margin-top: 4px; line-height: 1.6; }
+  @media (max-width: 860px) {
+    .timeline-teaser { padding: 40px 22px 48px; }
+    .node { width: auto; }
+    .node:nth-child(n+4) { display: none; }
+  }
+</style>

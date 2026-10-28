@@ -1,0 +1,62 @@
+---
+/* 全局布局 —— 瑞士网格 · 晨曦琥珀 */
+interface Props {
+  title?: string;
+  description?: string;
+}
+const { title = 'CRURANIA — 朱曦的数字花园', description = '拍照、读书、走路，把正在发生的一切放进这座花园里。' } = Astro.props;
+const pageTitle = title === 'CRURANIA — 朱曦的数字花园' ? title : `${title} · CRURANIA`;
+---
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={description} />
+  <title>{pageTitle}</title>
+  <style is:global>
+    :root {
+      --ink:   #1a1917;
+      --paper: #faf8f4;
+      --dawn:  #b8621e;
+      --gray:  #8c8880;
+      --line:  #e4e0d8;
+      --serif: Georgia, "Noto Serif SC", "Songti SC", "STSong", serif;
+      --sans:  "Helvetica Neue", "PingFang SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+      --mono:  "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: var(--paper); color: var(--ink);
+      font-family: var(--sans); font-size: 14px; line-height: 1.9;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    /* 文章正文排版（Markdown 渲染） */
+    .prose { max-width: 40em; margin: 0 auto; padding: 0 48px 96px; }
+    .prose h1, .prose h2, .prose h3 { font-family: var(--serif); line-height: 1.4; margin: 1.8em 0 .6em; }
+    .prose h1 { font-size: 30px; }
+    .prose h2 { font-size: 22px; }
+    .prose p  { margin: 1em 0; color: #33302b; }
+    .prose blockquote {
+      margin: 1.6em 0; padding: 2px 0 2px 1.4em;
+      border-left: 2px solid var(--dawn);
+      color: #55524c; font-family: var(--serif); font-size: 15px;
+    }
+    .prose img { margin: 2em auto; border: 1px solid var(--line); }
+    .prose code { font-family: var(--mono); font-size: 13px; background: #f0ede6; padding: 2px 6px; }
+    .prose pre  { background: #f0ede6; padding: 20px 24px; overflow-x: auto; margin: 1.6em 0; }
+    .prose pre code { background: none; padding: 0; }
+    .prose ul, .prose ol { padding-left: 1.4em; margin: 1em 0; }
+    .prose li { margin: .3em 0; }
+    .prose hr { border: none; border-top: 1px solid var(--line); margin: 2.5em 0; }
+
+    @media (max-width: 860px) { .prose { padding: 0 22px 64px; } }
+  </style>
+</head>
+<body>
+  <slot />
+</body>
+</html>

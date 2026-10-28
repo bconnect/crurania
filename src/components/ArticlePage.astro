@@ -1,0 +1,41 @@
+---
+/* 通用文章页核心 —— 五板块共用 */
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+import { render } from 'astro:content';
+const { entry, section, zh } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+const fmt = (date?: Date) => date ? `${date.getFullYear()}.${String(date.getMonth() + 1).padStart(2, '0')}.${String(date.getDate()).padStart(2, '0')}` : '';
+---
+<Header current={section} />
+<article>
+  <header class="art-head">
+    <div class="crumb"><a href="/">CRURANIA</a> / <a href={`/${section}`}>{zh}</a></div>
+    <h1>{d.title ?? d.book}</h1>
+    <div class="meta">
+      {d.date && <span>{fmt(d.date)}</span>}
+      {d.year && <span>{d.year}</span>}
+      {d.author && <span>{d.author}</span>}
+      {d.location && <span>{d.location}</span>}
+      {d.medium && <span>{d.medium}</span>}
+      {d.rating && <span class="stars">{'★'.repeat(d.rating)}</span>}
+      {d.status && <span class="pill">{d.status}</span>}
+    </div>
+  </header>
+  <div class="prose">
+    <Content />
+  </div>
+</article>
+<Footer />
+
+<style>
+  .art-head { padding: 72px 48px 40px; max-width: 40em; margin: 0 auto; }
+  .crumb { font-family: var(--mono); font-size: 11px; color: var(--gray); letter-spacing: .15em; margin-bottom: 24px; }
+  .crumb a { border-bottom: 1px solid var(--dawn); }
+  .art-head h1 { font-family: var(--serif); font-size: clamp(32px, 5vw, 48px); line-height: 1.25; font-weight: 700; }
+  .meta { display: flex; gap: 18px; margin-top: 20px; font-family: var(--mono); font-size: 12px; color: var(--gray); flex-wrap: wrap; }
+  .meta .stars { color: var(--dawn); letter-spacing: .2em; }
+  .meta .pill { border: 1px solid var(--line); border-radius: 99px; padding: 0 10px; }
+  @media (max-width: 860px) { .art-head { padding: 48px 22px 28px; } }
+</style>

@@ -1,0 +1,74 @@
+---
+/* 首页 —— 数据由五个内容集合实时驱动 */
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import TocRow from '../components/TocRow.astro';
+import TimelineTeaser from '../components/TimelineTeaser.astro';
+import Footer from '../components/Footer.astro';
+import { getCollection } from 'astro:content';
+
+const published = (c: any[]) => c.filter((e) => !e.data.draft);
+
+const photography = published(await getCollection('photography'));
+const reading     = published(await getCollection('reading'));
+const travel      = published(await getCollection('travel'));
+const works       = published(await getCollection('works'));
+const timeline    = published(await getCollection('timeline'));
+
+const byDateDesc = (a: any, b: any) => b.data.date - a.data.date;
+const latest = (arr: any[]) => [...arr].sort(byDateDesc)[0];
+
+const total = photography.length + reading.length + travel.length + works.length;
+
+const fmt = (d: Date) => `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}`;
+
+const sections = [
+  { num: '01', zh: '摄 影', en: 'Photography', key: 'photography', items: photography,
+    desc: '色彩与街拍。决定性瞬间的收集，光比主题更重要。' },
+  { num: '02', zh: '读书笔记', en: 'Reading Notes', key: 'reading', items: reading,
+    desc: '读过的书，留下痕迹的那些。《道德经》王弼版精读进行中。' },
+  { num: '03', zh: '旅游纪实', en: 'Travels', key: 'travel', items: travel,
+    desc: '到过的地方，见过的人。图文游记，按时间与地点归档。' },
+  { num: '04', zh: '大事记', en: 'Timeline', key: 'timeline', items: timeline,
+    desc: '时间长河中的坐标。人生节点、世界事件，并列呈现。' },
+  { num: '05', zh: '作 品', en: 'Works', key: 'works', items: works,
+    desc: '工程与艺术的交叉地带。芯片与画笔，在此和解。' },
+];
+
+const axisNodes = [...timeline]
+  .sort((a: any, b: any) => b.data.year - a.data.year)
+  .slice(0, 5)
+  .map((e: any) => ({ year: String(e.data.year), ev: e.data.title, hot: e.data.highlight }));
+---
+<Base>
+  <Header />
+  <Hero total={total} />
+
+  <nav class="toc">
+    {sections.map((s) => {
+      const l = s.key === 'timeline' ? s.items[0] : latest(s.items);
+      const hasLatest = s.key === 'timeline' ? s.items.length > 0 : !!l;
+      return (
+        <TocRow
+          num={s.num}
+          zh={s.zh}
+          en={s.en}
+          desc={s.desc}
+          href={`/${s.key}`}
+          latestTitle={hasLatest ? (l.data.title ?? l.data.book ?? '') : undefined}
+          latestDate={hasLatest ? (s.key === 'timeline' ? `${l.data.year}` : fmt(l.data.date)) : undefined}
+          count={s.items.length}
+        />
+      );
+    })}
+  </nav>
+
+  <TimelineTeaser nodes={axisNodes} />
+  <Footer />
+</Base>
+
+<style>
+  .toc { padding: 0 48px; }
+  @media (max-width: 860px) { .toc { padding: 0 22px; } }
+</style>

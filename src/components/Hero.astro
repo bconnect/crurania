@@ -1,0 +1,29 @@
+---
+/* Hero —— 首页大标题 */
+const { total = 0 } = Astro.props;
+const today = new Date().toISOString().slice(0, 10).replace(/-/g, '.');
+---
+<section class="hero">
+  <div class="kicker">朱 曦 / ZHU XI — 数字花园</div>
+  <h1>在记录中<br /><em>生长</em>。</h1>
+  <p class="sub">
+    IC 设计工程师，前排球运动员。拍照、读书、走路，把正在发生的一切放进这座花园里。
+    这里不是博客，没有更新压力——内容按自己的节奏生长，像植物一样。
+  </p>
+  <div class="meta">
+    <span><b>5</b> 个板块</span>
+    <span><b>{total}</b> 篇记录</span>
+    <span>最近更新 <b>{today}</b></span>
+  </div>
+</section>
+
+<style>
+  .hero { padding: 96px 48px 72px; border-bottom: 1px solid var(--line); }
+  .kicker { font-family: var(--mono); font-size: 12px; color: var(--dawn); letter-spacing: .3em; margin-bottom: 28px; }
+  .hero h1 { font-family: var(--serif); font-size: clamp(56px, 9vw, 112px); line-height: 1.08; font-weight: 700; letter-spacing: .02em; }
+  .hero h1 em { font-style: normal; color: var(--dawn); }
+  .hero .sub { margin-top: 32px; max-width: 34em; color: #55524c; font-size: 15px; }
+  .hero .meta { margin-top: 40px; display: flex; gap: 48px; font-family: var(--mono); font-size: 11px; color: var(--gray); letter-spacing: .08em; }
+  .hero .meta b { color: var(--ink); font-weight: 600; }
+  @media (max-width: 860px) { .hero { padding: 64px 22px 48px; } .hero .meta { gap: 24px; flex-wrap: wrap; } }
+</style>

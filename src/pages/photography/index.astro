@@ -1,0 +1,10 @@
+---
+import Base from '../../layouts/Base.astro';
+import SectionList from '../../components/SectionList.astro';
+import { getCollection } from 'astro:content';
+const items = (await getCollection('photography')).filter((e) => !e.data.draft)
+  .sort((a, b) => (b.data.date ?? 0) - (a.data.date ?? 0));
+---
+<Base title="摄 影">
+  <SectionList section="photography" zh="摄 影" en="Photography" items={items} />
+</Base>

@@ -1,0 +1,13 @@
+---
+import Base from '../../layouts/Base.astro';
+import ArticlePage from '../../components/ArticlePage.astro';
+import { getCollection, render } from 'astro:content';
+export async function getStaticPaths() {
+  const entries = (await getCollection('works')).filter((e) => !e.data.draft);
+  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+const { entry } = Astro.props;
+---
+<Base title={entry.data.title ?? entry.data.book ?? '作 品'}>
+  <ArticlePage entry={entry} section="works" zh="作 品" />
+</Base>

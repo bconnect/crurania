@@ -1,0 +1,33 @@
+{
+  "$ref": "#/definitions/timeline",
+  "definitions": {
+    "timeline": {
+      "type": "object",
+      "properties": {
+        "year": {
+          "type": "integer"
+        },
+        "title": {
+          "type": "string"
+        },
+        "highlight": {
+          "type": "boolean",
+          "default": false
+        },
+        "order": {
+          "type": "number",
+          "default": 0
+        },
+        "$schema": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "year",
+        "title"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

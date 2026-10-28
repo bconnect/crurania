@@ -1,0 +1,57 @@
+---
+/* 目录行 —— 首页板块入口（杂志目录式） */
+interface Props {
+  num: string;
+  zh: string;
+  en: string;
+  desc: string;
+  latestTitle?: string;
+  latestDate?: string;
+  count?: number | string;
+  href: string;
+}
+const { num, zh, en, desc, latestTitle, latestDate, count, href } = Astro.props;
+---
+<a class="toc-row" href={href}>
+  <div class="toc-num">{num}</div>
+  <div class="toc-title">
+    <span class="zh">{zh}</span>
+    <span class="en">{en}</span>
+  </div>
+  <div class="toc-desc">{desc}</div>
+  <div class="toc-latest">
+    {latestTitle ? (
+      <>
+        最新 — {latestTitle}<br />
+        <span class="date">{latestDate}</span>
+        {count !== undefined && <> · {count} 篇</>}
+      </>
+    ) : (
+      <span class="date">即将生长</span>
+    )}
+  </div>
+</a>
+
+<style>
+  .toc-row {
+    display: grid;
+    grid-template-columns: 96px 1fr 1.1fr auto;
+    gap: 32px; align-items: baseline;
+    padding: 30px 0;
+    border-bottom: 1px solid var(--line);
+    transition: background .25s ease, padding-left .25s ease;
+  }
+  .toc-row:hover { background: #f3efe7; padding-left: 16px; }
+  .toc-num { font-family: var(--serif); font-size: 44px; font-weight: 300; color: #cfc9bc; line-height: 1; transition: color .25s ease; }
+  .toc-row:hover .toc-num { color: var(--dawn); }
+  .toc-title { display: flex; flex-direction: column; gap: 4px; }
+  .toc-title .zh { font-family: var(--serif); font-size: 22px; font-weight: 700; letter-spacing: .1em; }
+  .toc-title .en { font-family: var(--mono); font-size: 11px; color: var(--gray); letter-spacing: .25em; text-transform: uppercase; }
+  .toc-desc { color: #55524c; font-size: 13px; max-width: 30em; }
+  .toc-latest { text-align: right; font-family: var(--mono); font-size: 11px; color: var(--gray); line-height: 1.8; white-space: nowrap; }
+  .toc-latest .date { color: var(--dawn); }
+  @media (max-width: 860px) {
+    .toc-row { grid-template-columns: 56px 1fr; gap: 16px; }
+    .toc-desc, .toc-latest { display: none; }
+  }
+</style>

@@ -7,7 +7,7 @@ backend:
   # 部署阶段二选一：
   # 方案A（推荐）：GitHub 仓库 —— 需要把仓库名改成你自己的
   name: github
-  repo: your-username/crurania      # ← 改成你的 GitHub 仓库
+  repo: bconnect/crurania
   branch: main
   # 方案B：自建 git-gateway（阿里云自托管 GoTrue，国内访问最快）
   # name: git-gateway

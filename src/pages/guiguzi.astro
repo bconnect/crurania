@@ -1,0 +1,251 @@
+---
+/* 鬼谷子 · 纵横学知识图谱 —— 专题页
+   数据：方案三整理的《鬼谷子》节点/连边体系（根-卷-篇-概念四级 + 交叉引用）
+   渲染：本地 ECharts 力导向图（拖拽/缩放/悬停高亮），点击节点右侧出详解。
+   配色沿用站点：纸底、墨色、晨曦琥珀。 */
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+<Base title="鬼谷子 · 纵横学知识图谱" description="《鬼谷子》纵横学知识图谱——上卷察势、中卷谋略、下卷内修，十五篇交互式力导向图谱。">
+  <Header current="guiguzi" />
+  <main class="ggz">
+    <header class="head">
+      <div class="crumb"><a href="/">CRURANIA</a> / 专题</div>
+      <h1>鬼谷子 <span class="en">GUIGUZI · KNOWLEDGE GRAPH</span></h1>
+      <p class="lede">
+        战国纵横家开山经典，融道家天道、阴阳变动与心理游说之术。
+        <b>上卷</b>察势立论，<b>中卷</b>游说决断，<b>下卷</b>内修治国——十五篇一图收束。
+        拖动节点整理布局，滚轮缩放，<b>点击任意节点看详解</b>。
+      </p>
+    </header>
+
+    <div class="stage">
+      <div id="graph" role="img" aria-label="鬼谷子知识图谱：根节点连接三卷，三卷各辖若干篇章，篇与篇之间有交叉引用"></div>
+      <aside id="panel" aria-live="polite"></aside>
+    </div>
+  </main>
+  <Footer editUrl="https://github.com/bconnect/crurania/edit/main/src/pages/guiguzi.astro" />
+
+  <script is:inline src="/vendor/echarts.min.js"></script>
+  <script is:inline>
+    const INFO = {
+      root: {
+        kick: '根节点 · ROOT', name: '《鬼谷子》纵横学体系',
+        def: '战国纵横家开山经典，融合道家天道、阴阳变动与心理游说之术。相传为鬼谷子（王诩）所著，苏秦、张仪之师承。',
+        rules: ['哲学基石：阴道阳取', '方法论眼：见变化之朕', '生存纲领：避亡趋存', '结构：上卷察势 · 中卷谋略 · 下卷内修'],
+      },
+      vol1: {
+        kick: '上卷 · VOLUME I', name: '立论总纲与察势之道',
+        def: '情报与关系建立。先学会开阖沉默、反听钓语，再谈进说与补隙——察势是纵横的第一课。',
+        rules: ['捭阖第一 · 反应第二', '内揵第三 · 抵巇第四'],
+      },
+      vol2: {
+        kick: '中卷 · VOLUME II', name: '游说心术与决策谋略',
+        def: '博弈与实战控制。飞箝忤合以择事，揣摩权谋以制人，决篇断疑，符言守位——游说者的工具箱。',
+        rules: ['飞箝第五 — 符言第十二', '八篇连环：诱 → 择 → 探 → 摩 → 言 → 谋 → 决 → 守'],
+      },
+      vol3: {
+        kick: '下卷 · VOLUME III', name: '内修蓄养与治国守则',
+        def: '内功与长远天道。外御之术前，先内炼精神意气；治国以持枢为纲，顺四时而不逆。',
+        rules: ['本经阴符七术 · 持枢 · 中经', '由内及外：盛神 → 养志 → 实意 → 分威 → 散势 → 转圆 → 损兑'],
+      },
+      c1: {
+        kick: '上卷 · 第一篇', name: '捭阖术',
+        def: '捭为开、为言、为阳；阖为闭、为默、为阴。全书的总开关：以语言的开合调控信息的进出。',
+        rules: ['口者，心之门户——言辞是探知与表达意图的枢纽', '随其嗜欲以见其志意——顺应对方偏好以侦测真实动机', '欲捭贵周，欲阖贵密——言说要周详无漏，沉默要隐秘不泄'],
+      },
+      c2: {
+        kick: '上卷 · 第二篇', name: '反应术',
+        def: '以反求覆：通过反向论难与反复试探获取真实情报。对方静默时，用回声式探问让他开口。',
+        rules: ['知之始己——自知而后知人', '以象动之，以钓语合事——形象类比加诱导言辞套取实情', '欲闻其声反默，欲张反敛，欲取反与——反向施策诱导反应'],
+      },
+      c3: {
+        kick: '上卷 · 第三篇', name: '内揵术',
+        def: '内为进说辞，揵为揵所谋：从内心深处与掌权者建立稳固信任，如钥匙入锁，转圜自如。',
+        rules: ['四结之术——结以道德、结以党友、结以财货、结以采色', '得其情，乃制其术——窥破底牌再定对策，志不合不强谋', '以变求内者，若管取揵——随情势灵活求变，开锁般顺畅'],
+      },
+      c4: {
+        kick: '上卷 · 第四篇', name: '抵巇术',
+        def: '巇为缝隙，抵为补或夺。万物发展必有裂痕——洞察裂缝的性质，决定做修补匠还是变革者。',
+        rules: ['物有自然，事有合离——矛盾裂痕是常态', '抵而塞之——世可治则弥缝补漏（如五帝佐世）', '抵而得之——不可治则破旧立新，取而代之（如三王革命）'],
+      },
+      c5: {
+        kick: '中卷 · 第五篇', name: '飞箝术',
+        def: '作声誉以飞扬之，因其所好以钳制之：先给足名声与甜头，再以此为缰绳牵引对方。',
+        rules: ['用之于天下——度权量能，考查天时地形人口与君主好恶', '用之于人——空往而实来，缀而不失', '使其随我意进退纵横——声誉是钩，所好是线'],
+      },
+      c6: {
+        kick: '中卷 · 第六篇', name: '忤合术',
+        def: '忤为背离，合为趋从。没有永恒的效忠对象，只有永恒的事理——动态选择值得托付的阵营。',
+        rules: ['世无常贵，事无常师——打破愚忠，因事为制', '计谋不两忠，必有反忤——合于此必忤于彼', '伊尹五就桀汤，吕尚三入殷周——反复忤合，只求真合'],
+      },
+      c7: {
+        kick: '中卷 · 第七篇', name: '揣篇',
+        def: '揣为度量：既量一国的综合国力，也探君心的隐秘好恶。游说之前，先做足情报功课。',
+        rules: ['量权——审察人口、地形、财富与诸侯亲疏', '揣情——投其所好、避其所忌', '极喜时察其所欲，极惧时察其所恶——情绪极处，真情毕露'],
+      },
+      c8: {
+        kick: '中卷 · 第八篇', name: '摩篇',
+        def: '摩为切磋试探、抚弄心理：揣知其心之后，以十种手法摩而验之。揣与摩互为表里。',
+        rules: ['摩意十法——平、正、喜、怒、名、行、廉、信、利、卑', '隐貌逃情，塞窌匿端——成事而无患', '谋之于阴，成之于阳——策划隐匿，功效显于明处'],
+      },
+      c9: {
+        kick: '中卷 · 第九篇', name: '权篇',
+        def: '权为言辞的权衡修饰。同样的意思，对不同人说不同的话——言辞没有标准版，只有适配版。',
+        rules: ['与智者依于博，与富者依于高，与贫者依利，与愚者依于锐', '应对者，利辞也——先顺其意，再导其行', '饰言者，假之也——修辞的本质是借势'],
+      },
+      c10: {
+        kick: '中卷 · 第十篇', name: '谋篇',
+        def: '谋为因势施策。最高原则只有一条：制人而不制于人——掌握主动，让对方跟着你的节奏走。',
+        rules: ['因其疑以变之——顺着对方的犹疑调整自己的进言', '立三仪生奇——设上中下三策参验，奇变不止', '事贵制人，不贵见制于人——主动权即生死权'],
+      },
+      c11: {
+        kick: '中卷 · 第十一篇', name: '决篇',
+        def: '决为断疑定计。当断不断，反受其乱——依据五种情境选择决断方式，一切以趋利避害为纲。',
+        rules: ['决断五法——阳德、阴贼、信诚、蔽匿、平素', '去患者决之，从福者决之——利弊两端，皆是决断时机', '趋利避害，为万事之基'],
+      },
+      c12: {
+        kick: '中卷 · 第十二篇', name: '符言',
+        def: '符为内符外应：君主内守与驭下之术。位高者不自乱，则群臣之实自然符应于其名。',
+        rules: ['人主九守——主位、主明、主德、主赏、主问、主因、主周、主恭、主名', '循名责实——听其言而察其行', '安徐正静，其被节无不肉——从容静默，全局自明'],
+      },
+      c13: {
+        kick: '下卷 · 第十三篇', name: '本经阴符七术',
+        def: '以内炼精神统摄外在行为：神、志、意、威、势、计、决，七环相扣，取法七种灵物。',
+        rules: ['盛神法五龙——养气通神', '养志法灵龟——固志节欲', '实意法螣蛇——定虑生谋', '分威法伏熊——蓄威分敌', '散势法鸷鸟——伺间击发', '转圆法猛兽——圆方转化，无穷之计', '损兑法灵蓍——减损直率，多求机变'],
+      },
+      c14: {
+        kick: '下卷 · 第十四篇', name: '持枢',
+        def: '持为守，枢为天枢。治国如务农：顺春生、夏长、秋收、冬藏之序——逆天时而动，必败。',
+        rules: ['春生、夏长、秋收、冬藏——自然天枢不可逆', '持枢者，施之于人事——把天时逻辑代入治国的节奏', '逆之者，虽成必败'],
+      },
+      c15: {
+        kick: '下卷 · 第十五篇', name: '中经',
+        def: '由中经外，救拘解难：以内修之功推及外御之术，处理世间七类难局。',
+        rules: ['见形为容，闻声知音——观形察色，听声辨心', '解仇斗郄——化解小怨，挑明大隙', '缀去、却语——留余味与藏后手', '摄心、守义——收服其心，守住大义'],
+      },
+    };
+
+    const NODES = [
+      { id: 'root', name: '鬼谷子', category: 0, symbolSize: 42, des: '纵横学体系总纲' },
+      { id: 'vol1', name: '上卷 · 察势总纲', category: 1, symbolSize: 28, des: '立论总纲与察势之道' },
+      { id: 'vol2', name: '中卷 · 谋略心术', category: 1, symbolSize: 28, des: '游说心术与决策谋略' },
+      { id: 'vol3', name: '下卷 · 内修天道', category: 1, symbolSize: 28, des: '内修蓄养与治国守则' },
+      { id: 'c1', name: '捭阖', category: 2, des: '阴阳开阖，见变化之朕' },
+      { id: 'c2', name: '反应', category: 2, des: '反听反问，象比钓语' },
+      { id: 'c3', name: '内揵', category: 2, des: '心意相合，管取揵' },
+      { id: 'c4', name: '抵巇', category: 2, des: '察隙补漏，抵塞或抵得' },
+      { id: 'c5', name: '飞箝', category: 2, des: '作誉飞扬，利益牵持' },
+      { id: 'c6', name: '忤合', category: 2, des: '因事为制，择主事从' },
+      { id: 'c7', name: '揣篇', category: 2, des: '量权考力，极情探心' },
+      { id: 'c8', name: '摩篇', category: 2, des: '隐貌逃情，阴谋阳成' },
+      { id: 'c9', name: '权篇', category: 2, des: '饰言因人，见人说法' },
+      { id: 'c10', name: '谋篇', category: 2, des: '事贵制人，三仪生奇' },
+      { id: 'c11', name: '决篇', category: 2, des: '决疑五法，趋利避害' },
+      { id: 'c12', name: '符言', category: 2, des: '名实相符，君道九守' },
+      { id: 'c13', name: '阴符七术', category: 2, des: '盛神养志，内炼神意' },
+      { id: 'c14', name: '持枢', category: 2, des: '顺随时序，天道治国' },
+      { id: 'c15', name: '中经', category: 2, des: '振穷趋急，外御七术' },
+    ];
+    const LINKS = [
+      { source: 'root', target: 'vol1' }, { source: 'root', target: 'vol2' }, { source: 'root', target: 'vol3' },
+      { source: 'vol1', target: 'c1' }, { source: 'vol1', target: 'c2' },
+      { source: 'vol1', target: 'c3' }, { source: 'vol1', target: 'c4' },
+      { source: 'vol2', target: 'c5' }, { source: 'vol2', target: 'c6' },
+      { source: 'vol2', target: 'c7' }, { source: 'vol2', target: 'c8' },
+      { source: 'vol2', target: 'c9' }, { source: 'vol2', target: 'c10' },
+      { source: 'vol2', target: 'c11' }, { source: 'vol2', target: 'c12' },
+      { source: 'vol3', target: 'c13' }, { source: 'vol3', target: 'c14' }, { source: 'vol3', target: 'c15' },
+      { source: 'c1', target: 'c2', relation: '由开阖生反应', lineStyle: { type: 'dashed', color: '#b8621e', curveness: 0.25 }, label: { show: true, fontSize: 10, color: '#b8621e' } },
+      { source: 'c7', target: 'c8', relation: '揣摩互为表里', lineStyle: { type: 'dashed', color: '#b8621e', curveness: 0.25 }, label: { show: true, fontSize: 10, color: '#b8621e' } },
+      { source: 'c9', target: 'c10', relation: '权谋相辅相成', lineStyle: { type: 'dashed', color: '#b8621e', curveness: 0.25 }, label: { show: true, fontSize: 10, color: '#b8621e' } },
+      { source: 'c13', target: 'c15', relation: '由内经外', lineStyle: { type: 'dashed', color: '#b8621e', curveness: 0.25 }, label: { show: true, fontSize: 10, color: '#b8621e' } },
+    ];
+
+    const PANEL = document.getElementById('panel');
+    function renderPanel(id) {
+      const d = INFO[id] || INFO.root;
+      PANEL.innerHTML =
+        '<div class="p-kick">' + d.kick + '</div>' +
+        '<h2 class="p-name">' + d.name + '</h2>' +
+        '<p class="p-def">' + d.def + '</p>' +
+        '<ul class="p-rules">' + d.rules.map(function (r) { return '<li>' + r + '</li>'; }).join('') + '</ul>';
+    }
+    renderPanel('root');
+
+    const chart = echarts.init(document.getElementById('graph'));
+    chart.setOption({
+      animationDuration: 1200,
+      tooltip: {
+        trigger: 'item',
+        backgroundColor: '#1a1917', borderWidth: 0, padding: [10, 14],
+        textStyle: { color: '#f5efe4', fontSize: 12 },
+        formatter: function (p) {
+          if (p.dataType === 'edge') return p.data.relation || '';
+          return p.data.des ? '<b>' + p.name + '</b><br/>' + p.data.des : p.name;
+        },
+      },
+      legend: {
+        bottom: 8, left: 12, icon: 'circle', itemWidth: 9, itemHeight: 9, itemGap: 22,
+        textStyle: { color: '#8c8880', fontSize: 11, fontFamily: '"SF Mono", Menlo, monospace' },
+        data: ['根节点', '典籍卷次', '核心篇章'],
+      },
+      series: [{
+        type: 'graph', layout: 'force', roam: true, draggable: true,
+        categories: [
+          { name: '根节点', itemStyle: { color: '#b8621e' } },
+          { name: '典籍卷次', itemStyle: { color: '#1a1917' } },
+          { name: '核心篇章', itemStyle: { color: '#c98a4b' } },
+        ],
+        force: { repulsion: 420, edgeLength: [70, 150], gravity: 0.08, friction: 0.3 },
+        label: {
+          show: true, position: 'right', distance: 6,
+          fontSize: 12, color: '#1a1917',
+          fontFamily: '"Helvetica Neue", "PingFang SC", "Noto Sans SC", sans-serif',
+        },
+        labelLayout: { hideOverlap: true },
+        emphasis: { focus: 'adjacency', lineStyle: { width: 2.5 }, label: { fontWeight: 'bold' } },
+        lineStyle: { color: 'source', opacity: 0.4, width: 1.2, curveness: 0.05 },
+        data: NODES,
+        links: LINKS,
+      }],
+    });
+    chart.on('click', function (p) { if (p.dataType === 'node') renderPanel(p.data.id); });
+    window.addEventListener('resize', function () { chart.resize(); });
+  </script>
+
+  <style>
+    .ggz { display: flex; flex-direction: column; min-height: calc(100vh - 120px); }
+    .head { padding: 56px 48px 28px; }
+    .crumb { font-family: var(--mono); font-size: 11px; color: var(--gray); letter-spacing: .15em; margin-bottom: 20px; }
+    .crumb a { border-bottom: 1px solid var(--dawn); }
+    .head h1 { font-family: var(--serif); font-size: clamp(34px, 5vw, 54px); font-weight: 700; }
+    .head h1 .en { font-family: var(--mono); font-size: 12px; color: var(--dawn); letter-spacing: .3em; margin-left: 16px; vertical-align: middle; }
+    .lede { margin-top: 18px; max-width: 46em; color: #55524c; font-size: 15px; }
+    .lede b { color: var(--dawn); font-weight: 600; }
+
+    .stage { flex: 1; display: flex; border-top: 1px solid var(--line); min-height: 64vh; }
+    #graph { flex: 1; min-width: 0; }
+    #panel {
+      width: 330px; flex-shrink: 0; border-left: 1px solid var(--line);
+      padding: 32px 28px; overflow-y: auto; background: #f5f2eb;
+    }
+    .p-kick { font-family: var(--mono); font-size: 10px; letter-spacing: .28em; color: var(--dawn); margin-bottom: 12px; }
+    .p-name { font-family: var(--serif); font-size: 26px; font-weight: 700; line-height: 1.3; }
+    .p-def { margin-top: 14px; font-size: 14px; color: #33302b; }
+    .p-rules { margin-top: 18px; list-style: none; padding: 0; }
+    .p-rules li {
+      position: relative; padding: 10px 0 10px 20px; font-size: 13.5px; color: #55524c;
+      border-top: 1px dashed var(--line);
+    }
+    .p-rules li::before { content: ''; position: absolute; left: 2px; top: 19px; width: 7px; height: 7px; background: var(--dawn); }
+
+    @media (max-width: 860px) {
+      .head { padding: 40px 22px 22px; }
+      .stage { flex-direction: column; }
+      #graph { height: 56vh; }
+      #panel { width: 100%; border-left: none; border-top: 1px solid var(--line); }
+    }
+  </style>
+</Base>

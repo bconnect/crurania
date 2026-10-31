@@ -1,8 +1,13 @@
 ---
-/* 页脚 —— 备案号 + 邮箱 */
+/* 页脚 —— 备案号 + 邮箱 + 内容维护入口 */
+const { editUrl, editLabel } = Astro.props;
 ---
 <footer>
   <span>© 2026 CRURANIA · 保留所有权利</span>
+  <span class="maint">
+    <a href="/write">✎ 写作台</a>
+    {editUrl && <a href={editUrl} target="_blank" rel="noopener">{editLabel ?? '✎ 在 GitHub 编辑本页 ↗'}</a>}
+  </span>
   <span>京ICP备XXXXXXXX号-1 · <a href="mailto:stjoue@163.com">stjoue@163.com</a></span>
 </footer>
 
@@ -14,5 +19,6 @@
     flex-wrap: wrap;
   }
   footer a { color: var(--ink); border-bottom: 1px solid var(--dawn); }
+  .maint { display: flex; gap: 20px; }
   @media (max-width: 860px) { footer { padding: 28px 22px; } }
 </style>

@@ -1,0 +1,168 @@
+---
+/* DawnField —— 晨曦粒子场（首页 Hero 背景）
+   mechanics 参考 BlueYard 的黑洞光标搅动粒子；
+   配色用本站晨曦琥珀：深墨夜色 (#14100c) 上漂浮的琥珀金光。
+   零依赖，Canvas 2D + 加色混合，移动端友好。 */
+const LABELS = [
+  { zh: '摄 影',     en: 'PHOTOGRAPHY', x: 12, y: 16, d: 0 },
+  { zh: '读书笔记',   en: 'READING',     x: 84, y: 13, d: 1.6 },
+  { zh: '旅游纪实',   en: 'TRAVELS',     x: 88, y: 56, d: 3.1 },
+  { zh: '大事记',     en: 'TIMELINE',    x: 9,  y: 74, d: 4.4 },
+  { zh: '作 品',     en: 'WORKS',       x: 78, y: 86, d: 5.8 },
+];
+---
+<canvas class="dawn-field" aria-hidden="true"></canvas>
+<div class="field-labels" aria-hidden="true">
+  {LABELS.map((l) => (
+    <span class="fl" style={`left:${l.x}%; top:${l.y}%; animation-delay:${l.d}s`}>
+      <b>{l.zh}</b><i>{l.en}</i>
+    </span>
+  ))}
+</div>
+
+<script>
+(function () {
+  const canvas = document.querySelector('.dawn-field');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isMobile = matchMedia('(max-width: 860px)').matches;
+
+  // —— 琥珀色阶：深赭 → 金 → 晨曦白 ——
+  const RAMP = [
+    [184, 98, 30],   // #b8621e 主色
+    [206, 120, 44],
+    [228, 152, 74],
+    [240, 196, 128],
+    [246, 228, 188], // 晨光白
+  ];
+  const WEIGHT = [0.34, 0.28, 0.2, 0.12, 0.06];
+
+  // 预渲染 5 张发光粒子贴图（比逐粒画圆快一个数量级）
+  const SPRITES = RAMP.map(([r, g, b]) => {
+    const s = document.createElement('canvas');
+    s.width = s.height = 64;
+    const c = s.getContext('2d');
+    const grad = c.createRadialGradient(32, 32, 0, 32, 32, 32);
+    grad.addColorStop(0, `rgba(${r},${g},${b},1)`);
+    grad.addColorStop(0.28, `rgba(${r},${g},${b},.55)`);
+    grad.addColorStop(1, `rgba(${r},${g},${b},0)`);
+    c.fillStyle = grad;
+    c.fillRect(0, 0, 64, 64);
+    return s;
+  });
+  function pickSprite() {
+    const r = Math.random(); let acc = 0;
+    for (let i = 0; i < WEIGHT.length; i++) { acc += WEIGHT[i]; if (r < acc) return i; }
+    return 0;
+  }
+
+  let W = 0, H = 0, DPR = 1, parts = [], raf = null, running = false, t0 = performance.now();
+  const mouse = { x: -9999, y: -9999 };
+
+  function resize() {
+    const rect = canvas.parentElement.getBoundingClientRect();
+    DPR = Math.min(window.devicePixelRatio || 1, isMobile ? 1.5 : 2);
+    W = rect.width; H = rect.height;
+    canvas.width = W * DPR; canvas.height = H * DPR;
+    canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    seed();
+  }
+
+  function seed() {
+    // 粒子数随面积伸缩，手机上不超 900
+    const n = reduce ? 700 : Math.max(500, Math.min(1500, Math.floor((W * H) / (isMobile ? 900 : 750))));
+    parts = [];
+    for (let i = 0; i < n; i++) {
+      const x = Math.random() * W, y = Math.random() * H;
+      parts.push({
+        x, y, hx: x, hy: y,           // 位置 + 归宿点（松手后缓缓回家）
+        vx: 0, vy: 0,
+        sp: pickSprite(),
+        size: 6 + Math.random() * (isMobile ? 14 : 22),
+        base: 0.14 + Math.random() * 0.4,
+        tw: Math.random() * Math.PI * 2,   // 闪烁相位
+        tws: 0.4 + Math.random() * 1.2,    // 闪烁速度
+      });
+    }
+  }
+
+  function frame(now) {
+    const t = (now - t0) / 1000;
+    ctx.clearRect(0, 0, W, H);
+    ctx.globalCompositeOperation = 'lighter';
+
+    const R = Math.min(W, H) * 0.38;      // 引力半径
+    for (const p of parts) {
+      // 流场缓漂：正弦叠加出"烟"的走势
+      const a = Math.sin(p.x * 0.0016 + t * 0.12) + Math.cos(p.y * 0.0019 - t * 0.09);
+      p.vx += Math.cos(a) * 0.006;
+      p.vy += Math.sin(a) * 0.006 - 0.0028;  // 微向上浮，像热气/晨光
+
+      // 鼠标引力 + 切向搅动（黑洞手感，但轻，像搅一勺蜜）
+      const dx = mouse.x - p.x, dy = mouse.y - p.y;
+      const d2 = dx * dx + dy * dy;
+      if (d2 < R * R && d2 > 1) {
+        const d = Math.sqrt(d2), f = 1 - d / R;
+        const pull = f * f * 0.5;
+        p.vx += (dx / d) * pull + (-dy / d) * pull * 0.75;  // 径向 + 旋涡
+        p.vy += (dy / d) * pull + (dx / d) * pull * 0.75;
+      }
+
+      // 回归宿 + 阻尼
+      p.vx += (p.hx - p.x) * 0.00045;
+      p.vy += (p.hy - p.y) * 0.00045;
+      p.vx *= 0.93; p.vy *= 0.93;
+      p.x += p.vx; p.y += p.vy;
+
+      const alpha = p.base * (0.6 + 0.4 * Math.sin(p.tw + t * p.tws));
+      ctx.globalAlpha = Math.max(0, alpha);
+      const s = p.size;
+      ctx.drawImage(SPRITES[p.sp], p.x - s / 2, p.y - s / 2, s, s);
+    }
+    ctx.globalAlpha = 1;
+    if (running) raf = requestAnimationFrame(frame);
+  }
+
+  function start() { if (!running && !reduce) { running = true; raf = requestAnimationFrame(frame); } }
+  function stop() { running = false; if (raf) cancelAnimationFrame(raf); }
+
+  // 事件：鼠标 / 手指 / 离开即散
+  const host = canvas.parentElement;
+  host.addEventListener('pointermove', (e) => {
+    const r = canvas.getBoundingClientRect();
+    mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top;
+  });
+  host.addEventListener('pointerleave', () => { mouse.x = -9999; mouse.y = -9999; });
+  document.addEventListener('visibilitychange', () => document.hidden ? stop() : start());
+
+  resize();
+  window.addEventListener('resize', resize);
+
+  if (reduce) {
+    // 尊重系统减少动态偏好：画一张静态星野
+    running = true; frame(t0 + 16); running = false;
+  } else {
+    start();
+  }
+})();
+</script>
+
+<style>
+  .dawn-field { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .field-labels { position: absolute; inset: 0; pointer-events: none; }
+  .fl {
+    position: absolute; transform: translate(-50%, -50%);
+    font-family: var(--mono); text-align: center; line-height: 1.6;
+    color: rgba(240, 196, 128, 0.5);
+    animation: drift 9s ease-in-out infinite alternate;
+  }
+  .fl b { display: block; font-weight: 400; font-size: 11px; letter-spacing: .35em; }
+  .fl i { display: block; font-style: normal; font-size: 9px; letter-spacing: .22em; opacity: .55; }
+  @keyframes drift {
+    from { margin-top: -6px; margin-left: -4px; }
+    to   { margin-top: 6px;  margin-left: 4px; }
+  }
+  @media (max-width: 860px) { .fl b { font-size: 9px; } .fl i { display: none; } }
+</style>

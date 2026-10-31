@@ -1,0 +1,192 @@
+---
+/* 写作台 —— 内容自助维护入口
+   零命令行：GitHub 网页编辑器直达，点按钮 → 粘贴模板 → Commit 即发布。 */
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const REPO = 'https://github.com/bconnect/crurania';
+
+const sections = [
+  {
+    key: 'photography', zh: '摄 影', en: 'PHOTOGRAPHY',
+    tip: '照片 + 一段文字。cover 是封面图，先上传到 public/images/。',
+    tpl: `---
+title: 巷口的光
+date: 2026-10-31
+location: 北京
+description: 一句话说清这张照片。
+cover: /images/your-photo.jpg
+tags:
+  - 街拍
+---
+
+正文用 Markdown 写。插图：![说明](/images/xxx.jpg)`,
+  },
+  {
+    key: 'reading', zh: '读书笔记', en: 'READING',
+    tip: '读过的书，留下痕迹。rating 1-5 星，status 三选一。',
+    tpl: `---
+title: 第一章笔记
+book: 道德经（王弼本）
+author: 老子
+date: 2026-10-31
+rating: 4
+status: 在读
+tags:
+  - 哲学
+---
+
+摘抄与感想。引用 > 符号。`,
+  },
+  {
+    key: 'travel', zh: '旅游纪实', en: 'TRAVELS',
+    tip: '图文游记，按时间地点归档。',
+    tpl: `---
+title: 京都的秋
+date: 2026-10-31
+location: 京都
+cover: /images/cover.jpg
+tags:
+  - 日本
+---
+
+正文。## 小标题这样写。`,
+  },
+  {
+    key: 'timeline', zh: '大事记', en: 'TIMELINE',
+    tip: '一个文件 = 一个节点。没有 date，用 year。order 越大排越前。',
+    tpl: `---
+year: 2026
+title: 事件标题
+highlight: true
+order: 10
+---
+
+（可选）一两句说明。`,
+  },
+  {
+    key: 'works', zh: '作 品', en: 'WORKS',
+    tip: '工程或艺术，皆可归档。medium 写媒介：油画 / 摄影 / 数字 …',
+    tpl: `---
+title: 无题 02
+date: 2026-10-31
+medium: 油画
+year: 2026
+cover: /images/work.jpg
+tags:
+  - 绘画
+---
+
+创作手记。`,
+  },
+];
+---
+<Base title="写作台" description="CRURANIA 内容自助维护入口。">
+  <Header />
+  <main class="write">
+    <div class="crumb"><a href="/">CRURANIA</a> / 写作台</div>
+    <h1>写作台 <span class="en">WRITE</span></h1>
+    <p class="lede">
+      三步发布：<b>①</b> 点下面按钮打开编辑器 → <b>②</b> 粘贴模板、改内容、起个文件名 →
+      <b>③</b> 右上角绿色 <b>Commit changes</b>。两分钟后自动上线，失败会发邮件通知你。
+    </p>
+
+    <h2>＋ 新建一篇</h2>
+    <div class="grid">
+      {sections.map((s) => (
+        <div class="card">
+          <div class="card-head">
+            <span class="zh">{s.zh}</span>
+            <span class="en">{s.en}</span>
+          </div>
+          <p class="tip">{s.tip}</p>
+          <div class="btns">
+            <a class="btn primary" href={`${REPO}/new/main/src/content/${s.key}`} target="_blank" rel="noopener">＋ 新建</a>
+            <a class="btn" href={`${REPO}/tree/main/src/content/${s.key}`} target="_blank" rel="noopener">管理已有</a>
+          </div>
+          <details>
+            <summary>看模板</summary>
+            <div class="tpl">
+              <button class="copy" type="button">复制</button>
+              <pre>{s.tpl}</pre>
+            </div>
+          </details>
+        </div>
+      ))}
+    </div>
+
+    <h2>🖼 传图片</h2>
+    <p class="body">
+      照片先传到 <code>public/images/</code>，正文里用 <code>/images/文件名.jpg</code> 引用。
+      编辑器限制单文件 25MB，大图建议先压缩到 2000px 宽以内。
+    </p>
+    <a class="btn primary" href={`${REPO}/new/main/public/images`} target="_blank" rel="noopener">上传图片 ↗</a>
+
+    <h2>✏️ 修改已有页面</h2>
+    <p class="body">
+      最省事：每篇文章<b>底部页脚</b>都有「✎ 在 GitHub 编辑本页」，点它直接进编辑器。
+      改完 Commit 即发布。想删内容，到文件列表里打开文件 → 右上角 ⋯ → Delete file。
+    </p>
+
+    <h2>⚠️ 三条纪律</h2>
+    <ol class="rules">
+      <li>文件名用<b>英文短横线</b>：如 <code>kyoto-autumn.md</code>。文件名就是网址。</li>
+      <li><code>---</code> 包住的那几行是<b>头信息</b>，别删字段，只改值。</li>
+      <li>拿不准就先 Commit——改错了也能在 GitHub 历史里找回。</li>
+    </ol>
+  </main>
+  <Footer editUrl={`${REPO}/edit/main/src/pages/write.astro`} />
+</Base>
+
+<script>
+  document.querySelectorAll('.copy').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const pre = btn.parentElement.querySelector('pre');
+      navigator.clipboard.writeText(pre.textContent).then(() => {
+        btn.textContent = '已复制 ✓';
+        setTimeout(() => { btn.textContent = '复制'; }, 1600);
+      });
+    });
+  });
+</script>
+
+<style>
+  .write { max-width: 60em; margin: 0 auto; padding: 72px 48px 96px; }
+  .crumb { font-family: var(--mono); font-size: 11px; color: var(--gray); letter-spacing: .15em; margin-bottom: 24px; }
+  .crumb a { border-bottom: 1px solid var(--dawn); }
+  .write h1 { font-family: var(--serif); font-size: clamp(34px, 5vw, 52px); font-weight: 700; }
+  .write h1 .en { font-family: var(--mono); font-size: 13px; color: var(--dawn); letter-spacing: .34em; margin-left: 14px; vertical-align: middle; }
+  .lede { margin-top: 22px; max-width: 42em; color: #55524c; font-size: 15px; }
+  .lede b { color: var(--dawn); }
+  .write h2 { font-family: var(--serif); font-size: 22px; margin: 56px 0 20px; padding-top: 28px; border-top: 1px solid var(--line); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 16px; }
+  .card { border: 1px solid var(--line); padding: 22px; display: flex; flex-direction: column; gap: 12px; }
+  .card-head { display: flex; justify-content: space-between; align-items: baseline; }
+  .card-head .zh { font-family: var(--serif); font-size: 20px; font-weight: 700; }
+  .card-head .en { font-family: var(--mono); font-size: 10px; color: var(--gray); letter-spacing: .22em; }
+  .tip { font-size: 13px; color: #55524c; flex: 1; }
+  .btns { display: flex; gap: 10px; }
+  .btn { font-family: var(--mono); font-size: 12px; letter-spacing: .06em; border: 1px solid var(--ink); padding: 8px 14px; color: var(--ink); }
+  .btn.primary { background: var(--ink); color: var(--paper); }
+  .btn:hover { background: var(--dawn); border-color: var(--dawn); color: #fff; }
+  details summary { cursor: pointer; font-family: var(--mono); font-size: 11px; color: var(--dawn); letter-spacing: .1em; }
+  .tpl { position: relative; margin-top: 10px; }
+  .tpl pre {
+    background: #f0ede6; padding: 16px; overflow-x: auto;
+    font-family: var(--mono); font-size: 12px; line-height: 1.7; white-space: pre-wrap; word-break: break-all;
+  }
+  .copy {
+    position: absolute; top: 6px; right: 6px;
+    font-family: var(--mono); font-size: 11px;
+    background: var(--paper); border: 1px solid var(--line); padding: 3px 10px; cursor: pointer; color: var(--ink);
+  }
+  .copy:hover { border-color: var(--dawn); color: var(--dawn); }
+  .body { max-width: 44em; color: #33302b; margin-bottom: 16px; }
+  .body b { color: var(--dawn); }
+  .write code { font-family: var(--mono); font-size: 13px; background: #f0ede6; padding: 2px 6px; }
+  .rules { padding-left: 1.2em; max-width: 44em; }
+  .rules li { margin: .5em 0; color: #33302b; }
+  .rules b { color: var(--dawn); }
+  @media (max-width: 860px) { .write { padding: 48px 22px 64px; } }
+</style>

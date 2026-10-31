@@ -1,29 +1,64 @@
 ---
-/* Hero —— 首页大标题 */
+/* Hero —— 首页首屏「晨曦粒子场」
+   深墨夜色 + 琥珀粒子 + 鼠标引力搅动（mechanics 参考 BlueYard，配色为本站晨曦琥珀）
+   向下滚入纸张白昼——夜与日、静与动的分界。 */
+import DawnField from './DawnField.astro';
 const { total = 0 } = Astro.props;
 const today = new Date().toISOString().slice(0, 10).replace(/-/g, '.');
 ---
-<section class="hero">
-  <div class="kicker">朱 曦 / ZHU XI — 数字花园</div>
-  <h1>在记录中<br /><em>生长</em>。</h1>
-  <p class="sub">
-    IC 设计工程师，前排球运动员。拍照、读书、走路，把正在发生的一切放进这座花园里。
-    这里不是博客，没有更新压力——内容按自己的节奏生长，像植物一样。
-  </p>
-  <div class="meta">
-    <span><b>5</b> 个板块</span>
-    <span><b>{total}</b> 篇记录</span>
-    <span>最近更新 <b>{today}</b></span>
+<section class="hero hero-dawn">
+  <DawnField />
+  <div class="hero-inner">
+    <div class="kicker rise" style="animation-delay:.1s">朱 曦 / ZHU XI — 数字花园</div>
+    <h1 class="rise" style="animation-delay:.28s">在记录中<br /><em>生长</em>。</h1>
+    <p class="sub rise" style="animation-delay:.5s">
+      IC 设计工程师，前排球运动员。拍照、读书、走路，把正在发生的一切放进这座花园里。
+      这里不是博客，没有更新压力——内容按自己的节奏生长，像植物一样。
+    </p>
+    <div class="meta rise" style="animation-delay:.68s">
+      <span><b>5</b> 个板块</span>
+      <span><b>{total}</b> 篇记录</span>
+      <span>最近更新 <b>{today}</b></span>
+    </div>
+    <div class="hint rise" style="animation-delay:.9s" aria-hidden="true">向下滚动 ↓ 进入花园</div>
   </div>
 </section>
 
 <style>
-  .hero { padding: 96px 48px 72px; border-bottom: 1px solid var(--line); }
-  .kicker { font-family: var(--mono); font-size: 12px; color: var(--dawn); letter-spacing: .3em; margin-bottom: 28px; }
-  .hero h1 { font-family: var(--serif); font-size: clamp(56px, 9vw, 112px); line-height: 1.08; font-weight: 700; letter-spacing: .02em; }
-  .hero h1 em { font-style: normal; color: var(--dawn); }
-  .hero .sub { margin-top: 32px; max-width: 34em; color: #55524c; font-size: 15px; }
-  .hero .meta { margin-top: 40px; display: flex; gap: 48px; font-family: var(--mono); font-size: 11px; color: var(--gray); letter-spacing: .08em; }
-  .hero .meta b { color: var(--ink); font-weight: 600; }
-  @media (max-width: 860px) { .hero { padding: 64px 22px 48px; } .hero .meta { gap: 24px; flex-wrap: wrap; } }
+  .hero { position: relative; overflow: hidden; min-height: calc(100vh - 110px); display: flex; align-items: center; }
+  .hero-dawn { background: radial-gradient(120% 90% at 50% 110%, #241a10 0%, #14100c 55%, #0d0b09 100%); }
+  .hero-inner { position: relative; z-index: 2; padding: 96px 48px 84px; }
+
+  .kicker { font-family: var(--mono); font-size: 12px; color: #e8c47c; letter-spacing: .3em; margin-bottom: 28px; }
+  .hero h1 { font-family: var(--serif); color: #f5efe4; font-size: clamp(56px, 9vw, 112px); line-height: 1.08; font-weight: 700; letter-spacing: .02em; }
+  .hero h1 em {
+    font-style: normal;
+    color: #e8974a;
+    text-shadow: 0 0 42px rgba(232, 151, 74, .45);
+  }
+  .hero .sub { margin-top: 32px; max-width: 34em; color: rgba(245, 239, 228, .68); font-size: 15px; }
+  .hero .meta { margin-top: 40px; display: flex; gap: 48px; font-family: var(--mono); font-size: 11px; color: rgba(245, 239, 228, .5); letter-spacing: .08em; }
+  .hero .meta b { color: #e8c47c; font-weight: 600; }
+  .hint { margin-top: 72px; font-family: var(--mono); font-size: 10px; letter-spacing: .3em; color: rgba(245, 239, 228, .35); }
+
+  /* 入场：自下而上浮起 */
+  .rise { opacity: 0; animation: rise 1.1s cubic-bezier(.22,.8,.3,1) forwards; }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(26px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @media (prefers-reduced-motion: reduce) { .rise { animation: none; opacity: 1; } }
+
+  /* 与下方纸张内容的分界：一线晨曦 */
+  .hero-dawn::after {
+    content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; z-index: 3;
+    background: linear-gradient(90deg, transparent, rgba(184, 98, 30, .65), transparent);
+  }
+
+  @media (max-width: 860px) {
+    .hero { min-height: calc(100svh - 90px); }
+    .hero-inner { padding: 64px 22px 56px; }
+    .hero .meta { gap: 24px; flex-wrap: wrap; }
+    .hint { margin-top: 48px; }
+  }
 </style>

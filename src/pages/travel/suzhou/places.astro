@@ -1,0 +1,8 @@
+---
+import SuzhouList from '../../../components/SuzhouList.astro';
+import { getCollection } from 'astro:content';
+const items = (await getCollection('suzhou'))
+  .filter((e) => e.data.type === 'place' && !e.data.draft)
+  .sort((a, b) => a.data.title.localeCompare(b.data.title, 'zh-Hans-CN'));
+---
+<SuzhouList zh="地点" en="Places" items={items} badge={(it) => it.data.location ?? '苏州'} />

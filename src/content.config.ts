@@ -68,4 +68,17 @@ const works = defineCollection({
   }),
 });
 
-export const collections = { photography, reading, travel, timeline, works };
+// 06 苏州专题 —— 2026年11月 · 三天
+// 一个集合装六种内容，用 type 区分：plan 计划 / note 笔记 / photo 照片 / place 地点 / anecdote 野史
+const suzhou = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/suzhou' }),
+  schema: base({
+    type: z.enum(['plan', 'note', 'photo', 'place', 'anecdote']),
+    day: z.number().int().optional(),      // note 用：第几天（1/2/3）
+    location: z.string().optional(),       // place 用：所在区域，如 "东北街 · 古城"
+    related: z.array(z.string()).default([]), // 关联条目的 slug，页面自动互链
+    tags: z.array(z.string()).default([]),
+  }),
+});
+
+export const collections = { photography, reading, travel, timeline, works, suzhou };

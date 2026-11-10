@@ -4,7 +4,31 @@ import SectionList from '../../components/SectionList.astro';
 import { getCollection } from 'astro:content';
 const items = (await getCollection('travel')).filter((e) => !e.data.draft)
   .sort((a, b) => (b.data.date ?? 0) - (a.data.date ?? 0));
+const suzhouCount = (await getCollection('suzhou')).filter((e) => !e.data.draft).length;
 ---
 <Base title="旅游纪实">
+  {suzhouCount > 0 && (
+    <a class="feature" href="/travel/suzhou/">
+      <div class="f-meta">专题 · 2026.11.24 — 11.26</div>
+      <div class="f-title">苏州三日</div>
+      <div class="f-desc">计划 · 笔记 · 照片 · 时间表 · 地点 · 野史 — {suzhouCount} 篇</div>
+      <div class="f-arrow">→</div>
+    </a>
+  )}
   <SectionList section="travel" zh="旅游纪实" en="Travels" items={items} />
 </Base>
+
+<style>
+  .feature {
+    display: grid; grid-template-columns: auto 1fr auto; gap: 8px 32px; align-items: center;
+    margin: 40px 48px 0; padding: 28px 32px;
+    border: 1px solid var(--dawn);
+    transition: background .2s;
+  }
+  .feature:hover { background: #f6efe5; }
+  .f-meta { grid-column: 1 / -1; font-family: var(--mono); font-size: 11px; color: var(--dawn); letter-spacing: .25em; }
+  .f-title { font-family: var(--serif); font-size: clamp(28px, 4vw, 40px); font-weight: 700; letter-spacing: .08em; }
+  .f-desc { font-size: 13px; color: var(--gray); }
+  .f-arrow { font-size: 28px; color: var(--dawn); }
+  @media (max-width: 860px) { .feature { margin: 24px 22px 0; grid-template-columns: 1fr; } .f-arrow { display: none; } }
+</style>

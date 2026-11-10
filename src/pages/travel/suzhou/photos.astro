@@ -1,0 +1,57 @@
+---
+/* 苏州专题 · 照片墙 —— 聚合 type=photo 的条目，按 day 分组渲染 */
+import Base from '../../../layouts/Base.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import { getCollection, render } from 'astro:content';
+const photos = (await getCollection('suzhou'))
+  .filter((e) => e.data.type === 'photo' && !e.data.draft)
+  .sort((a, b) => (a.data.day ?? 0) - (b.data.day ?? 0));
+---
+<Base title="苏州照片" description="苏州三日的照片墙。">
+  <Header current="travel" />
+  <section class="list-head">
+    <div class="crumb"><a href="/">CRURANIA</a> / <a href="/travel">旅游纪实</a> / <a href="/travel/suzhou/">苏州三日</a> / 照片</div>
+    <h1>照片</h1>
+    <div class="en">Photos · {photos.length} 组</div>
+  </section>
+
+  {photos.length === 0 && (
+    <section class="empty">
+      <p>相机还没背回来。</p>
+      <p class="hint">回来之后：进后台（/admin）→ 苏州专题 → 新建"照片"条目 → 上传图片写说明，这一页自动上墙。</p>
+    </section>
+  )}
+
+  <section class="wall">
+    {photos.map((p) => (
+      <a class="card" href={`/travel/suzhou/${p.id}/`}>
+        {p.data.cover && <img src={p.data.cover} alt={p.data.title} />}
+        <div class="cap">
+          <span class="day">{p.data.day ? `DAY ${p.data.day}` : '苏州'}</span>
+          <span class="t">{p.data.title}</span>
+        </div>
+      </a>
+    ))}
+  </section>
+  <Footer editUrl="https://github.com/bconnect/crurania/tree/main/src/content/suzhou" editLabel="✎ 管理本专题文件 ↗" />
+</Base>
+
+<style>
+  .list-head { padding: 64px 48px 32px; border-bottom: 1px solid var(--line); }
+  .crumb { font-family: var(--mono); font-size: 11px; color: var(--gray); letter-spacing: .15em; margin-bottom: 20px; }
+  .crumb a { border-bottom: 1px solid var(--dawn); }
+  .list-head h1 { font-family: var(--serif); font-size: clamp(32px, 5vw, 52px); font-weight: 700; letter-spacing: .06em; }
+  .list-head .en { font-family: var(--mono); font-size: 11px; color: var(--gray); letter-spacing: .3em; text-transform: uppercase; margin-top: 12px; }
+  .empty { padding: 72px 48px; }
+  .empty p { font-family: var(--serif); font-size: 22px; }
+  .empty .hint { font-size: 14px; color: var(--gray); margin-top: 14px; font-family: var(--sans); }
+  .wall { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 2px; padding: 2px 48px 72px; background: var(--paper); }
+  .card { position: relative; border: 1px solid var(--line); overflow: hidden; }
+  .card img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; transition: transform .4s; }
+  .card:hover img { transform: scale(1.03); }
+  .cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 12px 14px; background: linear-gradient(transparent, rgba(26,25,23,.82)); color: var(--paper); display: flex; gap: 10px; align-items: baseline; }
+  .cap .day { font-family: var(--mono); font-size: 10px; letter-spacing: .15em; color: #e8b98a; }
+  .cap .t { font-family: var(--serif); font-size: 16px; font-weight: 700; }
+  @media (max-width: 860px) { .list-head, .empty, .wall { padding-left: 22px; padding-right: 22px; } }
+</style>

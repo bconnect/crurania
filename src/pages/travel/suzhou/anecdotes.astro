@@ -1,0 +1,8 @@
+---
+import SuzhouList from '../../../components/SuzhouList.astro';
+import { getCollection } from 'astro:content';
+const items = (await getCollection('suzhou'))
+  .filter((e) => e.data.type === 'anecdote' && !e.data.draft)
+  .sort((a, b) => (b.data.date ?? 0) - (a.data.date ?? 0));
+---
+<SuzhouList zh="野史" en="Anecdotes" items={items} badge={() => '野史'} />

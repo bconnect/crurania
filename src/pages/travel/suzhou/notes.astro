@@ -1,0 +1,8 @@
+---
+import SuzhouList from '../../../components/SuzhouList.astro';
+import { getCollection } from 'astro:content';
+const items = (await getCollection('suzhou'))
+  .filter((e) => e.data.type === 'note' && !e.data.draft)
+  .sort((a, b) => (a.data.day ?? 0) - (b.data.day ?? 0));
+---
+<SuzhouList zh="旅行笔记" en="Notes" items={items} badge={(it) => `DAY ${it.data.day ?? '?'}`} />

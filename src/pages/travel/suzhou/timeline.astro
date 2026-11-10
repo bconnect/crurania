@@ -1,0 +1,72 @@
+---
+/* 苏州专题 · 时间表 —— 数据驱动：src/data/suzhou-timeline.yaml 是唯一数据源 */
+import Base from '../../../layouts/Base.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import { load as loadYaml } from 'js-yaml';
+import raw from '../../../data/suzhou-timeline.yaml?raw';
+
+const data = loadYaml(raw) as any;
+const fmt = (s: string) => s.replace(/-/g, '.');
+---
+<Base title="苏州时间表" description="苏州三日的时间表，由数据文件自动生成。">
+  <Header current="travel" />
+  <section class="head">
+    <div class="crumb"><a href="/">CRURANIA</a> / <a href="/travel">旅游纪实</a> / <a href="/travel/suzhou/">苏州三日</a> / 时间表</div>
+    <h1>时间表</h1>
+    <div class="en">Timetable · {fmt(data.trip.depart)} — {fmt(data.trip.return)}</div>
+    <p class="note">本页由 <code>src/data/suzhou-timeline.yaml</code> 自动生成——改数据即重建，无需手写表格。</p>
+  </section>
+
+  <section class="days">
+    {data.days.map((d: any) => (
+      <div class="day-block">
+        <div class="day-head">
+          <span class="num">DAY {d.day}</span>
+          <span class="date">{fmt(d.date)} · {d.weekday}</span>
+          <span class="theme">{d.theme}</span>
+        </div>
+        <table>
+          <tbody>
+            {d.schedule.map((s: any) => (
+              <tr>
+                <td class="time">{s.time}</td>
+                <td class="place">{s.place}</td>
+                <td class="desc">{s.note}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    ))}
+  </section>
+  <Footer editUrl="https://github.com/bconnect/crurania/edit/main/src/data/suzhou-timeline.yaml" editLabel="✎ 编辑时间表数据 ↗" />
+</Base>
+
+<style>
+  .head { padding: 64px 48px 32px; border-bottom: 1px solid var(--line); }
+  .crumb { font-family: var(--mono); font-size: 11px; color: var(--gray); letter-spacing: .15em; margin-bottom: 20px; }
+  .crumb a { border-bottom: 1px solid var(--dawn); }
+  .head h1 { font-family: var(--serif); font-size: clamp(32px, 5vw, 52px); font-weight: 700; letter-spacing: .06em; }
+  .head .en { font-family: var(--mono); font-size: 12px; color: var(--dawn); letter-spacing: .3em; text-transform: uppercase; margin-top: 12px; }
+  .head .note { font-size: 12px; color: var(--gray); margin-top: 18px; }
+  .head code { font-family: var(--mono); background: #f0ede6; padding: 1px 6px; font-size: 11px; }
+  .days { padding: 8px 48px 80px; max-width: 960px; }
+  .day-block { margin-top: 48px; }
+  .day-head { display: flex; gap: 18px; align-items: baseline; border-bottom: 2px solid var(--ink); padding-bottom: 12px; flex-wrap: wrap; }
+  .day-head .num { font-family: var(--mono); font-size: 12px; color: var(--dawn); letter-spacing: .2em; border: 1px solid var(--dawn); border-radius: 99px; padding: 2px 12px; }
+  .day-head .date { font-family: var(--mono); font-size: 12px; color: var(--gray); }
+  .day-head .theme { font-family: var(--serif); font-size: 20px; font-weight: 700; }
+  table { width: 100%; border-collapse: collapse; }
+  td { padding: 14px 16px 14px 0; border-bottom: 1px solid var(--line); vertical-align: baseline; }
+  .time { font-family: var(--mono); font-size: 13px; color: var(--dawn); white-space: nowrap; width: 90px; }
+  .place { font-family: var(--serif); font-size: 16px; font-weight: 700; white-space: nowrap; width: 180px; }
+  .desc { color: #55524c; font-size: 13px; }
+  @media (max-width: 860px) {
+    .head, .days { padding-left: 22px; padding-right: 22px; }
+    .place { white-space: normal; width: auto; }
+    td { display: block; padding: 4px 0; border: none; }
+    tr { display: block; border-bottom: 1px solid var(--line); padding: 12px 0; }
+    .time { width: auto; }
+  }
+</style>

@@ -1,0 +1,71 @@
+---
+/* 苏州专题列表核心 —— 笔记 / 地点 / 野史 三个索引页共用 */
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+interface Item {
+  id: string;
+  data: {
+    title?: string;
+    date?: Date;
+    day?: number;
+    location?: string;
+    description?: string;
+  };
+}
+interface Props {
+  zh: string;
+  en: string;
+  items: Item[];
+  badge?: (it: Item) => string;   // 每条目前的徽标，如 "DAY 1" / "东北街"
+  back?: string;                  // 面包屑上级文字
+}
+const { zh, en, items, badge, back = '苏州三日' } = Astro.props;
+const fmt = (d?: Date) => d ? `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}` : '';
+---
+<Header current="travel" />
+<section class="list-head">
+  <div class="crumb"><a href="/">CRURANIA</a> / <a href="/travel">旅游纪实</a> / <a href="/travel/suzhou/">{back}</a> / {zh}</div>
+  <h1>{zh}</h1>
+  <div class="en">{en} · {items.length} 篇</div>
+</section>
+
+<section class="list">
+  {items.length === 0 && <p class="empty">这里还没有内容。等它生长。</p>}
+  {items.map((it) => (
+    <a class="row" href={`/travel/suzhou/${it.id}/`}>
+      <div class="meta">
+        {badge && <span class="tag">{badge(it)}</span>}
+        {it.data.date && <span class="date">{fmt(it.data.date)}</span>}
+      </div>
+      <div class="title">{it.data.title}</div>
+      <div class="sub">{it.data.description}</div>
+    </a>
+  ))}
+</section>
+<Footer editUrl={`https://github.com/bconnect/crurania/tree/main/src/content/suzhou`} editLabel="✎ 管理本专题文件 ↗" />
+
+<style>
+  .list-head { padding: 64px 48px 32px; border-bottom: 1px solid var(--line); }
+  .crumb { font-family: var(--mono); font-size: 11px; color: var(--gray); letter-spacing: .15em; margin-bottom: 20px; }
+  .crumb a { border-bottom: 1px solid var(--dawn); }
+  .list-head h1 { font-family: var(--serif); font-size: clamp(32px, 5vw, 52px); font-weight: 700; letter-spacing: .06em; }
+  .list-head .en { font-family: var(--mono); font-size: 11px; color: var(--gray); letter-spacing: .3em; text-transform: uppercase; margin-top: 12px; }
+  .list { padding: 0 48px; }
+  .empty { padding: 64px 0; color: var(--gray); font-family: var(--serif); font-size: 18px; }
+  .row {
+    display: grid; grid-template-columns: 130px 1fr auto; gap: 32px; align-items: baseline;
+    padding: 26px 0; border-bottom: 1px solid var(--line);
+    transition: background .2s, padding-left .2s;
+  }
+  .row:hover { background: #f3efe7; padding-left: 14px; }
+  .meta { display: flex; gap: 12px; font-family: var(--mono); font-size: 11px; color: var(--gray); flex-wrap: wrap; }
+  .meta .tag { color: var(--dawn); border: 1px solid var(--dawn); padding: 0 8px; border-radius: 99px; font-size: 10px; letter-spacing: .1em; }
+  .meta .date { color: var(--gray); }
+  .title { font-family: var(--serif); font-size: 21px; font-weight: 700; letter-spacing: .04em; }
+  .sub { font-size: 13px; color: var(--gray); max-width: 32em; text-align: right; }
+  @media (max-width: 860px) {
+    .list-head, .list { padding-left: 22px; padding-right: 22px; }
+    .row { grid-template-columns: 1fr; gap: 6px; }
+    .sub { text-align: left; }
+  }
+</style>

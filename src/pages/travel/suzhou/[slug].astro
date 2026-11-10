@@ -1,0 +1,47 @@
+---
+/* 苏州专题 · 单篇渲染（计划/笔记/地点/野史/照片 共用） */
+import Base from '../../../layouts/Base.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import { getCollection, render } from 'astro:content';
+export async function getStaticPaths() {
+  const entries = (await getCollection('suzhou')).filter((e) => !e.data.draft);
+  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+const fmt = (date?: Date) => date ? `${date.getFullYear()}.${String(date.getMonth() + 1).padStart(2, '0')}.${String(date.getDate()).padStart(2, '0')}` : '';
+const typeZh: Record<string, string> = { plan: '行前计划', note: '旅行笔记', photo: '照片', place: '地点', anecdote: '野史' };
+const sectionHref: Record<string, string> = { plan: '/travel/suzhou/plan/', note: '/travel/suzhou/notes/', photo: '/travel/suzhou/photos/', place: '/travel/suzhou/places/', anecdote: '/travel/suzhou/anecdotes/' };
+const backLabel = typeZh[d.type] ?? '苏州三日';
+const backHref = sectionHref[d.type] ?? '/travel/suzhou/';
+---
+<Base title={d.title} description={d.description}>
+  <Header current="travel" />
+  <article>
+    <header class="art-head">
+      <div class="crumb"><a href="/">CRURANIA</a> / <a href="/travel">旅游纪实</a> / <a href="/travel/suzhou/">苏州三日</a> / <a href={backHref}>{backLabel}</a></div>
+      <h1>{d.title}</h1>
+      <div class="meta">
+        {d.day && <span class="day">DAY {d.day}</span>}
+        {d.date && <span>{fmt(d.date)}</span>}
+        {d.location && <span>{d.location}</span>}
+      </div>
+    </header>
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+  <Footer editUrl={`https://github.com/bconnect/crurania/edit/main/src/content/suzhou/${entry.id}.md`} />
+</Base>
+
+<style>
+  .art-head { padding: 72px 48px 40px; max-width: 40em; margin: 0 auto; }
+  .crumb { font-family: var(--mono); font-size: 11px; color: var(--gray); letter-spacing: .15em; margin-bottom: 24px; }
+  .crumb a { border-bottom: 1px solid var(--dawn); }
+  .art-head h1 { font-family: var(--serif); font-size: clamp(30px, 5vw, 46px); line-height: 1.25; font-weight: 700; }
+  .meta { display: flex; gap: 18px; margin-top: 20px; font-family: var(--mono); font-size: 12px; color: var(--gray); flex-wrap: wrap; }
+  .meta .day { color: var(--dawn); border: 1px solid var(--dawn); border-radius: 99px; padding: 0 10px; letter-spacing: .15em; }
+  @media (max-width: 860px) { .art-head { padding: 48px 22px 28px; } }
+</style>

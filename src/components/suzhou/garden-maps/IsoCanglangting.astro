@@ -1,0 +1,227 @@
+---
+/* 轴测手绘海报 · 沧浪亭（未入园门先见水） */
+import Frame from '../poster/Frame.astro';
+import Clouds from '../poster/Clouds.astro';
+import Plaque from '../poster/Plaque.astro';
+import PanelFrame from '../poster/PanelFrame.astro';
+import PSect from '../poster/PSect.astro';
+import Divider from '../poster/Divider.astro';
+import RouteScroll from '../poster/RouteScroll.astro';
+import Compass from '../poster/Compass.astro';
+import Disclaimer from '../poster/Disclaimer.astro';
+import VTag from '../poster/VTag.astro';
+import RTree from '../poster/RTree.astro';
+import Seal from '../poster/Seal.astro';
+---
+<svg class="ip" viewBox="0 0 760 920" role="img" aria-label="沧浪亭手绘游览图">
+  <Frame />
+  <Clouds />
+  <Plaque title="沧浪亭游览图" sub="未入园门先见水" />
+
+  <g>
+    <PanelFrame />
+    <PSect y={158} title="游览特点" />
+    <text x="534" y="192" font-size="13.5" font-weight="700" fill="#A94442" class="ip-serif">【园外之水】</text>
+    <text x="534" y="210" font-size="12" fill="#2c3531" class="ip-serif">葑溪环园，未入门先见水</text>
+    <text x="534" y="236" font-size="13.5" font-weight="700" fill="#A94442" class="ip-serif">【宋园之首】</text>
+    <text x="534" y="254" font-size="12" fill="#2c3531" class="ip-serif">庆历四年，苏舜钦始筑</text>
+
+    <Divider y={278} />
+    <PSect y={308} title="必打卡景观" />
+    <g transform="translate(530,326)">
+      <line x1="8" y1="30" x2="8" y2="14" stroke="#8a857a" stroke-width="2" />
+      <line x1="34" y1="30" x2="34" y2="14" stroke="#8a857a" stroke-width="2" />
+      <rect x="4" y="14" width="34" height="10" fill="#f7f1e3" stroke="#2c3531" stroke-width="0.9" />
+      <polygon points="0,15 42,15 46,11 38,2 4,2 -4,11" fill="#4a564f" stroke="#333d38" stroke-width="0.7" />
+    </g>
+    <text x="586" y="342" font-size="13" font-weight="700" fill="#2c3531" class="ip-serif">沧浪亭</text>
+    <text x="586" y="360" font-size="11" fill="#5c5548" class="ip-serif">山巅古亭，石柱十六根</text>
+    <g transform="translate(530,384)">
+      <polygon points="0,10 44,10 46,26 2,26" fill="#4a564f" stroke="#333d38" stroke-width="0.7" />
+      <line x1="6" y1="12" x2="7" y2="24" stroke="#e8dfc8" stroke-width="0.7" />
+      <line x1="16" y1="12" x2="17" y2="24" stroke="#e8dfc8" stroke-width="0.7" />
+      <line x1="26" y1="12" x2="27" y2="24" stroke="#e8dfc8" stroke-width="0.7" />
+      <line x1="36" y1="12" x2="37" y2="24" stroke="#e8dfc8" stroke-width="0.7" />
+      <polygon points="-2,10 46,10 48,7 40,0 4,0 -4,7" fill="#67756c" stroke="#333d38" stroke-width="0.6" />
+    </g>
+    <text x="586" y="394" font-size="13" font-weight="700" fill="#2c3531" class="ip-serif">复廊</text>
+    <text x="586" y="412" font-size="11" fill="#5c5548" class="ip-serif">花窗一百零八式</text>
+
+    <Divider y={434} />
+    <PSect y={466} title="推荐路线" />
+    <RouteScroll y={486} lines={["门厅 → 面水轩 → 复廊", "→ 五百名贤祠 → 看山楼", "→ 山径 → 沧浪亭 → 明道堂"]} />
+
+    <PSect y={612} title="贴士" />
+    <text x="534" y="644" font-size="11.5" fill="#2c3531" class="ip-serif">※ 花窗无一重复，宜细赏</text>
+    <text x="534" y="664" font-size="11.5" fill="#2c3531" class="ip-serif">※ 亭柱刻「清风明月本无价」</text>
+
+    <Compass x={668} y={768} />
+    <Disclaimer />
+  </g>
+
+  <!-- ═══ 主景 ═══ -->
+  <!-- 葑溪（园外之水：南缘+西缘） -->
+  <path d="M 26,782 C 100,770 220,774 320,780 C 400,785 460,780 500,786 L 500,884 L 26,884 Z" fill="#c3e2db" stroke="#7fa398" stroke-width="1.2" />
+  <path d="M 26,560 C 40,600 44,690 40,782 L 26,786 Z" fill="#c3e2db" stroke="#7fa398" stroke-width="1" />
+  <path d="M 60,824 q 10,-5 20,0 M 200,838 q 10,-5 20,0 M 350,820 q 10,-5 20,0" stroke="#7fa398" stroke-width="0.8" fill="none" />
+  <text x="300" y="852" font-size="12" fill="#5f7f78" class="ip-serif">葑 溪</text>
+
+  <!-- 南园墙 + 复廊 -->
+  <line x1="60" y1="772" x2="466" y2="772" stroke="#2c3531" stroke-width="1.8" />
+  <g>
+    <polygon points="96,744 452,744 456,768 100,768" fill="#4a564f" stroke="#333d38" stroke-width="0.8" />
+    <line x1="120" y1="750" x2="121" y2="762" stroke="#e8dfc8" stroke-width="0.8" />
+    <line x1="150" y1="750" x2="151" y2="762" stroke="#e8dfc8" stroke-width="0.8" />
+    <line x1="180" y1="750" x2="181" y2="762" stroke="#e8dfc8" stroke-width="0.8" />
+    <line x1="210" y1="750" x2="211" y2="762" stroke="#e8dfc8" stroke-width="0.8" />
+    <line x1="240" y1="750" x2="241" y2="762" stroke="#e8dfc8" stroke-width="0.8" />
+    <line x1="270" y1="750" x2="271" y2="762" stroke="#e8dfc8" stroke-width="0.8" />
+    <line x1="300" y1="750" x2="301" y2="762" stroke="#e8dfc8" stroke-width="0.8" />
+    <line x1="330" y1="750" x2="331" y2="762" stroke="#e8dfc8" stroke-width="0.8" />
+    <line x1="360" y1="750" x2="361" y2="762" stroke="#e8dfc8" stroke-width="0.8" />
+    <line x1="390" y1="750" x2="391" y2="762" stroke="#e8dfc8" stroke-width="0.8" />
+    <line x1="420" y1="750" x2="421" y2="762" stroke="#e8dfc8" stroke-width="0.8" />
+  </g>
+
+  <!-- 面水轩（隔廊面水） -->
+  <g>
+    <rect x="306" y="712" width="56" height="20" fill="#f7f1e3" stroke="#2c3531" stroke-width="1.1" />
+    <line x1="318" y1="712" x2="318" y2="732" stroke="#2c3531" stroke-width="0.6" />
+    <line x1="334" y1="712" x2="334" y2="732" stroke="#2c3531" stroke-width="0.6" />
+    <line x1="350" y1="712" x2="350" y2="732" stroke="#2c3531" stroke-width="0.6" />
+    <polygon points="300,714 368,714 374,708 362,696 306,696 294,708" fill="#4a564f" stroke="#333d38" stroke-width="0.9" />
+  </g>
+
+  <!-- 山（土阜乔木，全园之主） -->
+  <path d="M 128,584 C 108,520 118,420 158,352 C 178,314 218,296 256,302 C 306,310 340,350 348,410 C 356,470 344,540 310,576 C 262,604 168,612 128,584 Z" fill="#b8b3a6" stroke="#8a857a" stroke-width="1.1" />
+  <path d="M 150,540 C 190,560 250,562 300,540 M 170,470 C 210,490 270,492 320,470" stroke="#7a7568" stroke-width="0.8" fill="none" />
+  <!-- 山径 -->
+  <path d="M 180,586 C 200,550 190,520 214,494 C 240,466 226,436 252,408 C 264,394 258,370 250,352" fill="none" stroke="#7a7568" stroke-width="1.4" stroke-dasharray="5 4" />
+
+  <!-- 沧浪亭（山巅石亭） -->
+  <g>
+    <line x1="216" y1="272" x2="216" y2="296" stroke="#8a857a" stroke-width="2.4" />
+    <line x1="242" y1="272" x2="242" y2="296" stroke="#8a857a" stroke-width="2.4" />
+    <line x1="266" y1="272" x2="266" y2="296" stroke="#8a857a" stroke-width="2.4" />
+    <rect x="210" y="272" width="62" height="11" fill="#f7f1e3" stroke="#2c3531" stroke-width="1" />
+    <polygon points="202,274 280,274 288,268 272,252 210,252 194,268" fill="#4a564f" stroke="#333d38" stroke-width="0.9" />
+    <polygon points="214,252 268,252 260,244 222,244" fill="#67756c" stroke="#333d38" stroke-width="0.8" />
+    <line x1="232" y1="244" x2="250" y2="244" stroke="#333d38" stroke-width="2" />
+  </g>
+
+  <!-- 明道堂（山南山麓主厅） -->
+  <g>
+    <rect x="186" y="606" width="86" height="28" fill="#f7f1e3" stroke="#2c3531" stroke-width="1.2" />
+    <line x1="198" y1="606" x2="198" y2="634" stroke="#2c3531" stroke-width="0.6" />
+    <line x1="212" y1="606" x2="212" y2="634" stroke="#2c3531" stroke-width="0.6" />
+    <line x1="226" y1="606" x2="226" y2="634" stroke="#2c3531" stroke-width="0.6" />
+    <line x1="240" y1="606" x2="240" y2="634" stroke="#2c3531" stroke-width="0.6" />
+    <line x1="254" y1="606" x2="254" y2="634" stroke="#2c3531" stroke-width="0.6" />
+    <polygon points="180,608 278,608 286,600 270,586 188,586 172,600" fill="#4a564f" stroke="#333d38" stroke-width="0.9" />
+    <polygon points="192,586 266,586 256,576 202,576" fill="#67756c" stroke="#333d38" stroke-width="0.8" />
+    <line x1="216" y1="576" x2="244" y2="576" stroke="#333d38" stroke-width="1.8" />
+  </g>
+
+  <!-- 看山楼（西山三层楼） -->
+  <g>
+    <rect x="84" y="452" width="40" height="56" fill="#f7f1e3" stroke="#2c3531" stroke-width="1" />
+    <line x1="94" y1="452" x2="94" y2="508" stroke="#2c3531" stroke-width="0.6" />
+    <line x1="104" y1="452" x2="104" y2="508" stroke="#2c3531" stroke-width="0.6" />
+    <line x1="114" y1="452" x2="114" y2="508" stroke="#2c3531" stroke-width="0.6" />
+    <polygon points="78,454 130,454 136,448 122,434 86,434 72,448" fill="#4a564f" stroke="#333d38" stroke-width="0.8" />
+    <rect x="88" y="420" width="32" height="14" fill="#f7f1e3" stroke="#2c3531" stroke-width="0.9" />
+    <polygon points="82,422 126,422 132,416 120,404 88,404 76,416" fill="#67756c" stroke="#333d38" stroke-width="0.8" />
+    <rect x="94" y="392" width="20" height="12" fill="#f7f1e3" stroke="#2c3531" stroke-width="0.8" />
+    <polygon points="88,394 120,394 124,390 114,380 94,380 84,390" fill="#4a564f" stroke="#333d38" stroke-width="0.7" />
+  </g>
+
+  <!-- 五百名贤祠（西翼） -->
+  <g>
+    <rect x="104" y="636" width="62" height="20" fill="#f7f1e3" stroke="#2c3531" stroke-width="1" />
+    <line x1="116" y1="636" x2="116" y2="656" stroke="#2c3531" stroke-width="0.6" />
+    <line x1="130" y1="636" x2="130" y2="656" stroke="#2c3531" stroke-width="0.6" />
+    <line x1="144" y1="636" x2="144" y2="656" stroke="#2c3531" stroke-width="0.6" />
+    <polygon points="98,638 172,638 178,632 166,620 104,620 92,632" fill="#4a564f" stroke="#333d38" stroke-width="0.8" />
+  </g>
+
+  <!-- 翠玲珑（竹馆，东） -->
+  <g>
+    <rect x="392" y="424" width="48" height="19" fill="#f7f1e3" stroke="#2c3531" stroke-width="1" />
+    <line x1="402" y1="424" x2="402" y2="443" stroke="#2c3531" stroke-width="0.6" />
+    <line x1="416" y1="424" x2="416" y2="443" stroke="#2c3531" stroke-width="0.6" />
+    <line x1="430" y1="424" x2="430" y2="443" stroke="#2c3531" stroke-width="0.6" />
+    <polygon points="386,426 446,426 450,422 440,412 392,412 382,422" fill="#4a564f" stroke="#333d38" stroke-width="0.8" />
+  </g>
+  <g stroke="#54763d" stroke-width="1" fill="none">
+    <path d="M 456,440 l 0,-22" /><path d="M 463,442 l 0,-24" /><path d="M 470,439 l 0,-20" />
+  </g>
+  <g fill="#6a914d" stroke="#2c3531" stroke-width="0.5">
+    <ellipse cx="456" cy="412" rx="4" ry="2.5" /><ellipse cx="464" cy="410" rx="4" ry="2.5" /><ellipse cx="470" cy="414" rx="4" ry="2.5" />
+  </g>
+
+  <!-- 锄月轩（东南，梅花） -->
+  <g>
+    <rect x="360" y="630" width="52" height="21" fill="#f7f1e3" stroke="#2c3531" stroke-width="1" />
+    <line x1="371" y1="630" x2="371" y2="651" stroke="#2c3531" stroke-width="0.6" />
+    <line x1="386" y1="630" x2="386" y2="651" stroke="#2c3531" stroke-width="0.6" />
+    <line x1="401" y1="630" x2="401" y2="651" stroke="#2c3531" stroke-width="0.6" />
+    <polygon points="356,632 416,632 420,628 410,618 362,618 352,628" fill="#4a564f" stroke="#333d38" stroke-width="0.8" />
+  </g>
+  <RTree x={432} y={612} r={11} tone={4} />
+
+  <!-- 门厅（东南角） -->
+  <g>
+    <rect x="424" y="700" width="44" height="18" fill="#f7f1e3" stroke="#2c3531" stroke-width="1" />
+    <line x1="434" y1="700" x2="434" y2="718" stroke="#2c3531" stroke-width="0.6" />
+    <line x1="446" y1="700" x2="446" y2="718" stroke="#2c3531" stroke-width="0.6" />
+    <line x1="458" y1="700" x2="458" y2="718" stroke="#2c3531" stroke-width="0.6" />
+    <polygon points="420,702 472,702 476,698 466,688 426,688 416,698" fill="#4a564f" stroke="#333d38" stroke-width="0.8" />
+  </g>
+
+  <!-- ═══ 山林木（山为主角，密植） ═══ -->
+  <RTree x={156} y={352} r={14} tone={2} />
+  <RTree x={188} y={322} r={12} tone={1} />
+  <RTree x={300} y={330} r={14} tone={0} />
+  <RTree x={330} y={372} r={12} tone={2} />
+  <RTree x={146} y={430} r={13} tone={0} />
+  <RTree x={322} y={452} r={12} tone={1} />
+  <RTree x={196} y={508} r={11} tone={3} />
+  <RTree x={282} y={524} r={12} tone={2} />
+  <RTree x={368} y={362} r={11} tone={1} />
+  <RTree x={64} y={586} r={12} tone={1} />
+  <RTree x={436} y={528} r={11} tone={0} />
+
+  <!-- ═══ 游线 ═══ -->
+  <path d="M 446,736 L 400,744 L 340,742 L 336,700 L 300,680 L 240,672 L 180,660 L 140,644 L 104,508 L 104,470 L 140,420 L 170,360 L 208,320 L 220,300 M 208,320 L 260,330 L 320,400 L 360,410 L 400,430 L 430,470 L 430,560 L 420,620"
+        fill="none" stroke="#8a7d63" stroke-width="2" stroke-dasharray="6 5" />
+  <g fill="#8a7d63">
+    <ellipse cx="404" cy="742" rx="2.2" ry="3" /><ellipse cx="408" cy="750" rx="2.2" ry="3" />
+    <ellipse cx="300" cy="682" rx="2.2" ry="3" /><ellipse cx="304" cy="690" rx="2.2" ry="3" />
+    <ellipse cx="200" cy="664" rx="2.2" ry="3" /><ellipse cx="204" cy="672" rx="2.2" ry="3" />
+    <ellipse cx="110" cy="530" rx="2.2" ry="3" /><ellipse cx="114" cy="538" rx="2.2" ry="3" />
+    <ellipse cx="128" cy="432" rx="2.2" ry="3" /><ellipse cx="132" cy="440" rx="2.2" ry="3" />
+    <ellipse cx="188" cy="338" rx="2.2" ry="3" /><ellipse cx="192" cy="346" rx="2.2" ry="3" />
+    <ellipse cx="284" cy="334" rx="2.2" ry="3" /><ellipse cx="288" cy="342" rx="2.2" ry="3" />
+    <ellipse cx="352" cy="408" rx="2.2" ry="3" /><ellipse cx="356" cy="416" rx="2.2" ry="3" />
+    <ellipse cx="428" cy="510" rx="2.2" ry="3" /><ellipse cx="432" cy="518" rx="2.2" ry="3" />
+    <ellipse cx="424" cy="600" rx="2.2" ry="3" /><ellipse cx="428" cy="608" rx="2.2" ry="3" />
+  </g>
+
+  <!-- ═══ 竖排标签 ═══ -->
+  <VTag x={310} y={236} chars="沧浪亭" />
+  <VTag x={330} y={682} chars="明道堂" />
+  <VTag x={60} y={424} chars="看山楼" />
+  <VTag x={72} y={678} chars="五百名贤祠" />
+  <VTag x={464} y={396} chars="翠玲珑" />
+  <VTag x={340} y={586} chars="锄月轩" />
+  <VTag x={392} y={688} chars="面水轩" />
+  <VTag x={140} y={736} chars="复廊" />
+  <VTag x={482} y={722} chars="门厅" />
+
+  <Seal x={34} y={852} chars="沧" />
+</svg>
+
+<style>
+  .ip { display: block; width: 100%; height: auto; max-width: 720px; margin: 0 auto; }
+  .ip-serif { font-family: var(--serif); }
+</style>

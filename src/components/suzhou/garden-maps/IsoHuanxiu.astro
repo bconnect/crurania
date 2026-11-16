@@ -1,0 +1,194 @@
+---
+/* 轴测手绘海报 · 环秀山庄（半亩假山甲天下） */
+import Frame from '../poster/Frame.astro';
+import Clouds from '../poster/Clouds.astro';
+import Plaque from '../poster/Plaque.astro';
+import PanelFrame from '../poster/PanelFrame.astro';
+import PSect from '../poster/PSect.astro';
+import Divider from '../poster/Divider.astro';
+import RouteScroll from '../poster/RouteScroll.astro';
+import Compass from '../poster/Compass.astro';
+import Disclaimer from '../poster/Disclaimer.astro';
+import VTag from '../poster/VTag.astro';
+import RTree from '../poster/RTree.astro';
+import Seal from '../poster/Seal.astro';
+---
+<svg class="ip" viewBox="0 0 760 920" role="img" aria-label="环秀山庄手绘游览图">
+  <Frame />
+  <Clouds />
+  <Plaque title="环秀山庄游览图" sub="半亩假山甲天下" />
+
+  <g>
+    <PanelFrame />
+    <PSect y={158} title="游览特点" />
+    <text x="534" y="192" font-size="13.5" font-weight="700" fill="#A94442" class="ip-serif">【独步江南】</text>
+    <text x="534" y="210" font-size="12" fill="#2c3531" class="ip-serif">戈裕良叠山，半亩甲天下</text>
+    <text x="534" y="236" font-size="13.5" font-weight="700" fill="#A94442" class="ip-serif">【山据半园】</text>
+    <text x="534" y="254" font-size="12" fill="#2c3531" class="ip-serif">假山占园之半，池水映之</text>
+
+    <Divider y={278} />
+    <PSect y={308} title="必打卡景观" />
+    <!-- 湖石大山小图 -->
+    <g transform="translate(528,324)">
+      <path d="M 2,32 c -5,-14 6,-26 18,-23 c 4,-8 16,-6 18,2 c 10,-3 19,6 15,16 c 4,8 -3,16 -12,15 c -4,6 -14,6 -18,0 c -9,3 -18,-2 -21,-10 z" fill="#b8b3a6" stroke="#8a857a" stroke-width="0.9" />
+      <path d="M 14,22 c 4,-6 12,-5 14,1 M 28,14 c 3,-4 9,-3 10,1" stroke="#7a7568" stroke-width="0.7" fill="none" />
+      <path d="M 6,30 l 44,0" stroke="#7fa398" stroke-width="1.6" />
+    </g>
+    <text x="586" y="342" font-size="13" font-weight="700" fill="#2c3531" class="ip-serif">湖石大山</text>
+    <text x="586" y="360" font-size="11" fill="#5c5548" class="ip-serif">悬崖峡谷，中有石室</text>
+    <!-- 补秋舫小图 -->
+    <g transform="translate(532,384)">
+      <polygon points="2,22 40,22 34,32 8,32" fill="#d9d0ba" stroke="#2c3531" stroke-width="0.9" />
+      <rect x="10" y="10" width="22" height="12" fill="#f7f1e3" stroke="#2c3531" stroke-width="0.8" />
+      <polygon points="6,11 36,11 32,3 10,3" fill="#4a564f" stroke="#333d38" stroke-width="0.6" />
+    </g>
+    <text x="586" y="394" font-size="13" font-weight="700" fill="#2c3531" class="ip-serif">补秋舫</text>
+    <text x="586" y="412" font-size="11" fill="#5c5548" class="ip-serif">舫形建筑，临水而筑</text>
+
+    <Divider y={434} />
+    <PSect y={466} title="推荐路线" />
+    <RouteScroll y={486} lines={["门厅 → 有谷堂 → 沿廊", "→ 问泉亭 → 山径（穿洞）", "→ 山半亭 → 飞雪泉 → 补秋舫"]} />
+
+    <PSect y={612} title="贴士" />
+    <text x="534" y="644" font-size="11.5" fill="#2c3531" class="ip-serif">※ 假山禁止攀爬，宜绕赏</text>
+    <text x="534" y="664" font-size="11.5" fill="#2c3531" class="ip-serif">※ 十园中最冷清的一座</text>
+
+    <Compass x={668} y={768} />
+    <Disclaimer />
+  </g>
+
+  <!-- ═══ 主景 ═══ -->
+  <!-- 湖石大山（全园之主，悬崖峡谷） -->
+  <g stroke="#8a857a" stroke-width="1.1" fill="#b8b3a6">
+    <path d="M 84,548 C 60,480 70,380 108,318 C 128,284 168,264 208,270 C 256,278 292,314 300,366 C 318,404 314,470 290,516 C 258,560 128,586 84,548 Z" />
+    <ellipse cx="150" cy="380" rx="52" ry="58" />
+    <ellipse cx="232" cy="330" rx="44" ry="48" />
+  </g>
+  <g stroke="#7a7568" stroke-width="0.8" fill="none">
+    <path d="M 110,500 C 150,470 220,468 272,492" />
+    <path d="M 120,420 c 8,-10 22,-8 26,2 M 200,360 c 8,-8 22,-6 24,4 M 160,320 c 7,-7 18,-5 20,3 M 236,420 c 6,-7 16,-5 18,2 M 100,470 c 5,-6 14,-4 15,2" />
+    <!-- 峡谷缝 -->
+    <path d="M 196,540 C 204,500 200,460 212,424" stroke-width="1.2" />
+    <!-- 飞梁 -->
+    <path d="M 150,452 L 236,438" stroke="#5c5548" stroke-width="2.2" />
+    <!-- 山径 -->
+    <path d="M 116,544 C 140,520 132,496 156,478 C 182,458 172,430 196,410" stroke="#8a7d63" stroke-width="1.3" stroke-dasharray="5 4" />
+  </g>
+  <!-- 石室 -->
+  <path d="M 216,530 c 0,-15 22,-15 22,0 l 0,9 l -22,0 z" fill="#4a4438" stroke="#333028" stroke-width="0.9" />
+  <text x="252" y="540" font-size="10.5" fill="#7a7568" class="ip-serif">石室</text>
+
+  <!-- 山半亭（半潭秋水一房山） -->
+  <g>
+    <polygon points="262,414 296,414 300,410 290,400 268,400 258,410" fill="#4a564f" stroke="#333d38" stroke-width="0.7" />
+    <rect x="266" y="414" width="26" height="12" fill="#f7f1e3" stroke="#2c3531" stroke-width="0.9" />
+  </g>
+
+  <!-- 飞雪泉（山巅小瀑） -->
+  <g stroke="#8ab5ad" stroke-width="1.3" fill="none">
+    <path d="M 118,330 q 4,12 2,24" />
+    <path d="M 128,326 q 5,14 2,28" />
+    <path d="M 138,330 q 3,10 2,20" />
+  </g>
+  <g stroke="#c3e2db" stroke-width="0.8" fill="none">
+    <path d="M 112,360 q 6,-3 12,0 M 130,364 q 6,-3 12,0" />
+  </g>
+
+  <!-- 池（山南镜面） -->
+  <path d="M 108,604 C 130,586 200,580 250,590 C 292,598 312,618 306,648 C 300,680 264,700 216,698 C 164,696 116,672 106,640 C 102,624 102,614 108,604 Z" fill="#c3e2db" stroke="#7fa398" stroke-width="1.2" />
+  <path d="M 150,634 q 10,-5 20,0 M 230,656 q 10,-5 20,0" stroke="#7fa398" stroke-width="0.8" fill="none" />
+
+  <!-- 补秋舫（东南池畔） -->
+  <g>
+    <polygon points="292,662 356,662 346,682 302,682" fill="#d9d0ba" stroke="#2c3531" stroke-width="1" />
+    <rect x="306" y="640" width="36" height="20" fill="#f7f1e3" stroke="#2c3531" stroke-width="1" />
+    <line x1="316" y1="640" x2="316" y2="660" stroke="#2c3531" stroke-width="0.6" />
+    <line x1="326" y1="640" x2="326" y2="660" stroke="#2c3531" stroke-width="0.6" />
+    <line x1="336" y1="640" x2="336" y2="660" stroke="#2c3531" stroke-width="0.6" />
+    <polygon points="298,642 350,642 344,630 304,630" fill="#4a564f" stroke="#333d38" stroke-width="0.8" />
+  </g>
+
+  <!-- 问泉亭（西池畔） -->
+  <g>
+    <polygon points="74,602 112,602 116,598 106,588 80,588 70,598" fill="#4a564f" stroke="#333d38" stroke-width="0.7" />
+    <rect x="78" y="602" width="30" height="13" fill="#f7f1e3" stroke="#2c3531" stroke-width="0.9" />
+  </g>
+
+  <!-- 有谷堂（南，主厅） -->
+  <g>
+    <rect x="152" y="742" width="86" height="26" fill="#f7f1e3" stroke="#2c3531" stroke-width="1.2" />
+    <line x1="165" y1="742" x2="165" y2="768" stroke="#2c3531" stroke-width="0.6" />
+    <line x1="180" y1="742" x2="180" y2="768" stroke="#2c3531" stroke-width="0.6" />
+    <line x1="195" y1="742" x2="195" y2="768" stroke="#2c3531" stroke-width="0.6" />
+    <line x1="210" y1="742" x2="210" y2="768" stroke="#2c3531" stroke-width="0.6" />
+    <line x1="224" y1="742" x2="224" y2="768" stroke="#2c3531" stroke-width="0.6" />
+    <polygon points="146,744 244,744 252,736 236,722 154,722 138,736" fill="#4a564f" stroke="#333d38" stroke-width="0.9" />
+    <polygon points="158,722 232,722 222,714 168,714" fill="#67756c" stroke="#333d38" stroke-width="0.8" />
+    <line x1="184" y1="714" x2="206" y2="714" stroke="#333d38" stroke-width="1.8" />
+  </g>
+
+  <!-- 廊（沿南墙） -->
+  <g>
+    <polygon points="252,752 340,752 344,776 256,776" fill="#4a564f" stroke="#333d38" stroke-width="0.8" />
+    <line x1="268" y1="756" x2="269" y2="772" stroke="#e8dfc8" stroke-width="0.8" />
+    <line x1="288" y1="756" x2="289" y2="772" stroke="#e8dfc8" stroke-width="0.8" />
+    <line x1="308" y1="756" x2="309" y2="772" stroke="#e8dfc8" stroke-width="0.8" />
+    <line x1="328" y1="756" x2="329" y2="772" stroke="#e8dfc8" stroke-width="0.8" />
+  </g>
+
+  <!-- 门厅（东南角） -->
+  <g>
+    <rect x="370" y="752" width="44" height="18" fill="#f7f1e3" stroke="#2c3531" stroke-width="1" />
+    <line x1="380" y1="752" x2="380" y2="770" stroke="#2c3531" stroke-width="0.6" />
+    <line x1="392" y1="752" x2="392" y2="770" stroke="#2c3531" stroke-width="0.6" />
+    <line x1="404" y1="752" x2="404" y2="770" stroke="#2c3531" stroke-width="0.6" />
+    <polygon points="366,754 418,754 422,750 412,740 372,740 362,750" fill="#4a564f" stroke="#333d38" stroke-width="0.8" />
+  </g>
+
+  <!-- ═══ 林木（山为主角，树为点缀） ═══ -->
+  <g stroke="#2c3531" stroke-width="0.7">
+    <circle cx="128" cy="296" r="12" fill="#465f33" />
+    <circle cx="124" cy="282" r="9" fill="#54763d" />
+    <line x1="128" y1="320" x2="128" y2="292" stroke="#6f5b3f" stroke-width="1.6" />
+  </g>
+  <g stroke="#2c3531" stroke-width="0.7">
+    <circle cx="262" cy="292" r="10" fill="#6a914d" />
+    <circle cx="270" cy="282" r="8" fill="#8aa864" />
+    <line x1="262" y1="312" x2="262" y2="288" stroke="#6f5b3f" stroke-width="1.4" />
+  </g>
+  <RTree x={70} y={680} r={12} tone={1} />
+  <RTree x={330} y={620} r={11} tone={2} />
+  <RTree x={380} y={700} r={12} tone={0} />
+  <RTree x={96} y={724} r={11} tone={2} />
+
+  <!-- ═══ 游线 ═══ -->
+  <path d="M 392,770 L 340,764 L 296,764 L 250,754 L 200,734 L 140,700 L 92,640 L 76,596 L 92,560 L 116,544 L 156,478 L 196,410 L 240,360 L 200,340 L 150,340 L 124,332 M 156,478 L 196,410 L 262,420 M 240,360 L 262,330 M 92,640 L 200,660 L 260,668 L 300,670"
+        fill="none" stroke="#8a7d63" stroke-width="2" stroke-dasharray="6 5" />
+  <g fill="#8a7d63">
+    <ellipse cx="330" cy="762" rx="2.2" ry="3" /><ellipse cx="334" cy="770" rx="2.2" ry="3" />
+    <ellipse cx="214" cy="726" rx="2.2" ry="3" /><ellipse cx="218" cy="734" rx="2.2" ry="3" />
+    <ellipse cx="104" cy="612" rx="2.2" ry="3" /><ellipse cx="108" cy="620" rx="2.2" ry="3" />
+    <ellipse cx="130" cy="530" rx="2.2" ry="3" /><ellipse cx="134" cy="538" rx="2.2" ry="3" />
+    <ellipse cx="172" cy="446" rx="2.2" ry="3" /><ellipse cx="176" cy="454" rx="2.2" ry="3" />
+    <ellipse cx="228" cy="368" rx="2.2" ry="3" /><ellipse cx="232" cy="376" rx="2.2" ry="3" />
+    <ellipse cx="252" cy="414" rx="2.2" ry="3" /><ellipse cx="256" cy="422" rx="2.2" ry="3" />
+    <ellipse cx="136" cy="336" rx="2.2" ry="3" /><ellipse cx="140" cy="344" rx="2.2" ry="3" />
+    <ellipse cx="180" cy="654" rx="2.2" ry="3" /><ellipse cx="184" cy="662" rx="2.2" ry="3" />
+  </g>
+
+  <!-- ═══ 竖排标签 ═══ -->
+  <VTag x={356} y={262} chars="湖石大山" />
+  <VTag x={334} y={408} chars="山半亭" />
+  <VTag x={66} y={300} chars="飞雪泉" />
+  <VTag x={300} y={700} chars="补秋舫" />
+  <VTag x={46} y={640} chars="问泉亭" />
+  <VTag x={112} y={788} chars="有谷堂" />
+  <VTag x={300} y={796} chars="门厅" />
+
+  <Seal x={34} y={852} chars="环" />
+</svg>
+
+<style>
+  .ip { display: block; width: 100%; height: auto; max-width: 720px; margin: 0 auto; }
+  .ip-serif { font-family: var(--serif); }
+</style>

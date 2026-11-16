@@ -1,0 +1,210 @@
+---
+/* 轴测手绘海报 · 艺圃（乳鱼亭畔 · 巷深藏圃） */
+import Frame from '../poster/Frame.astro';
+import Clouds from '../poster/Clouds.astro';
+import Plaque from '../poster/Plaque.astro';
+import PanelFrame from '../poster/PanelFrame.astro';
+import PSect from '../poster/PSect.astro';
+import Divider from '../poster/Divider.astro';
+import RouteScroll from '../poster/RouteScroll.astro';
+import Compass from '../poster/Compass.astro';
+import Disclaimer from '../poster/Disclaimer.astro';
+import VTag from '../poster/VTag.astro';
+import RTree from '../poster/RTree.astro';
+import Lotus from '../poster/Lotus.astro';
+import Seal from '../poster/Seal.astro';
+---
+<svg class="ip" viewBox="0 0 760 920" role="img" aria-label="艺圃手绘游览图">
+  <Frame />
+  <Clouds />
+  <Plaque title="艺圃游览图" sub="乳鱼亭畔 · 巷深藏圃" />
+
+  <g>
+    <PanelFrame />
+    <PSect y={158} title="游览特点" />
+    <text x="534" y="192" font-size="13.5" font-weight="700" fill="#A94442" class="ip-serif">【深巷藏圃】</text>
+    <text x="534" y="210" font-size="12" fill="#2c3531" class="ip-serif">文衙弄深处，五弄方见</text>
+    <text x="534" y="236" font-size="13.5" font-weight="700" fill="#A94442" class="ip-serif">【文氏遗泽】</text>
+    <text x="534" y="254" font-size="12" fill="#2c3531" class="ip-serif">文震孟曾筑药圃于此</text>
+
+    <Divider y={278} />
+    <PSect y={308} title="必打卡景观" />
+    <!-- 乳鱼亭小图（方亭） -->
+    <g transform="translate(532,326)">
+      <line x1="8" y1="30" x2="8" y2="16" stroke="#2c3531" stroke-width="1.1" />
+      <line x1="32" y1="30" x2="32" y2="16" stroke="#2c3531" stroke-width="1.1" />
+      <rect x="4" y="16" width="32" height="12" fill="#f7f1e3" stroke="#2c3531" stroke-width="0.9" />
+      <polygon points="-2,17 42,17 46,13 36,2 4,2 -6,13" fill="#4a564f" stroke="#333d38" stroke-width="0.7" />
+      <ellipse cx="20" cy="32" rx="18" ry="4" fill="#c3e2db" stroke="#7fa398" stroke-width="0.6" />
+    </g>
+    <text x="586" y="342" font-size="13" font-weight="700" fill="#2c3531" class="ip-serif">乳鱼亭</text>
+    <text x="586" y="360" font-size="11" fill="#5c5548" class="ip-serif">方亭观鱼，名出《庄子》</text>
+    <!-- 延光阁小图（长水阁） -->
+    <g transform="translate(528,384)">
+      <rect x="2" y="14" width="50" height="14" fill="#f7f1e3" stroke="#2c3531" stroke-width="0.9" />
+      <line x1="12" y1="14" x2="12" y2="28" stroke="#2c3531" stroke-width="0.7" />
+      <line x1="24" y1="14" x2="24" y2="28" stroke="#2c3531" stroke-width="0.7" />
+      <line x1="36" y1="14" x2="36" y2="28" stroke="#2c3531" stroke-width="0.7" />
+      <line x1="5" y1="28" x2="5" y2="33" stroke="#2c3531" stroke-width="0.6" />
+      <line x1="49" y1="28" x2="49" y2="33" stroke="#2c3531" stroke-width="0.6" />
+      <polygon points="-2,16 56,16 60,12 50,2 4,2 -6,12" fill="#4a564f" stroke="#333d38" stroke-width="0.7" />
+    </g>
+    <text x="586" y="394" font-size="13" font-weight="700" fill="#2c3531" class="ip-serif">延光阁</text>
+    <text x="586" y="412" font-size="11" fill="#5c5548" class="ip-serif">五间水阁，面池最宽</text>
+
+    <Divider y={434} />
+    <PSect y={466} title="推荐路线" />
+    <RouteScroll y={486} lines={["门厅 → 博雅堂 → 池西假山", "→ 延光阁 → 乳鱼亭", "→ 响月廊 → 芹庐浴鸥池 → 思嗜轩"]} />
+
+    <PSect y={612} title="贴士" />
+    <text x="534" y="644" font-size="11.5" fill="#2c3531" class="ip-serif">※ 茶室在水阁，可坐半天</text>
+    <text x="534" y="664" font-size="11.5" fill="#2c3531" class="ip-serif">※ 文衙弄春桃，园外亦有景</text>
+
+    <Compass x={668} y={768} />
+    <Disclaimer />
+  </g>
+
+  <!-- ═══ 主景 ═══ -->
+  <!-- 大池 -->
+  <path d="M 96,478 C 116,458 162,450 200,458 C 236,466 262,482 258,516 C 254,552 244,596 214,616 C 180,638 130,630 108,600 C 90,574 82,506 96,478 Z" fill="#c3e2db" stroke="#7fa398" stroke-width="1.2" />
+  <path d="M 130,520 q 9,-4 18,0 M 180,560 q 9,-4 18,0" stroke="#7fa398" stroke-width="0.8" fill="none" />
+  <Lotus x={150} y={570} />
+
+  <!-- 延光阁（北岸五间水阁，全圃之主） -->
+  <g>
+    <rect x="96" y="414" width="120" height="26" fill="#f7f1e3" stroke="#2c3531" stroke-width="1.2" />
+    <line x1="110" y1="414" x2="110" y2="440" stroke="#2c3531" stroke-width="0.6" />
+    <line x1="126" y1="414" x2="126" y2="440" stroke="#2c3531" stroke-width="0.6" />
+    <line x1="142" y1="414" x2="142" y2="440" stroke="#2c3531" stroke-width="0.6" />
+    <line x1="158" y1="414" x2="158" y2="440" stroke="#2c3531" stroke-width="0.6" />
+    <line x1="174" y1="414" x2="174" y2="440" stroke="#2c3531" stroke-width="0.6" />
+    <line x1="190" y1="414" x2="190" y2="440" stroke="#2c3531" stroke-width="0.6" />
+    <line x1="206" y1="414" x2="206" y2="440" stroke="#2c3531" stroke-width="0.6" />
+    <polygon points="88,416 224,416 232,408 216,394 96,394 80,408" fill="#4a564f" stroke="#333d38" stroke-width="0.9" />
+    <polygon points="100,394 212,394 202,386 110,386" fill="#67756c" stroke="#333d38" stroke-width="0.8" />
+    <line x1="136" y1="386" x2="176" y2="386" stroke="#333d38" stroke-width="2" />
+    <line x1="104" y1="440" x2="104" y2="448" stroke="#2c3531" stroke-width="0.8" />
+    <line x1="208" y1="440" x2="208" y2="448" stroke="#2c3531" stroke-width="0.8" />
+  </g>
+
+  <!-- 乳鱼亭（池东北角，方亭立于水上石基） -->
+  <g>
+    <ellipse cx="252" cy="482" rx="17" ry="9" fill="#b8b3a6" stroke="#8a857a" stroke-width="1" />
+    <line x1="244" y1="476" x2="244" y2="458" stroke="#2c3531" stroke-width="1.1" />
+    <line x1="260" y1="476" x2="260" y2="458" stroke="#2c3531" stroke-width="1.1" />
+    <rect x="240" y="458" width="24" height="14" fill="#f7f1e3" stroke="#2c3531" stroke-width="0.9" />
+    <line x1="248" y1="458" x2="248" y2="472" stroke="#2c3531" stroke-width="0.6" />
+    <polygon points="234,459 270,459 274,455 264,443 240,443 230,455" fill="#4a564f" stroke="#333d38" stroke-width="0.8" />
+    <polygon points="240,443 264,443 258,437 246,437" fill="#67756c" stroke="#333d38" stroke-width="0.6" />
+  </g>
+
+  <!-- 池中游鱼 -->
+  <g stroke="#5f7f78" stroke-width="0.9" fill="none">
+    <path d="M 170,540 q 5,-3 10,0 q -5,3 -10,0 z" fill="#8aa8a0" />
+    <path d="M 200,520 q 5,-3 10,0 q -5,3 -10,0 z" fill="#8aa8a0" />
+  </g>
+
+  <!-- 响月廊（池东） -->
+  <g>
+    <polygon points="272,470 294,470 298,618 276,618" fill="#4a564f" stroke="#333d38" stroke-width="0.8" />
+    <line x1="283" y1="478" x2="286" y2="610" stroke="#e8dfc8" stroke-width="1" />
+    <line x1="277" y1="478" x2="280" y2="610" stroke="#e8dfc8" stroke-width="1" />
+    <line x1="289" y1="478" x2="292" y2="610" stroke="#e8dfc8" stroke-width="1" />
+    <line x1="274" y1="510" x2="295" y2="510" stroke="#2c3531" stroke-width="0.5" />
+    <line x1="275" y1="550" x2="296" y2="550" stroke="#2c3531" stroke-width="0.5" />
+    <line x1="276" y1="590" x2="297" y2="590" stroke="#2c3531" stroke-width="0.5" />
+  </g>
+
+  <!-- 芹庐（北隅小园：浴鸥池） -->
+  <g>
+    <rect x="316" y="400" width="46" height="17" fill="#f7f1e3" stroke="#2c3531" stroke-width="1" />
+    <polygon points="310,402 368,402 372,398 362,388 316,388 306,398" fill="#4a564f" stroke="#333d38" stroke-width="0.8" />
+  </g>
+  <path d="M 322,438 C 330,430 348,428 358,434 C 366,440 362,452 350,455 C 336,458 318,450 322,438 Z" fill="#c3e2db" stroke="#7fa398" stroke-width="1" />
+  <path d="M 324,444 L 334,436 L 344,446 L 354,438" fill="none" stroke="#2c3531" stroke-width="1.4" />
+  <g stroke="#2c3531" stroke-width="0.6">
+    <path d="M 374,452 l 12,0 l -2,7 l -8,0 z" fill="#c98a5a" />
+    <circle cx="380" cy="448" r="4.5" fill="#54763d" />
+  </g>
+  <RTree x={312} y={430} r={9} tone={4} />
+  <RTree x={374} y={414} r={9} tone={4} />
+
+  <!-- 思嗜轩（东南） -->
+  <g>
+    <rect x="310" y="646" width="48" height="19" fill="#f7f1e3" stroke="#2c3531" stroke-width="1" />
+    <line x1="321" y1="646" x2="321" y2="665" stroke="#2c3531" stroke-width="0.6" />
+    <line x1="335" y1="646" x2="335" y2="665" stroke="#2c3531" stroke-width="0.6" />
+    <line x1="347" y1="646" x2="347" y2="665" stroke="#2c3531" stroke-width="0.6" />
+    <polygon points="306,648 362,648 366,644 356,634 312,634 302,644" fill="#4a564f" stroke="#333d38" stroke-width="0.8" />
+  </g>
+
+  <!-- 池西假山 -->
+  <path d="M 60,500 C 52,478 64,462 84,462 C 102,462 112,478 106,498 C 114,510 108,526 92,530 C 74,534 62,520 60,500 Z" fill="#b8b3a6" stroke="#8a857a" stroke-width="1" />
+  <path d="M 74,494 c 4,-5 10,-4 11,1 M 84,512 c 3,-3 8,-2 8,2" stroke="#7a7568" stroke-width="0.7" fill="none" />
+
+  <!-- 博雅堂（南，主厅） -->
+  <g>
+    <rect x="196" y="702" width="76" height="26" fill="#f7f1e3" stroke="#2c3531" stroke-width="1.2" />
+    <line x1="210" y1="702" x2="210" y2="728" stroke="#2c3531" stroke-width="0.6" />
+    <line x1="224" y1="702" x2="224" y2="728" stroke="#2c3531" stroke-width="0.6" />
+    <line x1="238" y1="702" x2="238" y2="728" stroke="#2c3531" stroke-width="0.6" />
+    <line x1="252" y1="702" x2="252" y2="728" stroke="#2c3531" stroke-width="0.6" />
+    <polygon points="190,704 278,704 286,696 272,682 196,682 182,696" fill="#4a564f" stroke="#333d38" stroke-width="0.9" />
+    <polygon points="202,682 266,682 256,673 212,673" fill="#67756c" stroke="#333d38" stroke-width="0.8" />
+    <line x1="222" y1="673" x2="244" y2="673" stroke="#333d38" stroke-width="1.8" />
+  </g>
+
+  <!-- 门厅 -->
+  <g>
+    <rect x="300" y="712" width="44" height="18" fill="#f7f1e3" stroke="#2c3531" stroke-width="1" />
+    <line x1="310" y1="712" x2="310" y2="730" stroke="#2c3531" stroke-width="0.6" />
+    <line x1="322" y1="712" x2="322" y2="730" stroke="#2c3531" stroke-width="0.6" />
+    <line x1="334" y1="712" x2="334" y2="730" stroke="#2c3531" stroke-width="0.6" />
+    <polygon points="296,714 348,714 352,710 342,700 302,700 292,710" fill="#4a564f" stroke="#333d38" stroke-width="0.8" />
+  </g>
+
+  <!-- 文衙弄（深巷示意） -->
+  <line x1="150" y1="760" x2="380" y2="760" stroke="#2c3531" stroke-width="1.2" stroke-dasharray="9 6" />
+  <text x="236" y="782" font-size="11" fill="#8a7d63" class="ip-serif">文衙弄 · 深巷藏圃</text>
+
+  <!-- ═══ 林木 ═══ -->
+  <RTree x={80} y={580} r={12} tone={1} />
+  <RTree x={130} y={656} r={11} tone={2} />
+  <RTree x={236} y={620} r={12} tone={0} />
+  <RTree x={286} y={676} r={11} tone={1} />
+  <RTree x={382} y={596} r={11} tone={2} />
+  <RTree x={330} y={540} r={10} tone={0} />
+  <RTree x={86} y={430} r={11} tone={3} />
+
+  <!-- ═══ 游线 ═══ -->
+  <path d="M 322,740 L 282,734 L 240,734 L 200,700 L 170,680 L 140,640 L 108,600 L 92,540 L 96,470 L 112,450 L 150,448 L 210,446 M 240,500 L 252,470 L 260,470 M 286,470 L 286,540 L 296,600 L 310,640 M 96,470 L 80,470 L 70,500"
+        fill="none" stroke="#8a7d63" stroke-width="2" stroke-dasharray="6 5" />
+  <g fill="#8a7d63">
+    <ellipse cx="284" cy="734" rx="2.2" ry="3" /><ellipse cx="288" cy="742" rx="2.2" ry="3" />
+    <ellipse cx="182" cy="676" rx="2.2" ry="3" /><ellipse cx="186" cy="684" rx="2.2" ry="3" />
+    <ellipse cx="122" cy="618" rx="2.2" ry="3" /><ellipse cx="126" cy="626" rx="2.2" ry="3" />
+    <ellipse cx="98" cy="500" rx="2.2" ry="3" /><ellipse cx="102" cy="508" rx="2.2" ry="3" />
+    <ellipse cx="142" cy="450" rx="2.2" ry="3" /><ellipse cx="146" cy="458" rx="2.2" ry="3" />
+    <ellipse cx="248" cy="486" rx="2.2" ry="3" /><ellipse cx="252" cy="494" rx="2.2" ry="3" />
+    <ellipse cx="288" cy="520" rx="2.2" ry="3" /><ellipse cx="292" cy="528" rx="2.2" ry="3" />
+    <ellipse cx="300" cy="616" rx="2.2" ry="3" /><ellipse cx="304" cy="624" rx="2.2" ry="3" />
+  </g>
+
+  <!-- ═══ 竖排标签 ═══ -->
+  <VTag x={336} y={764} chars="门厅" />
+  <VTag x={164} y={682} chars="博雅堂" />
+  <VTag x={44} y={470} chars="延光阁" />
+  <VTag x={314} y={448} chars="乳鱼亭" />
+  <VTag x={320} y={544} chars="响月廊" />
+  <VTag x={416} y={420} chars="芹庐" />
+  <VTag x={378} y={688} chars="思嗜轩" />
+  <VTag x={42} y={560} chars="假山" />
+  <VTag x={366} y={478} chars="浴鸥池" />
+
+  <Seal x={34} y={852} chars="艺" />
+</svg>
+
+<style>
+  .ip { display: block; width: 100%; height: auto; max-width: 720px; margin: 0 auto; }
+  .ip-serif { font-family: var(--serif); }
+</style>

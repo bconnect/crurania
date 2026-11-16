@@ -4,6 +4,13 @@ import Base from '../../../layouts/Base.astro';
 import IsoZhuozhengyuan from '../../../components/suzhou/garden-maps/IsoZhuozhengyuan.astro';
 import IsoShizilin from '../../../components/suzhou/garden-maps/IsoShizilin.astro';
 import IsoLiuyuan from '../../../components/suzhou/garden-maps/IsoLiuyuan.astro';
+import IsoWangshi from '../../../components/suzhou/garden-maps/IsoWangshi.astro';
+import IsoCanglangting from '../../../components/suzhou/garden-maps/IsoCanglangting.astro';
+import IsoOuyuan from '../../../components/suzhou/garden-maps/IsoOuyuan.astro';
+import IsoTuisi from '../../../components/suzhou/garden-maps/IsoTuisi.astro';
+import IsoYipu from '../../../components/suzhou/garden-maps/IsoYipu.astro';
+import IsoHuanxiu from '../../../components/suzhou/garden-maps/IsoHuanxiu.astro';
+import IsoYiyuan from '../../../components/suzhou/garden-maps/IsoYiyuan.astro';
 const { site } = Astro.locals;
 ---
 <Base title="轴测手绘海报 · 评审 | 苏州" description="苏州园林轴测手绘海报风格样张集合。">
@@ -11,8 +18,15 @@ const { site } = Astro.locals;
     <h1>轴测手绘海报 · 评审页</h1>
     <p class="demo-note">统一视觉语言：朱匾标题 / 轴测鸟瞰 / 竖排标签 / 虚线游线 / 信息栏。滚动查看各园样张。</p>
     <section><h2>拙政园</h2><IsoZhuozhengyuan /></section>
-    <section><h2>狮子林</h2><IsoShizilin /></section>
     <section><h2>留园</h2><IsoLiuyuan /></section>
+    <section><h2>狮子林</h2><IsoShizilin /></section>
+    <section><h2>网师园</h2><IsoWangshi /></section>
+    <section><h2>沧浪亭</h2><IsoCanglangting /></section>
+    <section><h2>耦园</h2><IsoOuyuan /></section>
+    <section><h2>退思园</h2><IsoTuisi /></section>
+    <section><h2>艺圃</h2><IsoYipu /></section>
+    <section><h2>环秀山庄</h2><IsoHuanxiu /></section>
+    <section><h2>怡园</h2><IsoYiyuan /></section>
   </div>
 </Base>
 <style>

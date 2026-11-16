@@ -3,7 +3,7 @@
 import Base from '../../../layouts/Base.astro';
 import Header from '../../../components/Header.astro';
 import Footer from '../../../components/Footer.astro';
-import GardenMap from '../../../components/suzhou/garden-maps/GardenMap.astro';
+import IsoMap from '../../../components/suzhou/garden-maps/IsoMap.astro';
 
 /* 地图坐标点数据 */
 const spots: Record<string, any> = {
@@ -372,7 +372,7 @@ const tips = [
             <summary>人文典故与深度讲解 · 手绘导览图</summary>
             <p>{g.lecture}</p>
             {gardenReady.has(g.id) && <p class="deep-link"><a href={`/travel/suzhou/garden-${GARDEN_SLUG[g.id]}/`}>深度阅读：本园长文（约 2000 字 · 附建筑图纸）→</a></p>}
-            <div class="gmap-wrap"><GardenMap id={g.id} /></div>
+            <div class="gmap-wrap"><IsoMap id={g.id} /></div>
           </details>
         </article>
       ))}

@@ -1,0 +1,575 @@
+---
+/* 苏州专题 · 人文攻略 —— 手绘古城水系图 / 十大名园 / 八大美食 / 十位名人 / 游园锦囊 */
+import Base from '../../../layouts/Base.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+
+/* 地图坐标点数据 */
+const spots: Record<string, any> = {
+  zhuozheng: { badge: '世界文化遗产 · 明代', area: '古城东北隅 · 东北街', title: '拙政园', subtitle: '“天下园林之母” · 池广树茂，自然疏朗',
+    desc: '明正德四年（1509年），御史王献臣辞官回乡，借西晋潘岳《闲居赋》“此亦拙者之为政也”之意命名。全园水面积占五分之三，以远香堂为中心，巧借园外北寺塔入景。',
+    tip: '建议游览 3 小时。出园东行百步即达狮子林与苏州博物馆，午后可沿平江河一路向南漫步。' },
+  shizilin: { badge: '世界文化遗产 · 元代', area: '古城东北隅 · 园林路', title: '狮子林 & 苏州博物馆', subtitle: '禅意湖石迷宫与贝聿铭现代几何山水',
+    desc: '狮子林始建于元至正二年（1342年），因园内太湖石状如狻猊且纪念禅宗祖师得名，假山群九曲二十一洞；相邻苏州博物馆为贝聿铭封山之作，粉墙黛瓦演绎现代片石假山。',
+    tip: '狮子林假山上下穿行极具趣味，建议预留 2 小时；苏博务必提前 7 天在官方渠道预约。' },
+  pingjiang: { badge: '中国历史文化名街 · 宋代格局', area: '古城东部 · 平江河畔', title: '平江路历史街区', subtitle: '“水陆并行、河街相邻”的活态宋城标本',
+    desc: '完整保留南宋《平江图》双棋盘水陆格局，全长约 1.6 公里，两侧丁香巷、大儒巷、悬桥巷等水巷纵横。白墙黛瓦临水而筑，评弹馆、古琴社与苏式茶肆散落其间。',
+    tip: '傍晚华灯初上时漫步最佳，可在保吉利桥畔乘手摇乌篷船，听船娘唱一曲吴歌小调。' },
+  ouyuan: { badge: '世界文化遗产 · 清代', area: '平江路东侧 · 仓街小新桥巷', title: '耦园', subtitle: '三面临水，一宅两园，佳偶天成之浪漫名园',
+    desc: '清同治年间沈秉成携妻严永华归隐于此，扩建为东、西两园，取夫妇“耦耕”之意命名。东园黄石假山雄浑苍劲，西园织帘老屋书卷气浓厚，三面环水，有自家水码头。',
+    tip: '相对清幽小众，适合在平江路游览时顺道探访，感受“城曲草堂”里的神仙眷侣生活。' },
+  wangshi: { badge: '世界文化遗产 · 宋始清成', area: '古城东南部 · 阔家头巷', title: '网师园', subtitle: '“少胜多”的小型古典园林巅峰之作',
+    desc: '始建于南宋，原名“渔隐”，清乾隆年间宋宗元重修定名“网师园”，寓意“渔夫钓叟”。占地不足半公顷，却池水清澈、环池建阁，其西北角“殿春簃”被纽约大都会博物馆复制为“明轩”。',
+    tip: '强烈推荐体验“网师园夜花园”，在月到风来亭与濯缨水阁间欣赏昆曲、评弹实景演出。' },
+  canglang: { badge: '世界文化遗产 · 北宋', area: '古城南部 · 人民路沧浪亭街', title: '沧浪亭', subtitle: '苏州现存最古园林 · 未入园林先见水',
+    desc: '北宋庆历五年（1045年），诗人苏舜钦被贬后以四万钱购得吴越国旧园筑亭，取《楚辞》“沧浪之水清兮”命名。园外绿水绕园，沿水建复廊，以 108 式漏窗将园内山林与园外碧水融为一体。',
+    tip: '假山古木参天、竹影婆娑，对门即是可园，适合喜爱宋代文人风骨的游客静心慢游。' },
+  huanxiu: { badge: '世界文化遗产 · 清代', area: '古城中心 · 景德路 / 人民路', title: '环秀山庄 & 怡园', subtitle: '“叠山绝技”与“集诸园之大成”',
+    desc: '环秀山庄以清代叠山大师戈裕良所叠太湖石假山闻名，占地仅半亩却峰峦起伏、飞雪泉涌；不远处的怡园建于清光绪年间，博采拙政园、留园、沧浪亭之长，复廊鸳鸯厅极尽精巧。',
+    tip: '两园相距不远，位处古城中心，游览完可顺路前往观前街或皮市街寻觅地道苏式小吃。' },
+  yipu: { badge: '世界文化遗产 · 明代', area: '古城西北部 · 文衙弄', title: '艺圃', subtitle: '隐于市井深巷的明代文人幽居典范',
+    desc: '始建于明嘉靖年间，历经文震孟（文徵明曾孙）、姜埰等名士修葺。布局简练开朗，水池占园四分之一，北侧博雅堂，南侧假山临水，西侧水榭“延光阁”最为清雅。',
+    tip: '坐在延光阁临水品一盏碧螺春，看锦鲤游弋、日光洒满水面，是苏州最具生活气息的赏园体验。' },
+  liuyuan: { badge: '世界文化遗产 · 明始清盛', area: '阊门外 · 留园路', title: '留园', subtitle: '建筑空间艺术巅峰 · 冠云峰傲立江南',
+    desc: '始建于明万历年间（原名东园），清代刘恕改名寒碧山庄，盛康重修后取“长留天地间”意改名留园。全园分中、东、西、北四景区，曲廊长达 700 余米，以“冠云峰”太湖石名冠天下。',
+    tip: '入口曲折幽深，切忌走马观花，留意每一扇花窗与门洞框出的绝美构图。' },
+  shantang: { badge: '中国历史文化名街 · 唐代', area: '古城西北 · 阊门至虎丘', title: '七里山塘街', subtitle: '白居易主持开凿的“姑苏第一名街”',
+    desc: '唐宝历元年（825年），白居易任苏州刺史时开凿山塘河、筑山塘堤，连接阊门与虎丘，全长约七里。《红楼梦》开篇便誉其为“最是红尘中一二等富贵风流之地”。',
+    tip: '新民桥东段烟火繁华，通贵桥以西则安静古朴，两段风情截然不同。' },
+  tuisi: { badge: '世界文化遗产 · 清代水乡园林', area: '吴江 · 同里古镇', title: '退思园', subtitle: '全国唯一“贴水而建”的古典水乡园林',
+    desc: '清光绪十一年（1885年）任兰生落职归乡后所建，取《左传》“进思尽忠，退思补过”之意。打破传统园林纵向布局，改为横向由西向东，所有亭台楼阁均贴水面而筑，如浮水上。',
+    tip: '乘苏州地铁 4 号线至同里站换乘接驳车即达，可与同里古镇三桥水乡风光一同游览。' },
+};
+
+/* 十大名园 */
+const gardens = [
+  { id:'g1', name:'拙政园', era:'明代 · 正德四年 (1509)', eraTag:'ming', heritage:true, owner:'御史王献臣',
+    technique:'以水为中心 · 疏朗自然 · 借景北寺塔', highlights:'远香堂、香洲、小飞虹、与谁同坐轩、三十六鸳鸯馆',
+    summary:'中国四大名园之一，江南古典园林巅峰代表，以水见长，池广树茂。',
+    lecture:'王献臣仕途失意归隐姑苏，取潘岳《闲居赋》“筑室种树，逍遥自得……此亦拙者之为政也”命名。全园分东、中、西三部，中部以水面为核心，建筑临水而筑、虚实相生；西部“与谁同坐轩”构作扇形，化用苏轼“与谁同坐？明月清风我”词意，尽显明代文人高洁清旷之心。' },
+  { id:'g2', name:'留园', era:'明始清盛 · 万历二十一年 (1593)', eraTag:'qing', heritage:true, owner:'太仆寺少卿徐泰时 / 清代刘恕、盛康',
+    technique:'空间序列转换 · 曲廊贯通 · 冠云峰奇石', highlights:'冠云峰、五峰仙馆、涵碧山房、林泉耆硕之馆、700 米曲廊',
+    summary:'中国四大名园之一，以建筑空间处理与太湖石奇石艺术冠绝江南。',
+    lecture:'留园最妙之处在于“节奏感”。入园先经狭长幽暗的曲廊过渡，忽而豁然开朗见到碧水山林（涵碧山房），形成强烈的空间对比。园内“冠云峰”高 6.5 米，系北宋花石纲遗物，集太湖石“瘦、皱、漏、透”四奇于一身；全园曲廊镶嵌历代名家法帖石刻 300 余方，被誉为“留园法帖”。' },
+  { id:'g3', name:'网师园', era:'南宋始建 · 清乾隆重修 (1765)', eraTag:'qing', heritage:true, owner:'南宋史正志 / 清代宋宗元、瞿远村',
+    technique:'以小见大 · 环池聚景 · 殿春簃雅集', highlights:'月到风来亭、濯缨水阁、殿春簃、看松读画轩',
+    summary:'苏州小型古典园林典范，“少胜多”造园法则的教科书。',
+    lecture:'网师园全园不足十亩，却毫不局促。秘诀在于中心水池（彩霞池）沿岸建筑体量轻盈、高低错落，四面环水皆有可观之景。“月到风来亭”六角飞檐，立于池西，每逢明月东升，清风徐来，水月交辉；西北角小院“殿春簃”三面粉墙、修竹芭蕉，1980 年美国纽约大都会艺术博物馆以此为蓝本建造“明轩”，将苏州园林推向世界。' },
+  { id:'g4', name:'环秀山庄', era:'晋代旧址 · 清嘉庆十二年 (1807)', eraTag:'qing', heritage:true, owner:'清代孙均（叠山大师戈裕良造山）',
+    technique:'戈氏叠山绝技 · 半亩见千岩万壑 · 勾带水', highlights:'湖石主峰、飞雪泉、补秋山房、四面厅',
+    summary:'苏州园林假山堆叠艺术的最高峰，被誉为“独步江南”。',
+    lecture:'环秀山庄面积仅三亩有余，其中假山仅占地半亩，却由清代叠山宗师戈裕良以太湖石叠出主峰、次峰、悬崖、幽谷、石洞与飞瀑，高七米余，攀援其间宛如置身真山峻岭。戈裕良独创“环透法”，山腹空灵通透，山脚三面环水（勾带水），陈从周先生赞其“造园者至此，山之情面尽矣”。' },
+  { id:'g5', name:'狮子林', era:'元代 · 至正二年 (1342)', eraTag:'songyuan', heritage:true, owner:'天如禅师惟则及其弟子',
+    technique:'禅宗意境 · 立体石峰迷宫 · 假山群奇观', highlights:'九狮峰、真趣亭、立雪堂、问梅阁、湖心亭',
+    summary:'元代禅意园林遗珍，国内现存规模最大的古代太湖石假山群。',
+    lecture:'天如禅师为纪念其师中峰和尚（曾得道于浙江天目山狮子岩）而建，又因园内太湖石多似狮子形态，故名“狮子林”。全园假山分上、中、下三层，有 9 条山路、21 个洞口，迂回曲折如立体迷宫，乾隆皇帝六下江南皆游于此，御笔题写“真趣”匾额。著名建筑大师贝聿铭家族亦曾长期拥有此园。' },
+  { id:'g6', name:'沧浪亭', era:'北宋 · 庆历五年 (1045)', eraTag:'songyuan', heritage:true, owner:'北宋诗人苏舜钦',
+    technique:'未入园林先见水 · 复廊借水 · 108 式花窗', highlights:'沧浪亭石亭、复廊漏窗、明道堂、看山楼、翠玲珑',
+    summary:'苏州现存历史最悠久的宋代园林，以“复廊借景”与古木修竹著称。',
+    lecture:'北宋庆历新政受挫后，诗人苏舜钦流寓吴中，见城南荒园绿水环绕、古木参天，遂以四万钱购得，筑亭水畔，名曰“沧浪亭”，撰写《沧浪亭记》，开启宋代文人借园林寄托高洁志趣的传统。园内无大池，却巧借园外一泓清流，沿水建起一条双面空透的“复廊”，廊墙上开有 108 扇纹样无一重复的漏窗，将园内山林与园外绿水巧妙沟通。' },
+  { id:'g7', name:'艺圃', era:'明代 · 嘉靖二十年 (1541)', eraTag:'ming', heritage:true, owner:'明代袁祖庚 / 文震孟（药圃）/ 清代姜埰',
+    technique:'明代遗风 · 延光阁水榭 · 简练疏朗', highlights:'延光阁、博雅堂、乳鱼亭、浴鸥小院、响月廊',
+    summary:'最完整保存明代造园风格与文人隐居气息的世遗名园。',
+    lecture:'隐匿于古城深巷文衙弄中，明末大学士文震孟（文徵明曾孙）曾居此修“药圃”，清初明遗民姜埰购得后改称“敬亭山房”，其子姜实节更名“艺圃”。全园格局简练明快，水池居中，池北博雅堂、池南土石假山、池西水榭“延光阁”跨水而筑，为苏州园林中面积最大的水榭，临水品茗最得明人雅趣。' },
+  { id:'g8', name:'耦园', era:'清初筑涉园 · 同治十三年扩建 (1874)', eraTag:'qing', heritage:true, owner:'清代陆锦（涉园）/ 沈秉成与严永华夫妇',
+    technique:'一宅两园 · 三面环水 · 东山黄石假山', highlights:'城曲草堂、黄石假山、听橹楼、织帘老屋、魁星阁',
+    summary:'中轴住宅、东西双园并列，充满爱情佳话与水乡码头风情。',
+    lecture:'清同治年间，安徽巡抚沈秉成卸任后携才女妻子严永华隐居于此，扩建东西二园，取“耦园住佳耦，城曲筑诗城”之意，伉俪在此唱和八年，成就一段佳话。东园黄石假山气势雄浑，峭壁深壑模拟自然真山；全园东、南、北三面临河，设自有水码头，旧时可乘画舫直接入园。' },
+  { id:'g9', name:'退思园', era:'清代 · 光绪十一年 (1885)', eraTag:'qing', heritage:true, owner:'清代安徽兵备道任兰生',
+    technique:'横向布局 · 贴水而筑 · 水乡园林孤例', highlights:'退思草堂、闹红一舸、揽胜阁、眠云亭、岁寒居',
+    summary:'位于吴江同里古镇，世界文化遗产中唯一的江南水乡古镇园林。',
+    lecture:'园主任兰生遭弹劾罢官回乡后请画家袁龙设计建造，取《左传》“林父之事君也，进思尽忠，退思补过”之意命名。全园打破常规南北纵向轴线，改作自西向东横向展开（宅、庭、内园、外园依次递进），所有亭榭廊桥均紧贴水面建造，其中“闹红一舸”石舫半浸水中，如欲破浪前行。' },
+  { id:'g10', name:'怡园', era:'清代 · 光绪年间 (1874)', eraTag:'qing', heritage:false, owner:'清代宁绍台道顾文彬（过云楼主人）',
+    technique:'博采众长 · 复廊分景 · 鸳鸯厅精巧', highlights:'藕香榭（鸳鸯厅）、拜石轩、画舫斋、碧梧栖凤馆、坡仙琴馆',
+    summary:'晚清苏州园林集大成之作，素有“一园兼众园之长”美誉。',
+    lecture:'清代著名书画收藏家、“过云楼”主人顾文彬耗银二十万两历时九年建成。造园时博采苏州诸名园精华：复廊仿沧浪亭，水池仿网师园，假山仿环秀山庄，旱船仿拙政园。园内“藕香榭”北面敞朗迎荷风、南面轩雅宜冬日，一厅两景，尽显苏式建筑的匠心与生活智慧。' },
+];
+
+/* 八大美食 */
+const foods = [
+  { name:'松鼠鳜鱼', season:'四季皆宜', taste:'外脆里嫩 · 酸甜适口 · 造型灵动',
+    story:'相传乾隆皇帝微服下江南至苏州松鹤楼，厨师将鳜鱼施牡丹花刀炸成松鼠状，淋热卤汁吱吱作响，乾隆大悦，从此名扬天下。',
+    shops:'松鹤楼、得月楼、新聚丰' },
+  { name:'响油鳝糊', season:'夏秋滋补', taste:'油润鲜香 · 蒜香浓郁 · 胡椒提鲜',
+    story:'选用太湖笔杆粗细鲜活黄鳝划丝炒制，装盘后窝入蒜末与胡椒粉，上桌当众浇入滚烫麻油，“滋啦”声响彻席间，故名“响油”。',
+    shops:'得月楼、协和菜馆、珍珠饭店' },
+  { name:'碧螺虾仁', season:'清明谷雨', taste:'清雅茶香 · 弹嫩爽滑 · 莹润如玉',
+    story:'太湖手剥河虾仁与洞庭东山明前碧螺春同烹，茶叶清香化解河鲜微腥，虾仁洁白如玉，碧螺嫩绿点缀，宛如水墨小品。',
+    shops:'松鹤楼、老苏州茶酒楼、吴门人家' },
+  { name:'蟹粉狮子头', season:'金秋菊黄', taste:'入口即化 · 蟹黄醇厚 · 汤清味鲜',
+    story:'五花肉以手工石榴粒刀法斩切，拌入现拆阳澄湖大闸蟹蟹粉蟹黄，铺青菜心文火慢炖数小时，形如雄狮之首，肥而不腻。',
+    shops:'吴门人家、苏帮袁、得月楼' },
+  { name:'苏式汤面', season:'夏初三虾 · 盛夏枫镇', taste:'汤清见底 · 细面如丝 · 浇头百变',
+    story:'苏州人一日生活从“头汤面”开始。初夏最讲究“三虾面”（虾仁、虾籽、虾脑同炒拌面）；盛夏则食“枫镇大面”，以酒酿与鳝骨吊出白汤。',
+    shops:'同得兴、裕兴记、朱鸿兴' },
+  { name:'哑巴生煎', season:'四季晨昏', taste:'底脆如金 · 皮薄汁丰 · 鲜甜微卤',
+    story:'创办于清末民初，因创始人幼年失聪却手艺精湛而得名。馅心加入秘制肉皮冻，半水半油焖煎，出锅撒满葱花与芝麻，咬开汤汁四溢。',
+    shops:'哑巴生煎（临顿路总店）、鑫震源' },
+  { name:'桂花糖藕', season:'中秋前后', taste:'软糯拉丝 · 桂香清甜 · 冰凉爽口',
+    story:'水乡盛产九孔白莲藕，秋季采挖新藕，将浸泡透的圆糯米填入藕孔，加红糖文火慢焖至藕色红亮，切片淋上糖桂花蜜汁。',
+    shops:'潘玉麟糖粥摊、平江路苏式甜品铺' },
+  { name:'樱桃肉 / 藏书羊肉', season:'春肉冬羊', taste:'酥烂红亮 / 汤白味醇、暖身滋补',
+    story:'苏帮菜随四时流转：春末将五花肉切如樱桃小块，红曲米烹得色泽艳红；寒冬则往木渎藏书镇吃一锅杉木桶炖煮的白汤羊肉，暖彻心脾。',
+    shops:'新聚丰（樱桃肉）、老庆泰羊肉馆' },
+];
+
+/* 十位名人 */
+const celebrities = [
+  { seal:'子胥', name:'伍子胥', dynasty:'春秋', title:'姑苏古城缔造者 · “相土尝水，象天法地”',
+    story:'公元前 514 年，伍子胥受吴王阖闾之命规划建造阖闾大城，设水陆八门，开创“水陆并行、河街相邻”的古城水系格局，历经两千五百余年城址未变，为后世苏州园林提供了充沛的活水之源。',
+    quote:'“相土尝水，象天法地，造筑大城，周回四十七里。” ——《吴越春秋》' },
+  { seal:'乐天', name:'白居易', dynasty:'唐代', title:'七里山塘开凿者 · 诗咏江南水乡第一人',
+    story:'唐宝历元年（825年）任苏州刺史期间，疏浚河道、修筑白公堤（山塘街），极大改善阊门至虎丘水陆交通。他盛赞苏州“绿浪东西南北水，红栏三百九十桥”，奠定了后世文人对姑苏水乡的浪漫想象。',
+    quote:'“君到姑苏见，人家尽枕河。古宫闲地少，水港小桥多。” ——《送人游吴》' },
+  { seal:'希文', name:'范仲淹', dynasty:'北宋', title:'“先天下之忧而忧” · 天平山与沧浪亭文脉先驱',
+    story:'苏州吴县人，设“范氏义庄”泽被乡里八百年，在天平山先忧后乐坊留下千古名句；同时积极支持好友苏舜钦在城南营建沧浪亭，其“先忧后乐”精神深深刻入姑苏士大夫的园林题咏之中。',
+    quote:'“先天下之忧而忧，后天下之乐而乐。” ——《岳阳楼记》' },
+  { seal:'子美', name:'苏舜钦', dynasty:'北宋', title:'沧浪亭园主 · 开创苏州文人山水园林先河',
+    story:'北宋庆历五年（1045年）因支持范仲淹新政遭贬，流寓苏州。见城南荒园绿水环绕、古木参天，遂以四万钱购得，筑亭水畔，名曰“沧浪亭”，撰写《沧浪亭记》，开启宋代文人借园林寄托高洁志趣的传统。',
+    quote:'“清风明月本无价，可惜只卖四万钱。” —— 欧阳修赠苏舜钦诗' },
+  { seal:'石田', name:'沈周', dynasty:'明代', title:'吴门画派开山宗师 · 以画入园的审美奠基人',
+    story:'终身隐居苏州相城，不仕而以诗画名满天下。他为好友吴宽的园林绘制著名的《东庄图册》（现藏南京博物院），将山水画的“散点透视”与“留白意境”引入园林设计，促使明代苏州园林由奢华转向自然雅致。',
+    quote:'“竹深荷净处，便是小蓬莱。” —— 沈周题园林画作' },
+  { seal:'衡山', name:'文徵明', dynasty:'明代', title:'拙政园造园顾问 · 绘《拙政园三十一景图》',
+    story:'与王献臣交情深厚，亲自参与拙政园蓝图构思，园内文徵明手植紫藤至今每逢春末依然繁花满架。他还绘制《拙政园三十一景图》并逐一题咏，使拙政园的造园诗意得以完整传世。',
+    quote:'人间亦有痴于我，岂独伤心是小青。—— 文徵明咏园诗' },
+  { seal:'六如', name:'唐寅（唐伯虎）', dynasty:'明代', title:'桃花坞主人 · 姑苏才子文化的精神象征',
+    story:'世居苏州吴趋坊，晚年在古城西北桃花坞购地筑“桃花庵”，卖画为生、啸傲山水。其作品生动描绘了明代吴中士人的茶寮雅集与水乡生活，桃花坞木版年画更成为姑苏非遗瑰宝。',
+    quote:'“桃花坞里桃花庵，桃花庵里桃花仙。桃花仙人种桃树，又摘桃花换酒钱。”' },
+  { seal:'三白', name:'沈复', dynasty:'清代', title:'沧浪亭畔的布衣雅士 · 写尽苏式生活美学',
+    story:'生于苏州沧浪亭畔，与妻子陈芸（林语堂赞为“中国文学中最可爱的女人”）在此度过“布衣菜饭，可乐终身”的岁月。他在《浮生六记》中详述沧浪亭月夜赏景、盆景插花与苏式饮食，堪称苏州生活美学百科。',
+    quote:'“闲时与你立黄昏，灶前笑问粥可温。” ——《浮生六记》佚名题咏' },
+  { seal:'聿铭', name:'贝聿铭', dynasty:'现代', title:'狮子林贝氏族人 · 苏州博物馆新馆设计师',
+    story:'出身苏州望族贝氏，童年常在家族产业狮子林的太湖石假山间嬉戏捉迷藏。晚年他将苏州博物馆新馆视作“最亲爱的小女儿”，以钢结构屋顶演绎粉墙黛瓦，以片石假山致敬米芾山水，完成古典园林的现代转译。',
+    quote:'“中而新，苏而新；以壁为纸，以石为绘。” —— 贝聿铭谈苏博设计' },
+  { seal:'圣陶', name:'叶圣陶', dynasty:'现代', title:'《苏州园林》作者 · 提炼“图画美”核心法则',
+    story:'苏州人，曾长期执教于苏州草桥中学等地。其经典散文《苏州园林》以精练优美的语言，将苏州园林的艺术本质高度概括为“务必使游览者无论站在哪个点上，眼前总是一幅完美的图画”，影响几代国人的审美启蒙。',
+    quote:'“游览者看‘鱼戏莲叶间’，又是入画的一景。” ——《苏州园林》' },
+];
+
+const tips = [
+  { k:'01', t:'分时实名预约', d:'拙政园、狮子林、留园及苏州博物馆在节假日和春秋旺季极易约满，建议提前 7 天通过官方平台分时段预约；艺圃、沧浪亭等小众名园可随到随入。' },
+  { k:'02', t:'四时赏景指南', d:'春赏拙政园杜鹃与留园玉兰，夏观荷风四面亭莲影，秋品天平山红枫与满城桂香，冬寻沧浪亭与网师园雪压修竹、暗香浮动。' },
+  { k:'03', t:'观园三层境界', d:'一观山水花木之形，二品匾额楹联之文（如“与谁同坐轩”化用东坡词），三悟园主隐逸避世或兼济天下之精神怀抱。' },
+  { k:'04', t:'出行与穿搭', d:'古城内河道纵横、石板街巷窄深，建议地铁加步行或共享单车；园内假山石径多青苔，宜穿防滑平底鞋，素色新中式服饰与白墙黛瓦最为相衬。' },
+];
+---
+<Base title="苏州人文攻略" description="苏州三日 · 人文攻略：手绘古城水系名园图、十大名园讲解、八大美食、十位名人典故、游园锦囊。">
+  <Header current="travel" />
+  <section class="head">
+    <div class="crumb"><a href="/">CRURANIA</a> / <a href="/travel">旅游纪实</a> / <a href="/travel/suzhou/">苏州三日</a> / 人文攻略</div>
+    <h1>人文攻略</h1>
+    <div class="en">Guide · Gardens · Gastronomy · Figures</div>
+    <p class="lede">手绘古城水系与名园分布图、十大园林深度讲解、八大苏帮菜典故、十位姑苏名人——正史之外的苏州，姑妄听之。</p>
+    <nav class="anchor">
+      <a href="#map">水系名园图</a>
+      <a href="#gardens">十大名园</a>
+      <a href="#food">八大美食</a>
+      <a href="#figures">十位名人</a>
+      <a href="#tips">游园锦囊</a>
+    </nav>
+  </section>
+
+  <!-- 手绘古城水系与名园分布图 -->
+  <section id="map" class="sec">
+    <div class="sec-head">
+      <h2>手绘姑苏古城水系与名园分布图</h2>
+      <p>点击图中印记，查阅各处渊源、方位与游览锦囊。虚线为推荐漫游动线。</p>
+    </div>
+    <div class="map-wrap">
+      <div class="map-canvas">
+        <svg id="sz-map" viewBox="0 0 760 500" class="w-full h-auto" aria-label="苏州古城名园分布示意图">
+          <defs>
+            <pattern id="wave" width="24" height="12" patternUnits="userSpaceOnUse">
+              <path d="M0 6 Q 6 2, 12 6 T 24 6" fill="none" stroke="#b3ab9c" stroke-width="0.8" opacity="0.5"/>
+            </pattern>
+          </defs>
+          <!-- 远景山峦 -->
+          <path d="M-10,130 Q70,45 160,115 Q240,65 320,125 L320,0 L-10,0 Z" fill="#e8e3d7" opacity="0.7"/>
+          <path d="M540,490 Q630,410 770,460 L770,510 L540,510 Z" fill="#e8e3d7" opacity="0.7"/>
+          <!-- 护城河 -->
+          <path d="M 155,75 L 625,75 Q 645,75 645,95 L 645,415 Q 645,435 625,435 L 155,435 Q 135,435 135,415 L 135,95 Q 135,75 155,75 Z"
+                fill="none" stroke="#d5cfc0" stroke-width="16" opacity="0.6"/>
+          <path d="M 155,75 L 625,75 Q 645,75 645,95 L 645,415 Q 645,435 625,435 L 155,435 Q 135,435 135,415 L 135,95 Q 135,75 155,75 Z"
+                fill="url(#wave)" stroke="var(--ink)" stroke-width="1.4" stroke-dasharray="6 3"/>
+          <!-- 山塘河（通往虎丘） -->
+          <path d="M 135,135 Q 80,105 28,58" fill="none" stroke="#d5cfc0" stroke-width="11" opacity="0.7"/>
+          <path d="M 135,135 Q 80,105 28,58" fill="none" stroke="var(--ink)" stroke-width="1" stroke-dasharray="4 2"/>
+          <!-- 城内河道 -->
+          <path d="M 525,75 L 525,435" fill="none" stroke="#d5cfc0" stroke-width="8" opacity="0.65"/>
+          <path d="M 385,75 L 385,435" fill="none" stroke="#d5cfc0" stroke-width="6" opacity="0.5"/>
+          <path d="M 135,180 L 645,180" fill="none" stroke="#d5cfc0" stroke-width="6" opacity="0.5"/>
+          <path d="M 135,310 L 645,310" fill="none" stroke="#d5cfc0" stroke-width="7" opacity="0.55"/>
+          <!-- 小桥 -->
+          <path d="M 515,235 Q 525,223 535,235" fill="none" stroke="var(--dawn)" stroke-width="2.5"/>
+          <path d="M 515,239 Q 525,227 535,239" fill="none" stroke="var(--dawn)" stroke-width="1.5"/>
+          <path d="M 85,108 Q 92,94 102,102" fill="none" stroke="var(--dawn)" stroke-width="2.5"/>
+          <!-- 乌篷船 -->
+          <g transform="translate(514, 275) rotate(90)">
+            <path d="M0,4 Q12,0 24,4 Q12,9 0,4 Z" fill="var(--ink)"/>
+            <path d="M7,2 Q12,-2 17,2 Z" fill="var(--dawn)"/>
+          </g>
+          <g transform="translate(275, 428)">
+            <path d="M0,4 Q12,0 24,4 Q12,9 0,4 Z" fill="var(--ink)"/>
+            <path d="M7,2 Q12,-2 17,2 Z" fill="var(--dawn)"/>
+          </g>
+          <!-- 湖石剪影 -->
+          <path d="M 445,142 Q 440,122 452,115 Q 464,120 460,132 Q 470,136 462,145 Z" fill="#d8d2c4" stroke="var(--gray)" stroke-width="1.2"/>
+          <path d="M 185,152 Q 180,132 192,126 Q 202,132 198,144 Q 205,148 197,155 Z" fill="#d8d2c4" stroke="var(--gray)" stroke-width="1.2"/>
+          <!-- 推荐动线 -->
+          <path d="M 465,125 L 485,152 L 525,215 L 575,255 L 515,375 L 385,388 L 285,260 L 225,215 L 178,145 L 82,92"
+                fill="none" stroke="var(--dawn)" stroke-width="1.6" stroke-dasharray="5 5" opacity="0.6"/>
+          <!-- 题字印章 -->
+          <g transform="translate(668, 35)">
+            <rect x="0" y="0" width="26" height="62" rx="3" fill="var(--dawn)"/>
+            <text x="13" y="20" fill="#faf8f4" font-family="var(--serif)" font-size="13" font-weight="bold" text-anchor="middle">姑苏</text>
+            <text x="13" y="38" fill="#faf8f4" font-family="var(--serif)" font-size="13" font-weight="bold" text-anchor="middle">胜景</text>
+            <text x="13" y="55" fill="#faf8f4" font-family="var(--serif)" font-size="11" text-anchor="middle">手绘</text>
+          </g>
+          <!-- 景点节点 -->
+          <g class="spot" data-spot="zhuozheng" transform="translate(465, 118)">
+            <circle class="pulse" cx="0" cy="0" r="18" fill="var(--dawn)" opacity="0.22"/>
+            <circle class="dot" cx="0" cy="0" r="8" fill="var(--dawn)" stroke="#fff" stroke-width="2"/>
+            <rect x="-34" y="-32" width="68" height="20" rx="4" fill="#fff" stroke="var(--line)"/>
+            <text x="0" y="-18" font-family="var(--serif)" font-size="12" font-weight="bold" fill="var(--ink)" text-anchor="middle">拙政园</text>
+          </g>
+          <g class="spot" data-spot="shizilin" transform="translate(485, 158)">
+            <circle class="pulse" cx="0" cy="0" r="15" fill="var(--ink)" opacity="0.14"/>
+            <circle class="dot" cx="0" cy="0" r="7" fill="var(--ink)" stroke="#fff" stroke-width="2"/>
+            <rect x="12" y="-10" width="96" height="20" rx="4" fill="#fff" stroke="var(--line)"/>
+            <text x="60" y="4" font-family="var(--serif)" font-size="11" font-weight="bold" fill="var(--ink)" text-anchor="middle">狮子林 · 苏博</text>
+          </g>
+          <g class="spot" data-spot="pingjiang" transform="translate(525, 222)">
+            <circle class="pulse" cx="0" cy="0" r="15" fill="var(--ink)" opacity="0.14"/>
+            <circle class="dot" cx="0" cy="0" r="7" fill="var(--ink)" stroke="#fff" stroke-width="2"/>
+            <rect x="-74" y="-10" width="60" height="20" rx="4" fill="#fff" stroke="var(--line)"/>
+            <text x="-44" y="4" font-family="var(--serif)" font-size="11" font-weight="bold" fill="var(--ink)" text-anchor="middle">平江路</text>
+          </g>
+          <g class="spot" data-spot="ouyuan" transform="translate(592, 245)">
+            <circle class="pulse" cx="0" cy="0" r="14" fill="var(--ink)" opacity="0.14"/>
+            <circle class="dot" cx="0" cy="0" r="6.5" fill="var(--ink)" stroke="#fff" stroke-width="2"/>
+            <rect x="-24" y="-28" width="48" height="19" rx="4" fill="#fff" stroke="var(--line)"/>
+            <text x="0" y="-15" font-family="var(--serif)" font-size="11" font-weight="bold" fill="var(--ink)" text-anchor="middle">耦园</text>
+          </g>
+          <g class="spot" data-spot="wangshi" transform="translate(515, 375)">
+            <circle class="pulse" cx="0" cy="0" r="15" fill="var(--ink)" opacity="0.14"/>
+            <circle class="dot" cx="0" cy="0" r="7" fill="var(--ink)" stroke="#fff" stroke-width="2"/>
+            <rect x="12" y="-10" width="58" height="20" rx="4" fill="#fff" stroke="var(--line)"/>
+            <text x="41" y="4" font-family="var(--serif)" font-size="11" font-weight="bold" fill="var(--ink)" text-anchor="middle">网师园</text>
+          </g>
+          <g class="spot" data-spot="canglang" transform="translate(385, 392)">
+            <circle class="pulse" cx="0" cy="0" r="15" fill="var(--ink)" opacity="0.14"/>
+            <circle class="dot" cx="0" cy="0" r="7" fill="var(--ink)" stroke="#fff" stroke-width="2"/>
+            <rect x="-32" y="12" width="64" height="20" rx="4" fill="#fff" stroke="var(--line)"/>
+            <text x="0" y="26" font-family="var(--serif)" font-size="11" font-weight="bold" fill="var(--ink)" text-anchor="middle">沧浪亭</text>
+          </g>
+          <g class="spot" data-spot="huanxiu" transform="translate(325, 275)">
+            <circle class="pulse" cx="0" cy="0" r="14" fill="var(--ink)" opacity="0.14"/>
+            <circle class="dot" cx="0" cy="0" r="6.5" fill="var(--ink)" stroke="#fff" stroke-width="2"/>
+            <rect x="-56" y="12" width="112" height="20" rx="4" fill="#fff" stroke="var(--line)"/>
+            <text x="0" y="26" font-family="var(--serif)" font-size="11" font-weight="bold" fill="var(--ink)" text-anchor="middle">环秀山庄 · 怡园</text>
+          </g>
+          <g class="spot" data-spot="yipu" transform="translate(225, 215)">
+            <circle class="pulse" cx="0" cy="0" r="14" fill="var(--ink)" opacity="0.14"/>
+            <circle class="dot" cx="0" cy="0" r="6.5" fill="var(--ink)" stroke="#fff" stroke-width="2"/>
+            <rect x="-24" y="-28" width="48" height="19" rx="4" fill="#fff" stroke="var(--line)"/>
+            <text x="0" y="-15" font-family="var(--serif)" font-size="11" font-weight="bold" fill="var(--ink)" text-anchor="middle">艺圃</text>
+          </g>
+          <g class="spot" data-spot="liuyuan" transform="translate(178, 145)">
+            <circle class="pulse" cx="0" cy="0" r="15" fill="var(--ink)" opacity="0.14"/>
+            <circle class="dot" cx="0" cy="0" r="7" fill="var(--ink)" stroke="#fff" stroke-width="2"/>
+            <rect x="12" y="-10" width="52" height="20" rx="4" fill="#fff" stroke="var(--line)"/>
+            <text x="38" y="4" font-family="var(--serif)" font-size="11" font-weight="bold" fill="var(--ink)" text-anchor="middle">留园</text>
+          </g>
+          <g class="spot" data-spot="shantang" transform="translate(82, 92)">
+            <circle class="pulse" cx="0" cy="0" r="15" fill="var(--gray)" opacity="0.25"/>
+            <circle class="dot" cx="0" cy="0" r="7" fill="var(--gray)" stroke="#fff" stroke-width="2"/>
+            <rect x="-32" y="-30" width="64" height="20" rx="4" fill="#fff" stroke="var(--line)"/>
+            <text x="0" y="-16" font-family="var(--serif)" font-size="11" font-weight="bold" fill="var(--ink)" text-anchor="middle">山塘街</text>
+          </g>
+          <g class="spot" data-spot="tuisi" transform="translate(675, 455)">
+            <circle class="pulse" cx="0" cy="0" r="14" fill="var(--ink)" opacity="0.14"/>
+            <circle class="dot" cx="0" cy="0" r="7" fill="var(--ink)" stroke="#fff" stroke-width="2"/>
+            <text x="-10" y="24" font-family="var(--serif)" font-size="12" font-weight="bold" fill="var(--ink)" text-anchor="middle">↘ 同里 · 退思园</text>
+          </g>
+        </svg>
+        <div class="legend">
+          <span><i class="dot dawn"></i>核心名园</span>
+          <span><i class="dot ink"></i>古典园林</span>
+          <span><i class="dot gray"></i>历史水街</span>
+          <span class="note">虚线为推荐城内漫游动线</span>
+        </div>
+      </div>
+      <aside class="map-panel">
+        <div class="panel-top">
+          <span id="p-badge" class="badge">世界文化遗产 · 明代</span>
+          <span id="p-area" class="area">古城东北隅 · 东北街</span>
+        </div>
+        <h3 id="p-title">拙政园</h3>
+        <p id="p-subtitle" class="subtitle">“天下园林之母” · 池广树茂，自然疏朗</p>
+        <div class="panel-body">
+          <h4>人文渊源与造园</h4>
+          <p id="p-desc"></p>
+        </div>
+        <div class="panel-tip">
+          <h4>游览锦囊</h4>
+          <p id="p-tip"></p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 十大名园 -->
+  <section id="gardens" class="sec">
+    <div class="sec-head">
+      <h2>苏州十大古典园林深度解析</h2>
+      <p>九座世界文化遗产名园与一座晚清集大成之作。点开卡片看人文讲解。</p>
+    </div>
+    <div class="filters">
+      <button class="fbtn active" data-filter="all">全部 (10)</button>
+      <button class="fbtn" data-filter="heritage">世界文化遗产 (9)</button>
+      <button class="fbtn" data-filter="songyuan">宋元古韵 (2)</button>
+      <button class="fbtn" data-filter="ming">明代风华 (3)</button>
+      <button class="fbtn" data-filter="qing">清代精致 (4)</button>
+    </div>
+    <div class="card-grid two">
+      {gardens.map((g) => (
+        <article class="card garden-card" data-era={g.eraTag} data-heritage={g.heritage ? '1' : '0'}>
+          <header>
+            <div class="card-title">
+              <h3>{g.name}</h3>
+              {g.heritage
+                ? <span class="tag dawn">世界遗产</span>
+                : <span class="tag">晚清名园</span>}
+            </div>
+            <p class="era">{g.era} · 园主：{g.owner}</p>
+            <p class="summary">{g.summary}</p>
+          </header>
+          <dl>
+            <div><dt>造园手法</dt><dd>{g.technique}</dd></div>
+            <div><dt>核心胜景</dt><dd>{g.highlights}</dd></div>
+          </dl>
+          <details class="lecture">
+            <summary>人文典故与深度讲解</summary>
+            <p>{g.lecture}</p>
+          </details>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- 八大美食 -->
+  <section id="food" class="sec">
+    <div class="sec-head">
+      <h2>苏帮菜八大经典</h2>
+      <p>“不时不食，选料严谨，刀工精细，清甜鲜嫩”的吴地饮食哲学。</p>
+    </div>
+    <div class="card-grid four">
+      {foods.map((f) => (
+        <article class="card food-card">
+          <div class="food-top">
+            <h3>{f.name}</h3>
+            <span class="tag">{f.season}</span>
+          </div>
+          <p class="taste">{f.taste}</p>
+          <p class="story">{f.story}</p>
+          <p class="shops"><strong>老字号</strong> · {f.shops}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- 十位名人 -->
+  <section id="figures" class="sec">
+    <div class="sec-head">
+      <h2>姑苏十位历史名人与园林渊源</h2>
+      <p>从春秋筑城到现代几何园林，两千五百余年未曾断绝的姑苏文脉。</p>
+    </div>
+    <div class="card-grid two">
+      {celebrities.map((c) => (
+        <article class="card fig-card">
+          <header class="fig-head">
+            <span class="seal">{c.seal}</span>
+            <div>
+              <div class="fig-name">
+                <h3>{c.name}</h3>
+                <span class="tag">{c.dynasty}</span>
+              </div>
+              <p class="fig-title">{c.title}</p>
+            </div>
+          </header>
+          <p class="story">{c.story}</p>
+          <blockquote class="quote">{c.quote}</blockquote>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- 游园锦囊 -->
+  <section id="tips" class="sec">
+    <div class="sec-head">
+      <h2>游园锦囊</h2>
+      <p>四件事，让姑苏之行从容一些。</p>
+    </div>
+    <div class="card-grid four">
+      {tips.map((t) => (
+        <article class="card tip-card">
+          <span class="num">{t.k}</span>
+          <h3>{t.t}</h3>
+          <p>{t.d}</p>
+        </article>
+      ))}
+    </div>
+    <p class="disclaimer">本页典故多采自地方志与民间传说，真假参半，姑妄听之；出处以各景区官方讲解为准。</p>
+  </section>
+
+  <Footer editUrl="https://github.com/bconnect/crurania/edit/main/src/pages/travel/suzhou/guide.astro" editLabel="✎ 编辑本页 ↗" />
+</Base>
+
+<script define:vars={{ spots }}>
+  // 地图点位联动
+  const panel = {
+    badge: document.getElementById('p-badge'),
+    area: document.getElementById('p-area'),
+    title: document.getElementById('p-title'),
+    subtitle: document.getElementById('p-subtitle'),
+    desc: document.getElementById('p-desc'),
+    tip: document.getElementById('p-tip'),
+  };
+  function selectSpot(key) {
+    const d = spots[key];
+    if (!d) return;
+    panel.badge.textContent = d.badge;
+    panel.area.textContent = d.area;
+    panel.title.textContent = d.title;
+    panel.subtitle.textContent = d.subtitle;
+    panel.desc.textContent = d.desc;
+    panel.tip.textContent = d.tip;
+    document.querySelectorAll('#sz-map .spot').forEach((n) => {
+      const on = n.getAttribute('data-spot') === key;
+      const dot = n.querySelector('.dot');
+      const pulse = n.querySelector('.pulse');
+      if (dot) { dot.setAttribute('fill', on ? 'var(--dawn)' : (n.getAttribute('data-spot') === 'shantang' ? 'var(--gray)' : 'var(--ink)')); dot.setAttribute('r', on ? '8.5' : '7'); }
+      if (pulse) { pulse.setAttribute('opacity', on ? '0.3' : '0.14'); }
+    });
+  }
+  document.querySelectorAll('#sz-map .spot').forEach((n) => {
+    n.addEventListener('click', () => selectSpot(n.getAttribute('data-spot')));
+  });
+  selectSpot('zhuozheng');
+
+  // 名园筛选
+  document.querySelectorAll('.fbtn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.fbtn').forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.getAttribute('data-filter');
+      document.querySelectorAll('.garden-card').forEach((card) => {
+        const era = card.getAttribute('data-era');
+        const her = card.getAttribute('data-heritage');
+        const show = f === 'all' || (f === 'heritage' && her === '1') || era === f;
+        card.style.display = show ? '' : 'none';
+      });
+    });
+  });
+</script>
+
+<style>
+  .head { padding: 64px 48px 36px; border-bottom: 1px solid var(--line); }
+  .crumb { font-family: var(--mono); font-size: 11px; color: var(--gray); letter-spacing: .15em; margin-bottom: 20px; }
+  .crumb a { border-bottom: 1px solid var(--dawn); }
+  .head h1 { font-family: var(--serif); font-size: clamp(32px, 5vw, 52px); font-weight: 700; letter-spacing: .06em; }
+  .head .en { font-family: var(--mono); font-size: 12px; color: var(--dawn); letter-spacing: .3em; text-transform: uppercase; margin-top: 12px; }
+  .lede { font-family: var(--serif); font-size: 15px; color: #55524c; margin-top: 20px; max-width: 36em; }
+  .anchor { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 28px; font-size: 13px; font-family: var(--serif); }
+  .anchor a { border-bottom: 1px solid var(--dawn); color: var(--dawn); }
+
+  .sec { padding: 56px 48px 8px; }
+  .sec-head { max-width: 40em; margin-bottom: 32px; }
+  .sec-head h2 { font-family: var(--serif); font-size: clamp(24px, 3.4vw, 34px); font-weight: 700; letter-spacing: .04em; }
+  .sec-head p { color: var(--gray); font-size: 13px; margin-top: 10px; }
+
+  /* 手绘地图 */
+  .map-wrap { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: 24px; align-items: stretch; }
+  .map-canvas { background: #f4f0e6; border: 2px solid var(--ink); padding: 16px; position: relative; }
+  .map-canvas::after { content:''; position: absolute; top: 6px; left: 6px; right: 6px; bottom: 6px; border: 1px dashed rgba(26,25,23,.25); pointer-events: none; }
+  .spot { cursor: pointer; }
+  .spot text { user-select: none; }
+  .legend { display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: center; border-top: 1px solid var(--line); margin-top: 12px; padding-top: 10px; font-size: 12px; color: var(--gray); }
+  .legend .dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 6px; }
+  .legend .dot.dawn { background: var(--dawn); }
+  .legend .dot.ink { background: var(--ink); }
+  .legend .dot.gray { background: var(--gray); }
+  .legend .note { margin-left: auto; font-family: var(--serif); font-style: italic; }
+
+  .map-panel { background: #fff; border: 1px solid var(--line); padding: 24px; display: flex; flex-direction: column; }
+  .panel-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
+  .badge { font-family: var(--serif); font-size: 11px; font-weight: 700; color: var(--dawn); background: rgba(184,98,30,.08); border: 1px solid rgba(184,98,30,.35); padding: 2px 10px; border-radius: 99px; }
+  .area { font-family: var(--mono); font-size: 11px; color: var(--gray); }
+  .map-panel h3 { font-family: var(--serif); font-size: 26px; font-weight: 700; }
+  .subtitle { font-family: var(--serif); font-size: 13px; color: var(--dawn); margin-top: 6px; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+  .panel-body { margin-top: 16px; }
+  .panel-body h4, .panel-tip h4 { font-family: var(--serif); font-size: 12px; letter-spacing: .12em; color: var(--ink); margin-bottom: 6px; }
+  .panel-body p { font-size: 13px; color: #33302b; }
+  .panel-tip { margin-top: 18px; background: #f4f0e6; border: 1px solid var(--line); padding: 14px; }
+  .panel-tip p { font-size: 12.5px; color: #55524c; }
+
+  /* 筛选按钮 */
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+  .fbtn { font-family: var(--serif); font-size: 12.5px; padding: 7px 16px; border-radius: 99px; border: 1px solid var(--line); background: #fff; color: var(--ink); cursor: pointer; transition: all .2s; }
+  .fbtn:hover { border-color: var(--dawn); color: var(--dawn); }
+  .fbtn.active { background: var(--ink); color: #faf8f4; border-color: var(--ink); }
+
+  /* 卡片网格 */
+  .card-grid { display: grid; gap: 20px; }
+  .card-grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .card-grid.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .card { background: #fff; border: 1px solid var(--line); padding: 24px; display: flex; flex-direction: column; justify-content: space-between; transition: border-color .25s, transform .25s; }
+  .card:hover { border-color: var(--dawn); transform: translateY(-3px); }
+  .card h3 { font-family: var(--serif); font-size: 19px; font-weight: 700; }
+  .tag { font-family: var(--serif); font-size: 11px; color: var(--gray); background: #f0ede6; padding: 2px 10px; border-radius: 99px; white-space: nowrap; }
+  .tag.dawn { color: var(--dawn); background: rgba(184,98,30,.08); border: 1px solid rgba(184,98,30,.3); }
+
+  .garden-card header { margin-bottom: 14px; }
+  .card-title { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .era { font-size: 12px; color: var(--gray); margin-top: 8px; }
+  .summary { font-size: 13.5px; color: #33302b; font-weight: 600; margin-top: 10px; }
+  .garden-card dl { background: #faf8f4; border: 1px solid var(--line); padding: 12px 16px; margin-bottom: 14px; }
+  .garden-card dl div { display: grid; grid-template-columns: 5em 1fr; gap: 8px; font-size: 12.5px; padding: 3px 0; }
+  .garden-card dt { font-family: var(--serif); font-weight: 700; color: var(--dawn); white-space: nowrap; }
+  .garden-card dd { color: #55524c; }
+  details.lecture { border-left: 2px solid var(--dawn); background: #faf8f4; padding: 10px 16px; }
+  details.lecture summary { font-family: var(--serif); font-size: 13px; font-weight: 700; color: var(--dawn); cursor: pointer; user-select: none; }
+  details.lecture p { font-size: 12.5px; color: #44403a; line-height: 1.9; margin-top: 8px; }
+
+  .food-card .food-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+  .food-card h3 { font-size: 17px; }
+  .food-card .taste { font-size: 11.5px; color: var(--dawn); font-weight: 600; margin-top: 8px; }
+  .food-card .story { font-size: 12.5px; color: #44403a; margin-top: 10px; flex-grow: 1; }
+  .food-card .shops { font-size: 11.5px; color: var(--gray); border-top: 1px solid var(--line); margin-top: 14px; padding-top: 10px; }
+  .food-card .shops strong { color: var(--ink); font-family: var(--serif); }
+
+  .fig-head { display: flex; gap: 16px; align-items: flex-start; margin-bottom: 14px; }
+  .seal { width: 44px; height: 44px; flex-shrink: 0; background: var(--dawn); color: #faf8f4; font-family: var(--serif); font-weight: 700; font-size: 13px; display: flex; align-items: center; justify-content: center; letter-spacing: .1em; border-radius: 4px; }
+  .fig-name { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .fig-name h3 { font-size: 18px; }
+  .fig-title { font-size: 12.5px; color: var(--dawn); font-weight: 600; margin-top: 4px; }
+  .fig-card .story { font-size: 13px; color: #33302b; flex-grow: 1; }
+  .quote { font-family: var(--serif); font-size: 12.5px; color: var(--gray); border-left: 2px solid var(--ink); background: #f4f0e6; padding: 10px 16px; margin-top: 16px; font-style: italic; }
+
+  .tip-card .num { font-family: var(--mono); font-size: 12px; color: var(--dawn); letter-spacing: .2em; }
+  .tip-card h3 { margin-top: 8px; font-size: 17px; }
+  .tip-card p { font-size: 12.5px; color: #55524c; margin-top: 10px; }
+
+  .disclaimer { font-size: 12px; color: var(--gray); font-family: var(--serif); margin-top: 28px; }
+
+  @media (max-width: 1100px) {
+    .card-grid.four { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .map-wrap { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 860px) {
+    .head, .sec { padding-left: 22px; padding-right: 22px; }
+    .card-grid.two, .card-grid.four { grid-template-columns: 1fr; }
+    .legend .note { margin-left: 0; width: 100%; }
+  }
+</style>

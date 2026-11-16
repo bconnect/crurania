@@ -34,7 +34,8 @@
             "note",
             "photo",
             "place",
-            "anecdote"
+            "anecdote",
+            "figure"
           ]
         },
         "day": {

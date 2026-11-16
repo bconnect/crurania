@@ -12,8 +12,8 @@ const { entry } = Astro.props;
 const { Content } = await render(entry);
 const d = entry.data;
 const fmt = (date?: Date) => date ? `${date.getFullYear()}.${String(date.getMonth() + 1).padStart(2, '0')}.${String(date.getDate()).padStart(2, '0')}` : '';
-const typeZh: Record<string, string> = { plan: '行前计划', note: '旅行笔记', photo: '照片', place: '地点', anecdote: '野史' };
-const sectionHref: Record<string, string> = { plan: '/travel/suzhou/plan/', note: '/travel/suzhou/notes/', photo: '/travel/suzhou/photos/', place: '/travel/suzhou/places/', anecdote: '/travel/suzhou/anecdotes/' };
+const typeZh: Record<string, string> = { plan: '行前计划', note: '旅行笔记', photo: '照片', place: '地点', anecdote: '野史', figure: '人物' };
+const sectionHref: Record<string, string> = { plan: '/travel/suzhou/plan/', note: '/travel/suzhou/notes/', photo: '/travel/suzhou/photos/', place: '/travel/suzhou/places/', anecdote: '/travel/suzhou/anecdotes/', figure: '/travel/suzhou/guide/' };
 const backLabel = typeZh[d.type] ?? '苏州三日';
 const backHref = sectionHref[d.type] ?? '/travel/suzhou/';
 ---

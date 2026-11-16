@@ -1,0 +1,91 @@
+---
+/* 狮子林 · 手绘示意图 */
+---
+<svg class="gm" viewBox="0 0 460 380" role="img" aria-label="狮子林手绘示意图">
+  <rect x="7" y="7" width="446" height="366" fill="#faf6ec" stroke="#2c3531" stroke-width="2.4"/>
+  <rect x="12" y="12" width="436" height="356" fill="none" stroke="#2c3531" stroke-width="0.7"/>
+  <text x="26" y="44" class="gm-title">狮子林</text>
+  <text x="112" y="44" class="gm-sub">假山王国 · 禅意石海 —— 手绘示意，非实测</text>
+  <!-- 中部大假山：湖石群峰 -->
+  <path class="gm-rock" d="M150,258 C130,220 138,160 180,128 C222,96 288,100 314,146 C338,190 328,240 292,262 C250,288 172,292 150,258 Z"/>
+  <g class="gm-rockhatch">
+    <path d="M180,220 l18,-24 M210,200 l16,-20 M246,188 l14,-18 M276,204 l14,-16 M192,250 l16,-18 M236,238 l16,-16 M268,244 l14,-14 M222,152 l12,-14 M258,146 l12,-12"/>
+  </g>
+  <!-- 山中古道（虚线） -->
+  <path class="gm-path" d="M168,246 C196,232 210,236 226,218 C244,198 238,178 258,162 C274,150 292,152 304,140"/>
+  <path class="gm-path" d="M186,262 C204,250 236,254 256,240"/>
+  <!-- 西部水池 -->
+  <path class="gm-water" d="M52,176 C78,154 126,150 148,172 C168,192 164,232 140,254 C116,276 72,274 54,250 C40,230 38,196 52,176 Z"/>
+  <path class="gm-ripple" d="M66,196 q14,-4 28,0 M84,222 q14,-4 28,0"/>
+  <!-- 湖心：真趣亭 -->
+  <g class="gm-pav"><rect x="90" y="198" width="20" height="14"/><polygon class="gm-roof" points="86,198 114,198 108,190 92,190"/></g>
+  <text x="118" y="210" class="gm-label-big">真趣亭（湖心）</text>
+  <path class="gm-bridge" d="M66,230 Q88,222 108,228"/>
+  <path class="gm-bridge" d="M112,228 Q134,224 148,214"/>
+  <!-- 石舫 -->
+  <g>
+    <polygon class="gm-bldg2" points="44,166 84,166 78,156 50,156"/>
+    <polygon class="gm-roof" points="56,156 72,146 78,156"/>
+    <text x="30" y="150" class="gm-label">石舫</text>
+  </g>
+  <!-- 东部：祠堂与厅堂 -->
+  <rect class="gm-yard" x="336" y="60" width="102" height="262"/>
+  <g class="gm-bldg"><rect x="356" y="282" width="62" height="24"/><polygon class="gm-roof" points="350,282 424,282 414,272 360,272"/></g>
+  <text x="352" y="324" class="gm-label-big">燕誉堂（主厅）</text>
+  <g class="gm-bldg"><rect x="360" y="210" width="54" height="22"/><polygon class="gm-roof" points="354,210 420,210 411,201 363,201"/></g>
+  <text x="362" y="246" class="gm-label">小方厅</text>
+  <g class="gm-bldg"><rect x="366" y="120" width="58" height="22"/><polygon class="gm-roof" points="360,120 430,120 420,111 370,111"/></g>
+  <text x="364" y="112" class="gm-label">贝氏宗祠（门厅）</text>
+  <!-- 九狮峰小院 -->
+  <rect class="gm-yard" x="336" y="166" width="66" height="38"/>
+  <path class="gm-rock" d="M348,196 l8,-16 10,16 z"/>
+  <path class="gm-rock" d="M366,198 l6,-12 8,12 z"/>
+  <text x="348" y="224" class="gm-label">九狮峰院</text>
+  <!-- 指柏轩 -->
+  <g class="gm-bldg"><rect x="292" y="286" width="42" height="20"/><polygon class="gm-roof" points="287,286 339,286 331,277 295,277"/></g>
+  <text x="296" y="322" class="gm-label">指柏轩</text>
+  <!-- 古五松园（北部） -->
+  <g class="gm-tree">
+    <circle cx="356" cy="76" r="8"/><circle cx="378" cy="72" r="9"/><circle cx="400" cy="78" r="8"/>
+  </g>
+  <text x="338" y="66" class="gm-label">古五松园</text>
+  <!-- 文天祥碑亭（东南角） -->
+  <g class="gm-pav"><rect x="420" y="324" width="18" height="12"/><polygon class="gm-roof" points="417,324 441,324 435,317 423,317"/></g>
+  <text x="352" y="344" class="gm-label">文天祥碑亭</text>
+  <!-- 山与大假山标注 -->
+  <text x="196" y="290" class="gm-label-big">湖石大假山（古道盘旋·石洞幽壑）</text>
+  <text x="196" y="118" class="gm-anno">山含九狮之形，峰列二十一景</text>
+  <!-- 指北针 -->
+  <g class="gm-north">
+    <circle cx="60" cy="42" r="14" fill="none" stroke="#2c3531" stroke-width="1"/>
+    <polygon points="60,32 64,46 60,43 56,46" fill="#A94442"/>
+    <text x="56" y="66" class="gm-anno">N</text>
+  </g>
+  <!-- 印章 -->
+  <g>
+    <rect class="gm-seal" x="26" y="330" width="24" height="24" rx="3"/>
+    <text x="32" y="347" class="gm-sealtext">狮</text>
+  </g>
+</svg>
+<style>
+  .gm { display:block; width:100%; height:auto; }
+  .gm text { font-family: var(--serif); }
+  .gm-title { font-size:24px; font-weight:700; fill:#2c3531; letter-spacing:8px; }
+  .gm-sub { font-size:11px; fill:#8a7d63; letter-spacing:1px; }
+  .gm-water { fill:#b9d0c9; }
+  .gm-ripple { fill:none; stroke:#7fa398; stroke-width:.8; opacity:.75; }
+  .gm-rock { fill:#d8ccb2; stroke:#9c8f74; stroke-width:1; }
+  .gm-rockhatch { stroke:#9c8f74; stroke-width:.8; }
+  .gm-tree { fill:none; stroke:#5a6b5c; stroke-width:1.2; }
+  .gm-yard { fill:#f2ecda; stroke:#9c8f74; stroke-width:.8; }
+  .gm-bldg rect, .gm-pav rect { fill:#fdfbf3; stroke:#2c3531; stroke-width:1.1; }
+  .gm-bldg2 { fill:#fdfbf3; stroke:#2c3531; stroke-width:1.1; }
+  .gm-roof { fill:#4a564f; }
+  .gm-bridge { fill:none; stroke:#A94442; stroke-width:2; }
+  .gm-path { fill:none; stroke:#a08c6c; stroke-width:1.1; stroke-dasharray:3 3; }
+  .gm-label { font-size:10.5px; fill:#2c3531; }
+  .gm-label-big { font-size:12px; font-weight:700; fill:#2c3531; }
+  .gm-anno { font-size:9.5px; fill:#8a7d63; }
+  .gm-seal { fill:#A94442; }
+  .gm-sealtext { fill:#faf6ec; font-size:15px; font-weight:700; }
+</style>

@@ -1,0 +1,29 @@
+---
+/* 十大名园手绘地图 · 分发器：按园 id 渲染对应 SVG */
+import MapZhuozhengyuan from './maps/MapZhuozhengyuan.astro';
+import MapLiuyuan from './maps/MapLiuyuan.astro';
+import MapWangshi from './maps/MapWangshi.astro';
+import MapCanglangting from './maps/MapCanglangting.astro';
+import MapShizilin from './maps/MapShizilin.astro';
+import MapYipu from './maps/MapYipu.astro';
+import MapHuanxiu from './maps/MapHuanxiu.astro';
+import MapOuyuan from './maps/MapOuyuan.astro';
+import MapTuisi from './maps/MapTuisi.astro';
+import MapYiyuan from './maps/MapYiyuan.astro';
+
+const { id } = Astro.props;
+const maps: Record<string, any> = {
+  g1: MapZhuozhengyuan,
+  g2: MapLiuyuan,
+  g3: MapWangshi,
+  g4: MapHuanxiu,
+  g5: MapShizilin,
+  g6: MapCanglangting,
+  g7: MapYipu,
+  g8: MapOuyuan,
+  g9: MapTuisi,
+  g10: MapYiyuan,
+};
+const Cmp = maps[id];
+---
+{Cmp && <Cmp />}

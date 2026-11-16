@@ -3,6 +3,7 @@
 import Base from '../../../layouts/Base.astro';
 import Header from '../../../components/Header.astro';
 import Footer from '../../../components/Footer.astro';
+import GardenMap from '../../../components/suzhou/garden-maps/GardenMap.astro';
 
 /* 地图坐标点数据 */
 const spots: Record<string, any> = {
@@ -146,6 +147,20 @@ const celebrities = [
     story:'苏州人，曾长期执教于苏州草桥中学等地。其经典散文《苏州园林》以精练优美的语言，将苏州园林的艺术本质高度概括为“务必使游览者无论站在哪个点上，眼前总是一幅完美的图画”，影响几代国人的审美启蒙。',
     quote:'“游览者看‘鱼戏莲叶间’，又是入画的一景。” ——《苏州园林》' },
 ];
+
+/* 十位名人 → 全文长文 slug（src/content/suzhou/figure-*.md） */
+const figureSlugs: Record<string, string> = {
+  '伍子胥': 'figure-wu-zixu',
+  '白居易': 'figure-bai-juyi',
+  '范仲淹': 'figure-fan-zhongyan',
+  '苏舜钦': 'figure-su-shunqin',
+  '沈周': 'figure-shen-zhou',
+  '文徵明': 'figure-wen-zhengming',
+  '唐寅（唐伯虎）': 'figure-tang-yin',
+  '沈复': 'figure-shen-fu',
+  '贝聿铭': 'figure-pei-yuming',
+  '叶圣陶': 'figure-ye-shengtao',
+};
 
 const tips = [
   { k:'01', t:'分时实名预约', d:'拙政园、狮子林、留园及苏州博物馆在节假日和春秋旺季极易约满，建议提前 7 天通过官方平台分时段预约；艺圃、沧浪亭等小众名园可随到随入。' },
@@ -350,8 +365,9 @@ const tips = [
             <div><dt>核心胜景</dt><dd>{g.highlights}</dd></div>
           </dl>
           <details class="lecture">
-            <summary>人文典故与深度讲解</summary>
+            <summary>人文典故与深度讲解 · 手绘导览图</summary>
             <p>{g.lecture}</p>
+            <div class="gmap-wrap"><GardenMap id={g.id} /></div>
           </details>
         </article>
       ))}
@@ -400,6 +416,7 @@ const tips = [
           </header>
           <p class="story">{c.story}</p>
           <blockquote class="quote">{c.quote}</blockquote>
+          <a class="fig-more" href={`/travel/suzhou/${figureSlugs[c.name]}/`}>阅读全文（千字长文）→</a>
         </article>
       ))}
     </div>
@@ -572,4 +589,7 @@ const tips = [
     .card-grid.two, .card-grid.four { grid-template-columns: 1fr; }
     .legend .note { margin-left: 0; width: 100%; }
   }
+
+  .gmap-wrap { margin: 14px 0 4px; }
+  .fig-more { display: inline-block; margin-top: 10px; font-family: var(--mono); font-size: 11px; letter-spacing: .12em; color: var(--dawn); border-bottom: 1px solid var(--dawn); }
 </style>

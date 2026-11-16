@@ -35,11 +35,15 @@
             "photo",
             "place",
             "anecdote",
-            "figure"
+            "figure",
+            "garden"
           ]
         },
         "day": {
           "type": "integer"
+        },
+        "garden": {
+          "type": "string"
         },
         "location": {
           "type": "string"

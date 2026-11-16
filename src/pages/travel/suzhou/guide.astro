@@ -86,6 +86,10 @@ const gardens = [
     lecture:'清代著名书画收藏家、“过云楼”主人顾文彬耗银二十万两历时九年建成。造园时博采苏州诸名园精华：复廊仿沧浪亭，水池仿网师园，假山仿环秀山庄，旱船仿拙政园。园内“藕香榭”北面敞朗迎荷风、南面轩雅宜冬日，一厅两景，尽显苏式建筑的匠心与生活智慧。' },
 ];
 
+/* 名园长文 slug 映射（garden-*.md 每园约 2000 字 + 建筑图纸） */
+const GARDEN_SLUG: Record<string, string> = { g1:'zhuozhengyuan', g2:'liuyuan', g3:'wangshi', g4:'huanxiu', g5:'shizilin', g6:'canglangting', g7:'yipu', g8:'ouyuan', g9:'tuisi', g10:'yiyuan' };
+const gardenReady = new Set(['g1']);
+
 /* 八大美食 */
 const foods = [
   { name:'松鼠鳜鱼', season:'四季皆宜', taste:'外脆里嫩 · 酸甜适口 · 造型灵动',
@@ -367,6 +371,7 @@ const tips = [
           <details class="lecture">
             <summary>人文典故与深度讲解 · 手绘导览图</summary>
             <p>{g.lecture}</p>
+            {gardenReady.has(g.id) && <p class="deep-link"><a href={`/travel/suzhou/garden-${GARDEN_SLUG[g.id]}/`}>深度阅读：本园长文（约 2000 字 · 附建筑图纸）→</a></p>}
             <div class="gmap-wrap"><GardenMap id={g.id} /></div>
           </details>
         </article>
@@ -558,6 +563,9 @@ const tips = [
   details.lecture { border-left: 2px solid var(--dawn); background: #faf8f4; padding: 10px 16px; }
   details.lecture summary { font-family: var(--serif); font-size: 13px; font-weight: 700; color: var(--dawn); cursor: pointer; user-select: none; }
   details.lecture p { font-size: 12.5px; color: #44403a; line-height: 1.9; margin-top: 8px; }
+  .deep-link { margin-top: 10px; }
+  .deep-link a { font-family: var(--serif); font-size: 13px; font-weight: 700; color: var(--dawn); border-bottom: 1px solid var(--dawn); letter-spacing: .05em; }
+  .deep-link a:hover { color: #8a3c3a; border-color: #8a3c3a; }
 
   .food-card .food-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
   .food-card h3 { font-size: 17px; }

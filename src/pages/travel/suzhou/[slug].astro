@@ -1,9 +1,33 @@
 ---
-/* 苏州专题 · 单篇渲染（计划/笔记/地点/野史/照片 共用） */
+/* 苏州专题 · 单篇渲染（计划/笔记/地点/野史/人物/名园 共用） */
 import Base from '../../../layouts/Base.astro';
 import Header from '../../../components/Header.astro';
 import Footer from '../../../components/Footer.astro';
 import { getCollection, render } from 'astro:content';
+import IsoZhuozhengyuan from '../../../components/suzhou/garden-maps/IsoZhuozhengyuan.astro';
+import IsoLiuyuan from '../../../components/suzhou/garden-maps/IsoLiuyuan.astro';
+import IsoWangshi from '../../../components/suzhou/garden-maps/IsoWangshi.astro';
+import IsoCanglangting from '../../../components/suzhou/garden-maps/IsoCanglangting.astro';
+import IsoShizilin from '../../../components/suzhou/garden-maps/IsoShizilin.astro';
+import IsoYipu from '../../../components/suzhou/garden-maps/IsoYipu.astro';
+import IsoOuyuan from '../../../components/suzhou/garden-maps/IsoOuyuan.astro';
+import IsoTuisi from '../../../components/suzhou/garden-maps/IsoTuisi.astro';
+import IsoHuanxiu from '../../../components/suzhou/garden-maps/IsoHuanxiu.astro';
+import IsoYiyuan from '../../../components/suzhou/garden-maps/IsoYiyuan.astro';
+
+const isoByGarden: Record<string, any> = {
+  zhuozhengyuan: IsoZhuozhengyuan,
+  liuyuan: IsoLiuyuan,
+  wangshi: IsoWangshi,
+  canglangting: IsoCanglangting,
+  shizilin: IsoShizilin,
+  yipu: IsoYipu,
+  ouyuan: IsoOuyuan,
+  tuisi: IsoTuisi,
+  huanxiu: IsoHuanxiu,
+  yiyuan: IsoYiyuan,
+};
+
 export async function getStaticPaths() {
   const entries = (await getCollection('suzhou')).filter((e) => !e.data.draft);
   return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
@@ -12,10 +36,11 @@ const { entry } = Astro.props;
 const { Content } = await render(entry);
 const d = entry.data;
 const fmt = (date?: Date) => date ? `${date.getFullYear()}.${String(date.getMonth() + 1).padStart(2, '0')}.${String(date.getDate()).padStart(2, '0')}` : '';
-const typeZh: Record<string, string> = { plan: '行前计划', note: '旅行笔记', photo: '照片', place: '地点', anecdote: '野史', figure: '人物' };
-const sectionHref: Record<string, string> = { plan: '/travel/suzhou/plan/', note: '/travel/suzhou/notes/', photo: '/travel/suzhou/photos/', place: '/travel/suzhou/places/', anecdote: '/travel/suzhou/anecdotes/', figure: '/travel/suzhou/guide/' };
+const typeZh: Record<string, string> = { plan: '行前计划', note: '旅行笔记', photo: '照片', place: '地点', anecdote: '野史', figure: '人物', garden: '十大名园' };
+const sectionHref: Record<string, string> = { plan: '/travel/suzhou/plan/', note: '/travel/suzhou/notes/', photo: '/travel/suzhou/photos/', place: '/travel/suzhou/places/', anecdote: '/travel/suzhou/anecdotes/', figure: '/travel/suzhou/guide/', garden: '/travel/suzhou/guide/' };
 const backLabel = typeZh[d.type] ?? '苏州三日';
 const backHref = sectionHref[d.type] ?? '/travel/suzhou/';
+const Iso = d.type === 'garden' && d.garden ? (isoByGarden[d.garden] ?? null) : null;
 ---
 <Base title={d.title} description={d.description}>
   <Header current="travel" />
@@ -29,6 +54,12 @@ const backHref = sectionHref[d.type] ?? '/travel/suzhou/';
         {d.location && <span>{d.location}</span>}
       </div>
     </header>
+    {Iso && (
+      <div class="iso-hero">
+        <Iso />
+        <p class="iso-note">轴测手绘游览图 · 与正文图纸同为示意，非实测</p>
+      </div>
+    )}
     <div class="prose">
       <Content />
     </div>
@@ -43,5 +74,10 @@ const backHref = sectionHref[d.type] ?? '/travel/suzhou/';
   .art-head h1 { font-family: var(--serif); font-size: clamp(30px, 5vw, 46px); line-height: 1.25; font-weight: 700; }
   .meta { display: flex; gap: 18px; margin-top: 20px; font-family: var(--mono); font-size: 12px; color: var(--gray); flex-wrap: wrap; }
   .meta .day { color: var(--dawn); border: 1px solid var(--dawn); border-radius: 99px; padding: 0 10px; letter-spacing: .15em; }
-  @media (max-width: 860px) { .art-head { padding: 48px 22px 28px; } }
+  .iso-hero { max-width: 800px; margin: 0 auto 48px; padding: 0 48px; }
+  .iso-note { text-align: center; font-family: var(--mono); font-size: 11px; color: var(--gray); letter-spacing: .1em; margin-top: 12px; }
+  :global(.bp) { margin: 44px auto; max-width: 680px; padding: 26px 26px 18px; background: #fdf9ee; border: 1px solid #e2d9c0; box-shadow: 0 1px 0 rgba(44, 53, 49, .06); }
+  :global(.bp svg) { display: block; width: 100%; height: auto; }
+  :global(.bp figcaption) { text-align: center; font-size: 12.5px; color: #8a7d63; font-family: var(--serif); letter-spacing: .12em; margin-top: 14px; }
+  @media (max-width: 860px) { .art-head { padding: 48px 22px 28px; } .iso-hero { padding: 0 22px; } }
 </style>

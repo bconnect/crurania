@@ -73,8 +73,9 @@ const works = defineCollection({
 const suzhou = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/suzhou' }),
   schema: base({
-    type: z.enum(['plan', 'note', 'photo', 'place', 'anecdote', 'figure']),
+    type: z.enum(['plan', 'note', 'photo', 'place', 'anecdote', 'figure', 'garden']),
     day: z.number().int().optional(),      // note 用：第几天（1/2/3）
+    garden: z.string().optional(),         // garden 用：园子 id（对应海报组件，如 zhuozhengyuan）
     location: z.string().optional(),       // place 用：所在区域，如 "东北街 · 古城"
     related: z.array(z.string()).default([]), // 关联条目的 slug，页面自动互链
     tags: z.array(z.string()).default([]),

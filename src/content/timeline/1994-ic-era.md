@@ -1,5 +1,5 @@
 ---
-year: 2015
+year: 1994
 title: IC 设计的黄金年代
 order: 1
 highlight: true

@@ -1,0 +1,10 @@
+---
+/* 海报公共件 · 卷轴式推荐路线 */
+interface Props { y: number; lines: string[] }
+const { y, lines } = Astro.props;
+const h = lines.length * 22 + 26;
+---
+<rect x="528" y={y} width="204" height={h} rx="5" fill="#fbf7ea" stroke="#2c3531" stroke-width="1" />
+<line x1="532" y1={y + 6} x2="728" y2={y + 6} stroke="#9c8f74" stroke-width="0.5" />
+<line x1="532" y1={y + h - 6} x2="728" y2={y + h - 6} stroke="#9c8f74" stroke-width="0.5" />
+{lines.map((l, i) => <text x={540} y={y + 28 + i * 22} font-size="11.5" fill="#2c3531" class="ip-serif">{l}</text>)}

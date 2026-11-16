@@ -1,369 +1,277 @@
 ---
-/* 轴测手绘风 · 拙政园海报样张（试验稿） */
+/* 轴测手绘海报 · 拙政园 */
+import Frame from '../poster/Frame.astro';
+import Clouds from '../poster/Clouds.astro';
+import Plaque from '../poster/Plaque.astro';
+import PanelFrame from '../poster/PanelFrame.astro';
+import PSect from '../poster/PSect.astro';
+import Divider from '../poster/Divider.astro';
+import RouteScroll from '../poster/RouteScroll.astro';
+import Compass from '../poster/Compass.astro';
+import Disclaimer from '../poster/Disclaimer.astro';
+import VTag from '../poster/VTag.astro';
+import RTree from '../poster/RTree.astro';
+import Willow from '../poster/Willow.astro';
+import Rock from '../poster/Rock.astro';
+import Lotus from '../poster/Lotus.astro';
+import Ducks from '../poster/Ducks.astro';
+import Seal from '../poster/Seal.astro';
 ---
 <svg class="ip" viewBox="0 0 760 920" role="img" aria-label="拙政园手绘游览图">
-  <!-- ═══ 底 ═══ -->
-  <rect x="10" y="10" width="740" height="900" fill="#faf6ec" stroke="#2c3531" stroke-width="1.6"/>
-  <rect x="16" y="16" width="728" height="888" fill="none" stroke="#2c3531" stroke-width="0.6"/>
-
-  <!-- 云纹 -->
-  <g class="ip-cloud" stroke="#8a7d63" fill="none" stroke-width="1.4" opacity="0.6">
-    <path d="M 52,60 c -10,2 -16,-8 -9,-14 c 7,-6 18,-2 17,6 c 6,-6 16,-3 16,4 c 8,-3 15,3 11,9"/>
-    <path d="M 636,52 c -9,0 -13,-9 -6,-13 c 7,-4 15,1 14,8 c 6,-5 14,-1 13,6 c 7,-2 12,4 8,9"/>
-  </g>
-
-  <!-- 标题匾 -->
-  <g>
-    <rect x="218" y="24" width="296" height="80" rx="16" fill="#A94442" stroke="#7e2f2d" stroke-width="1.5"/>
-    <rect x="226" y="32" width="280" height="64" rx="12" fill="none" stroke="#f3dfc2" stroke-width="0.9"/>
-    <text x="366" y="64" text-anchor="middle" font-size="28" font-weight="700" fill="#f7f1e3" letter-spacing="6" class="ip-serif">拙政园游览图</text>
-    <text x="366" y="90" text-anchor="middle" font-size="12.5" fill="#f3d9c7" letter-spacing="3" class="ip-serif">天下园林之母 · 借景移步</text>
-  </g>
+  <Frame />
+  <Clouds />
+  <Plaque title="拙政园游览图" sub="天下园林之母 · 借景移步" />
 
   <!-- ═══ 右侧信息栏 ═══ -->
   <g>
-    <rect x="512" y="122" width="228" height="756" fill="#f5efe0" stroke="#2c3531" stroke-width="1.1"/>
-    <rect x="518" y="128" width="216" height="744" fill="none" stroke="#9c8f74" stroke-width="0.6"/>
-
-    <text x="534" y="158" font-size="17" font-weight="700" fill="#2c3531" letter-spacing="4" class="ip-serif">游览特点</text>
-    <line x1="534" y1="166" x2="626" y2="166" stroke="#A94442" stroke-width="2"/>
+    <PanelFrame />
+    <PSect y={158} title="游览特点" />
     <text x="534" y="192" font-size="13.5" font-weight="700" fill="#A94442" class="ip-serif">【移步换景】</text>
     <text x="534" y="210" font-size="12" fill="#2c3531" class="ip-serif">随步而变，一步一景</text>
     <text x="534" y="236" font-size="13.5" font-weight="700" fill="#A94442" class="ip-serif">【借景手法】</text>
     <text x="534" y="254" font-size="12" fill="#2c3531" class="ip-serif">远借北寺塔，入园即成景</text>
 
-    <line x1="530" y1="278" x2="722" y2="278" stroke="#9c8f74" stroke-width="0.7" stroke-dasharray="1 3"/>
-
-    <text x="534" y="308" font-size="17" font-weight="700" fill="#2c3531" letter-spacing="4" class="ip-serif">必打卡景观</text>
-    <line x1="534" y1="316" x2="626" y2="316" stroke="#A94442" stroke-width="2"/>
+    <Divider y={278} />
+    <PSect y={308} title="必打卡景观" />
     <!-- 小飞虹小图 -->
     <g transform="translate(530,332)">
-      <path d="M 4,26 Q 22,8 40,26" fill="none" stroke="#2c3531" stroke-width="2.2"/>
-      <path d="M 4,26 Q 22,8 40,26 L 40,30 Q 22,12 4,30 Z" fill="#d9d0ba" stroke="#2c3531" stroke-width="0.7"/>
-      <polygon points="6,18 38,18 33,9 11,9" fill="#4a564f" stroke="#333d38" stroke-width="0.7"/>
-      <line x1="16" y1="9" x2="16" y2="20" stroke="#2c3531" stroke-width="1"/>
-      <line x1="28" y1="9" x2="28" y2="20" stroke="#2c3531" stroke-width="1"/>
+      <path d="M 4,26 Q 22,8 40,26" fill="none" stroke="#2c3531" stroke-width="2.2" />
+      <path d="M 4,26 Q 22,8 40,26 L 40,30 Q 22,12 4,30 Z" fill="#d9d0ba" stroke="#2c3531" stroke-width="0.7" />
+      <polygon points="6,18 38,18 33,9 11,9" fill="#4a564f" stroke="#333d38" stroke-width="0.7" />
+      <line x1="16" y1="9" x2="16" y2="20" stroke="#2c3531" stroke-width="1" />
+      <line x1="28" y1="9" x2="28" y2="20" stroke="#2c3531" stroke-width="1" />
     </g>
     <text x="586" y="342" font-size="13" font-weight="700" fill="#2c3531" class="ip-serif">小飞虹</text>
     <text x="586" y="360" font-size="11" fill="#5c5548" class="ip-serif">江南罕见之廊桥</text>
     <!-- 卅六鸳鸯馆小图 -->
     <g transform="translate(530,384)">
-      <rect x="2" y="14" width="46" height="16" fill="#f7f1e3" stroke="#2c3531" stroke-width="1"/>
-      <rect x="7" y="18" width="36" height="8" fill="#7fa3c0" stroke="#2c3531" stroke-width="0.6"/>
-      <line x1="13" y1="18" x2="13" y2="26" stroke="#f7f1e3" stroke-width="1"/>
-      <line x1="19" y1="18" x2="19" y2="26" stroke="#f7f1e3" stroke-width="1"/>
-      <line x1="25" y1="18" x2="25" y2="26" stroke="#f7f1e3" stroke-width="1"/>
-      <line x1="31" y1="18" x2="31" y2="26" stroke="#f7f1e3" stroke-width="1"/>
-      <line x1="37" y1="18" x2="37" y2="26" stroke="#f7f1e3" stroke-width="1"/>
-      <polygon points="-2,16 52,16 56,12 46,2 4,2 -6,12" fill="#4a564f" stroke="#333d38" stroke-width="0.7"/>
+      <rect x="2" y="14" width="46" height="16" fill="#f7f1e3" stroke="#2c3531" stroke-width="1" />
+      <rect x="7" y="18" width="36" height="8" fill="#7fa3c0" stroke="#2c3531" stroke-width="0.6" />
+      <line x1="13" y1="18" x2="13" y2="26" stroke="#f7f1e3" stroke-width="1" />
+      <line x1="19" y1="18" x2="19" y2="26" stroke="#f7f1e3" stroke-width="1" />
+      <line x1="25" y1="18" x2="25" y2="26" stroke="#f7f1e3" stroke-width="1" />
+      <line x1="31" y1="18" x2="31" y2="26" stroke="#f7f1e3" stroke-width="1" />
+      <line x1="37" y1="18" x2="37" y2="26" stroke="#f7f1e3" stroke-width="1" />
+      <polygon points="-2,16 52,16 56,12 46,2 4,2 -6,12" fill="#4a564f" stroke="#333d38" stroke-width="0.7" />
     </g>
     <text x="586" y="394" font-size="13" font-weight="700" fill="#2c3531" class="ip-serif">卅六鸳鸯馆</text>
     <text x="586" y="412" font-size="11" fill="#5c5548" class="ip-serif">彩色玻璃 · 奢华西厅</text>
 
-    <line x1="530" y1="434" x2="722" y2="434" stroke="#9c8f74" stroke-width="0.7" stroke-dasharray="1 3"/>
+    <Divider y={434} />
+    <PSect y={466} title="推荐路线" />
+    <RouteScroll y={486} lines={["东门入 → 兰雪堂 → 芙蓉榭", "→ 远香堂 → 小飞虹 → 香洲", "→ 卅六鸳鸯馆 → 留听阁"]} />
 
-    <text x="534" y="466" font-size="17" font-weight="700" fill="#2c3531" letter-spacing="4" class="ip-serif">推荐路线</text>
-    <line x1="534" y1="474" x2="626" y2="474" stroke="#A94442" stroke-width="2"/>
-    <rect x="528" y="486" width="204" height="86" rx="5" fill="#fbf7ea" stroke="#2c3531" stroke-width="1"/>
-    <line x1="532" y1="492" x2="728" y2="492" stroke="#9c8f74" stroke-width="0.5"/>
-    <line x1="532" y1="566" x2="728" y2="566" stroke="#9c8f74" stroke-width="0.5"/>
-    <text x="540" y="514" font-size="11.5" fill="#2c3531" class="ip-serif">东门入 → 兰雪堂 → 芙蓉榭</text>
-    <text x="540" y="536" font-size="11.5" fill="#2c3531" class="ip-serif">→ 远香堂 → 小飞虹 → 香洲</text>
-    <text x="540" y="558" font-size="11.5" fill="#2c3531" class="ip-serif">→ 卅六鸳鸯馆 → 留听阁</text>
-
-    <text x="534" y="612" font-size="17" font-weight="700" fill="#2c3531" letter-spacing="4" class="ip-serif">贴士</text>
-    <line x1="534" y1="620" x2="626" y2="620" stroke="#A94442" stroke-width="2"/>
+    <PSect y={612} title="贴士" />
     <text x="534" y="644" font-size="11.5" fill="#2c3531" class="ip-serif">※ 提前 7 天实名分时段预约</text>
     <text x="534" y="664" font-size="11.5" fill="#2c3531" class="ip-serif">※ 清晨入园人少，荷花季尤美</text>
 
-    <!-- 指北针 -->
-    <g transform="translate(668,768)">
-      <circle cx="0" cy="0" r="25" fill="#fbf7ea" stroke="#2c3531" stroke-width="1.2"/>
-      <circle cx="0" cy="0" r="19" fill="none" stroke="#9c8f74" stroke-width="0.6"/>
-      <path d="M 0,-19 L 4,-4 L 19,0 L 4,4 L 0,19 L -4,4 L -19,0 L -4,-4 Z" fill="#A94442" stroke="#7e2f2d" stroke-width="0.7"/>
-      <circle cx="0" cy="0" r="3" fill="#fbf7ea" stroke="#2c3531" stroke-width="0.8"/>
-      <text x="0" y="-30" text-anchor="middle" font-size="10" font-weight="700" fill="#2c3531" class="ip-serif">N</text>
-      <text x="0" y="36" text-anchor="middle" font-size="10" fill="#2c3531" class="ip-serif">S</text>
-      <text x="32" y="4" text-anchor="middle" font-size="10" fill="#2c3531" class="ip-serif">E</text>
-      <text x="-32" y="4" text-anchor="middle" font-size="10" fill="#2c3531" class="ip-serif">W</text>
-    </g>
-
-    <text x="532" y="862" font-size="10.5" fill="#8a7d63" class="ip-serif">手绘示意 · 非实测</text>
+    <Compass x={668} y={768} />
+    <Disclaimer />
   </g>
 
   <!-- ═══ 主景 ═══ -->
 
   <!-- 天泉亭小水湾 -->
-  <path d="M 128,385 C 145,368 185,366 202,380 C 216,392 210,410 188,414 C 162,419 130,410 128,385 Z" fill="#c3e2db" stroke="#7fa398" stroke-width="1"/>
-  <path d="M 142,392 q 8,-4 16,0 M 168,402 q 8,-4 16,0" stroke="#7fa398" stroke-width="0.8" fill="none"/>
+  <path d="M 128,385 C 145,368 185,366 202,380 C 216,392 210,410 188,414 C 162,419 130,410 128,385 Z" fill="#c3e2db" stroke="#7fa398" stroke-width="1" />
+  <path d="M 142,392 q 8,-4 16,0 M 168,402 q 8,-4 16,0" stroke="#7fa398" stroke-width="0.8" fill="none" />
   <!-- 芙蓉榭 -->
   <g>
-    <rect x="204" y="360" width="36" height="15" fill="#f7f1e3" stroke="#2c3531" stroke-width="1"/>
-    <line x1="212" y1="360" x2="212" y2="375" stroke="#2c3531" stroke-width="0.6"/>
-    <line x1="222" y1="360" x2="222" y2="375" stroke="#2c3531" stroke-width="0.6"/>
-    <line x1="232" y1="360" x2="232" y2="375" stroke="#2c3531" stroke-width="0.6"/>
-    <polygon points="198,362 246,362 252,357 240,346 204,346 192,357" fill="#4a564f" stroke="#333d38" stroke-width="0.7"/>
+    <rect x="204" y="360" width="36" height="15" fill="#f7f1e3" stroke="#2c3531" stroke-width="1" />
+    <line x1="212" y1="360" x2="212" y2="375" stroke="#2c3531" stroke-width="0.6" />
+    <line x1="222" y1="360" x2="222" y2="375" stroke="#2c3531" stroke-width="0.6" />
+    <line x1="232" y1="360" x2="232" y2="375" stroke="#2c3531" stroke-width="0.6" />
+    <polygon points="198,362 246,362 252,357 240,346 204,346 192,357" fill="#4a564f" stroke="#333d38" stroke-width="0.7" />
   </g>
   <!-- 天泉亭 -->
   <g>
-    <polygon points="78,318 122,318 126,314 116,304 84,304 74,314" fill="#4a564f" stroke="#333d38" stroke-width="0.7"/>
-    <rect x="84" y="318" width="32" height="14" fill="#f7f1e3" stroke="#2c3531" stroke-width="1"/>
-    <line x1="92" y1="318" x2="92" y2="332" stroke="#2c3531" stroke-width="0.6"/>
-    <line x1="100" y1="318" x2="100" y2="332" stroke="#2c3531" stroke-width="0.6"/>
-    <line x1="108" y1="318" x2="108" y2="332" stroke="#2c3531" stroke-width="0.6"/>
+    <polygon points="78,318 122,318 126,314 116,304 84,304 74,314" fill="#4a564f" stroke="#333d38" stroke-width="0.7" />
+    <rect x="84" y="318" width="32" height="14" fill="#f7f1e3" stroke="#2c3531" stroke-width="1" />
+    <line x1="92" y1="318" x2="92" y2="332" stroke="#2c3531" stroke-width="0.6" />
+    <line x1="100" y1="318" x2="100" y2="332" stroke="#2c3531" stroke-width="0.6" />
+    <line x1="108" y1="318" x2="108" y2="332" stroke="#2c3531" stroke-width="0.6" />
   </g>
 
   <!-- 大池 -->
-  <path d="M 178,438 C 205,412 258,404 305,418 C 345,430 372,416 400,436 C 428,456 432,505 424,548 C 416,592 430,640 396,682 C 362,724 300,738 252,720 C 204,702 172,668 166,612 C 160,556 148,478 178,438 Z" fill="#c3e2db" stroke="#7fa398" stroke-width="1.2"/>
-  <path d="M 240,520 q 10,-5 20,0 M 320,600 q 10,-5 20,0 M 228,648 q 10,-5 20,0 M 350,520 q 10,-5 20,0" stroke="#7fa398" stroke-width="0.8" fill="none"/>
+  <path d="M 178,438 C 205,412 258,404 305,418 C 345,430 372,416 400,436 C 428,456 432,505 424,548 C 416,592 430,640 396,682 C 362,724 300,738 252,720 C 204,702 172,668 166,612 C 160,556 148,478 178,438 Z" fill="#c3e2db" stroke="#7fa398" stroke-width="1.2" />
+  <path d="M 240,520 q 10,-5 20,0 M 320,600 q 10,-5 20,0 M 228,648 q 10,-5 20,0 M 350,520 q 10,-5 20,0" stroke="#7fa398" stroke-width="0.8" fill="none" />
 
-  <!-- 荷区 -->
+  <Lotus x={250} y={604} />
+  <Lotus x={332} y={558} />
   <g stroke="#4e7038" stroke-width="0.7">
-    <ellipse cx="238" cy="606" rx="10" ry="4" fill="#6a914d"/>
-    <ellipse cx="252" cy="598" rx="9" ry="4" fill="#7fa05a"/>
-    <ellipse cx="262" cy="608" rx="8" ry="3.5" fill="#6a914d"/>
-    <ellipse cx="246" cy="614" rx="7" ry="3" fill="#54763d"/>
-    <ellipse cx="268" cy="600" rx="7" ry="3" fill="#7fa05a"/>
-    <ellipse cx="330" cy="556" rx="9" ry="4" fill="#6a914d"/>
-    <ellipse cx="342" cy="562" rx="8" ry="3.5" fill="#7fa05a"/>
-    <ellipse cx="322" cy="564" rx="7" ry="3" fill="#54763d"/>
-    <ellipse cx="215" cy="534" rx="8" ry="3.5" fill="#6a914d"/>
-    <ellipse cx="226" cy="540" rx="7" ry="3" fill="#7fa05a"/>
+    <ellipse cx="215" cy="534" rx="8" ry="3.5" fill="#6a914d" />
+    <ellipse cx="226" cy="540" rx="7" ry="3" fill="#7fa05a" />
   </g>
   <g fill="#e8a0b4" stroke="#c47a92" stroke-width="0.6">
-    <circle cx="244" cy="600" r="3.2"/><circle cx="258" cy="610" r="3.2"/><circle cx="334" cy="552" r="3.2"/><circle cx="220" cy="528" r="3"/>
+    <circle cx="220" cy="528" r="3" />
   </g>
 
-  <!-- 鸭 -->
+  <Ducks x={288} y={652} />
   <g stroke="#2c3531" stroke-width="0.7">
-    <ellipse cx="288" cy="654" rx="9" ry="4.5" fill="#8a857a"/>
-    <circle cx="297" cy="650" r="3" fill="#8a857a"/>
-    <ellipse cx="308" cy="666" rx="7.5" ry="4" fill="#6f6a5e"/>
-    <circle cx="316" cy="662" r="2.6" fill="#6f6a5e"/>
-    <ellipse cx="344" cy="594" rx="8" ry="4" fill="#f7f1e3"/>
-    <circle cx="352" cy="590" r="2.8" fill="#f7f1e3"/>
+    <ellipse cx="344" cy="594" rx="8" ry="4" fill="#f7f1e3" />
+    <circle cx="352" cy="590" r="2.8" fill="#f7f1e3" />
   </g>
 
   <!-- 小游船 -->
   <g stroke="#2c3531" stroke-width="0.9">
-    <path d="M 340,648 Q 365,661 392,646 L 386,657 Q 365,665 346,656 Z" fill="#a08059"/>
-    <rect x="356" y="632" width="30" height="12" fill="#e8dfc8" stroke-width="0.7"/>
-    <line x1="371" y1="632" x2="371" y2="624" stroke-width="0.8"/>
+    <path d="M 340,648 Q 365,661 392,646 L 386,657 Q 365,665 346,656 Z" fill="#a08059" />
+    <rect x="356" y="632" width="30" height="12" fill="#e8dfc8" stroke-width="0.7" />
+    <line x1="371" y1="632" x2="371" y2="624" stroke-width="0.8" />
   </g>
 
   <!-- 见山楼（两层楼阁+石基） -->
   <g>
-    <path d="M 216,230 C 214,216 228,208 250,208 C 274,208 288,216 286,230 L 280,238 L 222,238 Z" fill="#b8b3a6" stroke="#8a857a" stroke-width="1"/>
-    <path d="M 232,222 c 4,-4 10,-2 10,3 M 258,218 c 4,-3 9,-1 9,3" stroke="#8a857a" stroke-width="0.7" fill="none"/>
-    <rect x="224" y="184" width="56" height="20" fill="#f7f1e3" stroke="#2c3531" stroke-width="1.1"/>
-    <line x1="234" y1="184" x2="234" y2="204" stroke="#2c3531" stroke-width="0.6"/>
-    <line x1="246" y1="184" x2="246" y2="204" stroke="#2c3531" stroke-width="0.6"/>
-    <line x1="258" y1="184" x2="258" y2="204" stroke="#2c3531" stroke-width="0.6"/>
-    <line x1="270" y1="184" x2="270" y2="204" stroke="#2c3531" stroke-width="0.6"/>
-    <polygon points="214,186 290,186 296,180 282,166 222,166 208,180" fill="#4a564f" stroke="#333d38" stroke-width="0.8"/>
-    <rect x="232" y="148" width="40" height="18" fill="#f7f1e3" stroke="#2c3531" stroke-width="1"/>
-    <polygon points="222,150 282,150 288,144 274,130 230,130 216,144" fill="#4a564f" stroke="#333d38" stroke-width="0.8"/>
-    <line x1="240" y1="130" x2="264" y2="130" stroke="#333d38" stroke-width="2"/>
+    <path d="M 216,230 C 214,216 228,208 250,208 C 274,208 288,216 286,230 L 280,238 L 222,238 Z" fill="#b8b3a6" stroke="#8a857a" stroke-width="1" />
+    <path d="M 232,222 c 4,-4 10,-2 10,3 M 258,218 c 4,-3 9,-1 9,3" stroke="#8a857a" stroke-width="0.7" fill="none" />
+    <rect x="224" y="184" width="56" height="20" fill="#f7f1e3" stroke="#2c3531" stroke-width="1.1" />
+    <line x1="234" y1="184" x2="234" y2="204" stroke="#2c3531" stroke-width="0.6" />
+    <line x1="246" y1="184" x2="246" y2="204" stroke="#2c3531" stroke-width="0.6" />
+    <line x1="258" y1="184" x2="258" y2="204" stroke="#2c3531" stroke-width="0.6" />
+    <line x1="270" y1="184" x2="270" y2="204" stroke="#2c3531" stroke-width="0.6" />
+    <polygon points="214,186 290,186 296,180 282,166 222,166 208,180" fill="#4a564f" stroke="#333d38" stroke-width="0.8" />
+    <rect x="232" y="148" width="40" height="18" fill="#f7f1e3" stroke="#2c3531" stroke-width="1" />
+    <polygon points="222,150 282,150 288,144 274,130 230,130 216,144" fill="#4a564f" stroke="#333d38" stroke-width="0.8" />
+    <line x1="240" y1="130" x2="264" y2="130" stroke="#333d38" stroke-width="2" />
   </g>
-  <!-- 太湖石 -->
-  <g stroke="#8a857a" stroke-width="0.9" fill="#b8b3a6">
-    <path d="M 306,186 c -6,-8 2,-18 12,-15 c 3,-7 14,-7 17,0 c 9,-2 15,7 10,14 c 5,6 -1,14 -9,13 c -3,6 -13,6 -16,0 c -8,2 -15,-4 -14,-12 z"/>
-    <path d="M 316,182 c 3,-4 9,-3 10,2 M 322,190 c 3,-2 7,0 7,4" stroke="#7a7568" stroke-width="0.6" fill="none"/>
-  </g>
+  <Rock x={306} y={176} />
 
   <!-- 远香堂 + 临水平台 -->
   <g>
-    <rect x="330" y="288" width="102" height="12" fill="#ddd3bc" stroke="#2c3531" stroke-width="0.9"/>
-    <rect x="338" y="258" width="84" height="30" fill="#f7f1e3" stroke="#2c3531" stroke-width="1.2"/>
-    <rect x="348" y="266" width="12" height="16" fill="#4a564f"/>
-    <rect x="366" y="266" width="12" height="16" fill="#4a564f"/>
-    <rect x="384" y="266" width="12" height="16" fill="#4a564f"/>
-    <line x1="360" y1="266" x2="360" y2="282" stroke="#2c3531" stroke-width="0.8"/>
-    <line x1="378" y1="266" x2="378" y2="282" stroke="#2c3531" stroke-width="0.8"/>
-    <polygon points="328,260 432,260 440,252 426,238 334,238 320,252" fill="#4a564f" stroke="#333d38" stroke-width="0.8"/>
-    <polygon points="338,238 422,238 412,228 348,228" fill="#67756c" stroke="#333d38" stroke-width="0.7"/>
-    <line x1="356" y1="228" x2="404" y2="228" stroke="#333d38" stroke-width="2"/>
-    <!-- 游人 -->
+    <rect x="330" y="288" width="102" height="12" fill="#ddd3bc" stroke="#2c3531" stroke-width="0.9" />
+    <rect x="338" y="258" width="84" height="30" fill="#f7f1e3" stroke="#2c3531" stroke-width="1.2" />
+    <rect x="348" y="266" width="12" height="16" fill="#4a564f" />
+    <rect x="366" y="266" width="12" height="16" fill="#4a564f" />
+    <rect x="384" y="266" width="12" height="16" fill="#4a564f" />
+    <line x1="360" y1="266" x2="360" y2="282" stroke="#2c3531" stroke-width="0.8" />
+    <line x1="378" y1="266" x2="378" y2="282" stroke="#2c3531" stroke-width="0.8" />
+    <polygon points="328,260 432,260 440,252 426,238 334,238 320,252" fill="#4a564f" stroke="#333d38" stroke-width="0.8" />
+    <polygon points="338,238 422,238 412,228 348,228" fill="#67756c" stroke="#333d38" stroke-width="0.7" />
+    <line x1="356" y1="228" x2="404" y2="228" stroke="#333d38" stroke-width="2" />
     <g stroke="#2c3531" stroke-width="0.6">
-      <circle cx="352" cy="300" r="2.4" fill="#f0d7c0"/><path d="M 352,302 l 0,6 M 349,306 l 6,0" stroke="#A94442" stroke-width="1.6" fill="none"/>
-      <circle cx="366" cy="301" r="2.4" fill="#f0d7c0"/><path d="M 366,303 l 0,6 M 363,307 l 6,0" stroke="#4a6b8a" stroke-width="1.6" fill="none"/>
-      <circle cx="382" cy="299" r="2.4" fill="#f0d7c0"/><path d="M 382,301 l 0,6 M 379,305 l 6,0" stroke="#6a914d" stroke-width="1.6" fill="none"/>
+      <circle cx="352" cy="300" r="2.4" fill="#f0d7c0" /><path d="M 352,302 l 0,6 M 349,306 l 6,0" stroke="#A94442" stroke-width="1.6" fill="none" />
+      <circle cx="366" cy="301" r="2.4" fill="#f0d7c0" /><path d="M 366,303 l 0,6 M 363,307 l 6,0" stroke="#4a6b8a" stroke-width="1.6" fill="none" />
+      <circle cx="382" cy="299" r="2.4" fill="#f0d7c0" /><path d="M 382,301 l 0,6 M 379,305 l 6,0" stroke="#6a914d" stroke-width="1.6" fill="none" />
     </g>
   </g>
 
   <!-- 小飞虹（廊桥） -->
   <g>
-    <path d="M 288,444 Q 322,416 356,444" fill="none" stroke="#2c3531" stroke-width="2.4"/>
-    <path d="M 288,444 Q 322,416 356,444 L 356,450 Q 322,422 288,450 Z" fill="#d9d0ba" stroke="#2c3531" stroke-width="0.8"/>
-    <path d="M 292,439 Q 322,413 352,439" fill="none" stroke="#2c3531" stroke-width="0.6"/>
-    <line x1="302" y1="434" x2="302" y2="444" stroke="#2c3531" stroke-width="1"/>
-    <line x1="314" y1="428" x2="314" y2="439" stroke="#2c3531" stroke-width="1"/>
-    <line x1="330" y1="428" x2="330" y2="439" stroke="#2c3531" stroke-width="1"/>
-    <line x1="342" y1="434" x2="342" y2="444" stroke="#2c3531" stroke-width="1"/>
-    <path d="M 284,430 Q 322,398 360,430 L 360,440 Q 322,408 284,440 Z" fill="#4a564f" stroke="#333d38" stroke-width="0.8"/>
-    <path d="M 288,426 Q 322,396 356,426" fill="none" stroke="#333d38" stroke-width="1.3"/>
-    <line x1="300" y1="419" x2="300" y2="436" stroke="#2c3531" stroke-width="1"/>
-    <line x1="314" y1="415" x2="314" y2="431" stroke="#2c3531" stroke-width="1"/>
-    <line x1="330" y1="415" x2="330" y2="431" stroke="#2c3531" stroke-width="1"/>
-    <line x1="344" y1="419" x2="344" y2="436" stroke="#2c3531" stroke-width="1"/>
+    <path d="M 288,444 Q 322,416 356,444" fill="none" stroke="#2c3531" stroke-width="2.4" />
+    <path d="M 288,444 Q 322,416 356,444 L 356,450 Q 322,422 288,450 Z" fill="#d9d0ba" stroke="#2c3531" stroke-width="0.8" />
+    <path d="M 284,430 Q 322,398 360,430 L 360,440 Q 322,408 284,440 Z" fill="#4a564f" stroke="#333d38" stroke-width="0.8" />
+    <path d="M 288,426 Q 322,396 356,426" fill="none" stroke="#333d38" stroke-width="1.3" />
+    <line x1="300" y1="419" x2="300" y2="436" stroke="#2c3531" stroke-width="1" />
+    <line x1="314" y1="415" x2="314" y2="431" stroke="#2c3531" stroke-width="1" />
+    <line x1="330" y1="415" x2="330" y2="431" stroke="#2c3531" stroke-width="1" />
+    <line x1="344" y1="419" x2="344" y2="436" stroke="#2c3531" stroke-width="1" />
   </g>
 
   <!-- 东部长廊（廊顶覆盖） -->
   <g>
-    <polygon points="440,206 460,206 464,428 444,428" fill="#4a564f" stroke="#333d38" stroke-width="0.9"/>
-    <line x1="453" y1="202" x2="457" y2="424" stroke="#e8dfc8" stroke-width="0.8"/>
-    <line x1="445" y1="228" x2="465" y2="228" stroke="#2c3531" stroke-width="0.5"/>
-    <line x1="446" y1="268" x2="466" y2="268" stroke="#2c3531" stroke-width="0.5"/>
-    <line x1="447" y1="308" x2="467" y2="308" stroke="#2c3531" stroke-width="0.5"/>
-    <line x1="448" y1="348" x2="468" y2="348" stroke="#2c3531" stroke-width="0.5"/>
-    <line x1="449" y1="388" x2="464" y2="388" stroke="#2c3531" stroke-width="0.5"/>
+    <polygon points="440,206 460,206 464,428 444,428" fill="#4a564f" stroke="#333d38" stroke-width="0.9" />
+    <line x1="451" y1="212" x2="453" y2="422" stroke="#e8dfc8" stroke-width="0.8" />
+    <line x1="441" y1="238" x2="461" y2="238" stroke="#2c3531" stroke-width="0.5" />
+    <line x1="442" y1="278" x2="462" y2="278" stroke="#2c3531" stroke-width="0.5" />
+    <line x1="443" y1="318" x2="463" y2="318" stroke="#2c3531" stroke-width="0.5" />
+    <line x1="444" y1="358" x2="464" y2="358" stroke="#2c3531" stroke-width="0.5" />
+    <line x1="445" y1="398" x2="465" y2="398" stroke="#2c3531" stroke-width="0.5" />
   </g>
 
   <!-- 兰雪堂 -->
   <g>
-    <rect x="446" y="172" width="48" height="20" fill="#f7f1e3" stroke="#2c3531" stroke-width="1.1"/>
-    <line x1="456" y1="172" x2="456" y2="192" stroke="#2c3531" stroke-width="0.6"/>
-    <line x1="470" y1="172" x2="470" y2="192" stroke="#2c3531" stroke-width="0.6"/>
-    <line x1="484" y1="172" x2="484" y2="192" stroke="#2c3531" stroke-width="0.6"/>
-    <polygon points="438,174 502,174 508,168 496,156 444,156 432,168" fill="#4a564f" stroke="#333d38" stroke-width="0.8"/>
-    <polygon points="448,156 492,156 484,148 456,148" fill="#67756c" stroke="#333d38" stroke-width="0.7"/>
-    <line x1="462" y1="148" x2="478" y2="148" stroke="#333d38" stroke-width="1.6"/>
+    <rect x="446" y="172" width="48" height="20" fill="#f7f1e3" stroke="#2c3531" stroke-width="1.1" />
+    <line x1="456" y1="172" x2="456" y2="192" stroke="#2c3531" stroke-width="0.6" />
+    <line x1="470" y1="172" x2="470" y2="192" stroke="#2c3531" stroke-width="0.6" />
+    <line x1="484" y1="172" x2="484" y2="192" stroke="#2c3531" stroke-width="0.6" />
+    <polygon points="438,174 502,174 508,168 496,156 444,156 432,168" fill="#4a564f" stroke="#333d38" stroke-width="0.8" />
+    <polygon points="448,156 492,156 484,148 456,148" fill="#67756c" stroke="#333d38" stroke-width="0.7" />
+    <line x1="462" y1="148" x2="478" y2="148" stroke="#333d38" stroke-width="1.6" />
   </g>
 
   <!-- 香洲（画舫） -->
   <g>
-    <polygon points="304,474 396,474 384,494 314,494" fill="#d9d0ba" stroke="#2c3531" stroke-width="1"/>
-    <path d="M 304,474 q -9,-1 -11,-11" fill="none" stroke="#2c3531" stroke-width="1"/>
-    <rect x="322" y="448" width="54" height="24" fill="#f7f1e3" stroke="#2c3531" stroke-width="1"/>
-    <line x1="332" y1="448" x2="332" y2="472" stroke="#2c3531" stroke-width="0.6"/>
-    <line x1="344" y1="448" x2="344" y2="472" stroke="#2c3531" stroke-width="0.6"/>
-    <line x1="356" y1="448" x2="356" y2="472" stroke="#2c3531" stroke-width="0.6"/>
-    <line x1="368" y1="448" x2="368" y2="472" stroke="#2c3531" stroke-width="0.6"/>
-    <polygon points="314,450 384,450 376,436 322,436" fill="#4a564f" stroke="#333d38" stroke-width="0.8"/>
-    <line x1="336" y1="436" x2="362" y2="436" stroke="#333d38" stroke-width="1.6"/>
+    <polygon points="304,474 396,474 384,494 314,494" fill="#d9d0ba" stroke="#2c3531" stroke-width="1" />
+    <path d="M 304,474 q -9,-1 -11,-11" fill="none" stroke="#2c3531" stroke-width="1" />
+    <rect x="322" y="448" width="54" height="24" fill="#f7f1e3" stroke="#2c3531" stroke-width="1" />
+    <line x1="332" y1="448" x2="332" y2="472" stroke="#2c3531" stroke-width="0.6" />
+    <line x1="344" y1="448" x2="344" y2="472" stroke="#2c3531" stroke-width="0.6" />
+    <line x1="356" y1="448" x2="356" y2="472" stroke="#2c3531" stroke-width="0.6" />
+    <line x1="368" y1="448" x2="368" y2="472" stroke="#2c3531" stroke-width="0.6" />
+    <polygon points="314,450 384,450 376,436 322,436" fill="#4a564f" stroke="#333d38" stroke-width="0.8" />
+    <line x1="336" y1="436" x2="362" y2="436" stroke="#333d38" stroke-width="1.6" />
   </g>
 
   <!-- 卅六鸳鸯馆 -->
   <g>
-    <rect x="62" y="590" width="112" height="11" fill="#ddd3bc" stroke="#2c3531" stroke-width="0.9"/>
-    <rect x="70" y="560" width="92" height="30" fill="#f7f1e3" stroke="#2c3531" stroke-width="1.2"/>
-    <rect x="78" y="567" width="76" height="14" fill="#7fa3c0" stroke="#2c3531" stroke-width="0.7"/>
-    <line x1="88" y1="567" x2="88" y2="581" stroke="#f7f1e3" stroke-width="1"/>
-    <line x1="98" y1="567" x2="98" y2="581" stroke="#f7f1e3" stroke-width="1"/>
-    <line x1="108" y1="567" x2="108" y2="581" stroke="#f7f1e3" stroke-width="1"/>
-    <line x1="118" y1="567" x2="118" y2="581" stroke="#f7f1e3" stroke-width="1"/>
-    <line x1="128" y1="567" x2="128" y2="581" stroke="#f7f1e3" stroke-width="1"/>
-    <line x1="138" y1="567" x2="138" y2="581" stroke="#f7f1e3" stroke-width="1"/>
-    <line x1="148" y1="567" x2="148" y2="581" stroke="#f7f1e3" stroke-width="1"/>
-    <polygon points="60,562 172,562 180,554 166,540 66,540 52,554" fill="#4a564f" stroke="#333d38" stroke-width="0.9"/>
-    <polygon points="70,540 162,540 152,530 80,530" fill="#67756c" stroke="#333d38" stroke-width="0.8"/>
-    <line x1="100" y1="530" x2="134" y2="530" stroke="#333d38" stroke-width="2"/>
+    <rect x="62" y="590" width="112" height="11" fill="#ddd3bc" stroke="#2c3531" stroke-width="0.9" />
+    <rect x="70" y="560" width="92" height="30" fill="#f7f1e3" stroke="#2c3531" stroke-width="1.2" />
+    <rect x="78" y="567" width="76" height="14" fill="#7fa3c0" stroke="#2c3531" stroke-width="0.7" />
+    <line x1="88" y1="567" x2="88" y2="581" stroke="#f7f1e3" stroke-width="1" />
+    <line x1="98" y1="567" x2="98" y2="581" stroke="#f7f1e3" stroke-width="1" />
+    <line x1="108" y1="567" x2="108" y2="581" stroke="#f7f1e3" stroke-width="1" />
+    <line x1="118" y1="567" x2="118" y2="581" stroke="#f7f1e3" stroke-width="1" />
+    <line x1="128" y1="567" x2="128" y2="581" stroke="#f7f1e3" stroke-width="1" />
+    <line x1="138" y1="567" x2="138" y2="581" stroke="#f7f1e3" stroke-width="1" />
+    <line x1="148" y1="567" x2="148" y2="581" stroke="#f7f1e3" stroke-width="1" />
+    <polygon points="60,562 172,562 180,554 166,540 66,540 52,554" fill="#4a564f" stroke="#333d38" stroke-width="0.9" />
+    <polygon points="70,540 162,540 152,530 80,530" fill="#67756c" stroke="#333d38" stroke-width="0.8" />
+    <line x1="100" y1="530" x2="134" y2="530" stroke="#333d38" stroke-width="2" />
   </g>
 
   <!-- 留听阁 -->
   <g>
-    <polygon points="176,700 224,700 228,696 218,686 182,686 172,696" fill="#4a564f" stroke="#333d38" stroke-width="0.7"/>
-    <rect x="182" y="700" width="36" height="15" fill="#f7f1e3" stroke="#2c3531" stroke-width="1"/>
-    <line x1="192" y1="700" x2="192" y2="715" stroke="#2c3531" stroke-width="0.6"/>
-    <line x1="202" y1="700" x2="202" y2="715" stroke="#2c3531" stroke-width="0.6"/>
-    <line x1="212" y1="700" x2="212" y2="715" stroke="#2c3531" stroke-width="0.6"/>
+    <polygon points="176,700 224,700 228,696 218,686 182,686 172,696" fill="#4a564f" stroke="#333d38" stroke-width="0.7" />
+    <rect x="182" y="700" width="36" height="15" fill="#f7f1e3" stroke="#2c3531" stroke-width="1" />
+    <line x1="192" y1="700" x2="192" y2="715" stroke="#2c3531" stroke-width="0.6" />
+    <line x1="202" y1="700" x2="202" y2="715" stroke="#2c3531" stroke-width="0.6" />
+    <line x1="212" y1="700" x2="212" y2="715" stroke="#2c3531" stroke-width="0.6" />
   </g>
 
   <!-- ═══ 林木 ═══ -->
-  <g stroke="#2c3531" stroke-width="0.7">
-    <g><line x1="78" y1="286" x2="78" y2="272" stroke="#6f5b3f" stroke-width="1.8" fill="none"/><circle cx="78" cy="262" r="14" fill="#6a914d"/><circle cx="68" cy="272" r="10" fill="#8aa864"/><circle cx="89" cy="272" r="9" fill="#54763d"/></g>
-    <g><line x1="112" y1="266" x2="112" y2="250" stroke="#6f5b3f" stroke-width="2" fill="none"/><circle cx="112" cy="238" r="17" fill="#8aa864"/><circle cx="99" cy="250" r="12" fill="#6a914d"/><circle cx="126" cy="250" r="11" fill="#7fa05a"/></g>
-    <g><line x1="140" y1="300" x2="140" y2="288" stroke="#6f5b3f" stroke-width="1.6" fill="none"/><circle cx="140" cy="280" r="12" fill="#54763d"/><circle cx="131" cy="289" r="8" fill="#6a914d"/></g>
-    <g><line x1="168" y1="160" x2="168" y2="146" stroke="#6f5b3f" stroke-width="1.8" fill="none"/><circle cx="168" cy="136" r="15" fill="#d9a441"/><circle cx="156" cy="147" r="10" fill="#e0b45e"/><circle cx="180" cy="147" r="9" fill="#c89333"/></g>
-    <g><line x1="322" y1="146" x2="322" y2="132" stroke="#6f5b3f" stroke-width="1.8" fill="none"/><circle cx="322" cy="122" r="14" fill="#6a914d"/><circle cx="311" cy="132" r="9" fill="#8aa864"/></g>
-    <g><line x1="455" y1="130" x2="455" y2="118" stroke="#6f5b3f" stroke-width="1.5" fill="none"/><circle cx="455" cy="111" r="11" fill="#8aa864"/><circle cx="446" cy="119" r="7" fill="#6a914d"/></g>
-    <g><line x1="168" y1="248" x2="168" y2="238" stroke="#6f5b3f" stroke-width="1.3" fill="none"/><circle cx="168" cy="231" r="10" fill="#54763d"/><circle cx="160" cy="239" r="7" fill="#6a914d"/></g>
-    <g><line x1="452" y1="500" x2="452" y2="486" stroke="#6f5b3f" stroke-width="1.8" fill="none"/><circle cx="452" cy="476" r="13" fill="#6a914d"/><circle cx="442" cy="486" r="9" fill="#8aa864"/><circle cx="462" cy="487" r="8" fill="#54763d"/></g>
-    <g><line x1="152" y1="486" x2="152" y2="474" stroke="#6f5b3f" stroke-width="1.6" fill="none"/><circle cx="152" cy="466" r="12" fill="#8aa864"/><circle cx="143" cy="475" r="8" fill="#6a914d"/></g>
-    <g><line x1="392" y1="712" x2="392" y2="702" stroke="#6f5b3f" stroke-width="1.4" fill="none"/><circle cx="392" cy="695" r="10" fill="#54763d"/><circle cx="384" cy="703" r="7" fill="#6a914d"/></g>
-    <g><line x1="102" y1="686" x2="102" y2="672" stroke="#6f5b3f" stroke-width="1.8" fill="none"/><circle cx="102" cy="662" r="13" fill="#6a914d"/><circle cx="92" cy="672" r="9" fill="#7fa05a"/></g>
-    <g><line x1="58" y1="604" x2="58" y2="592" stroke="#6f5b3f" stroke-width="1.5" fill="none"/><circle cx="58" cy="585" r="11" fill="#8aa864"/><circle cx="49" cy="593" r="7" fill="#6a914d"/></g>
-  </g>
-  <!-- 垂柳 -->
-  <g>
-    <path d="M 268,806 C 262,784 274,772 268,758" fill="none" stroke="#6f5b3f" stroke-width="2.4"/>
-    <g stroke="#2c3531" stroke-width="0.7">
-      <circle cx="268" cy="750" r="13" fill="#8aa864"/>
-      <circle cx="256" cy="758" r="9" fill="#6a914d"/>
-      <circle cx="281" cy="758" r="9" fill="#7fa05a"/>
-    </g>
-    <g stroke="#54763d" stroke-width="0.9" fill="none">
-      <path d="M 254,762 q -2,12 1,22"/><path d="M 262,764 q -1,13 1,24"/><path d="M 270,765 q 0,13 0,25"/>
-      <path d="M 278,764 q 1,13 0,24"/><path d="M 286,761 q 2,12 0,22"/>
-    </g>
-  </g>
+  <RTree x={78} y={274} r={14} tone={1} />
+  <RTree x={112} y={252} r={17} tone={0} />
+  <RTree x={140} y={288} r={12} tone={2} />
+  <RTree x={168} y={146} r={15} tone={3} />
+  <RTree x={322} y={138} r={14} tone={1} />
+  <RTree x={455} y={122} r={11} tone={0} />
+  <RTree x={168} y={236} r={10} tone={2} />
+  <RTree x={452} y={486} r={13} tone={1} />
+  <RTree x={152} y={476} r={12} tone={0} />
+  <RTree x={392} y={706} r={10} tone={2} />
+  <RTree x={102} y={674} r={13} tone={1} />
+  <RTree x={58} y={592} r={11} tone={0} />
+  <Willow x={268} y={768} />
 
   <!-- ═══ 游线（虚线+脚印） ═══ -->
   <path d="M 464,198 L 454,300 L 430,292 L 380,296 L 352,344 L 348,420 L 356,462 L 320,520 L 258,556 L 196,540 L 160,566 L 178,640 L 200,692"
-        fill="none" stroke="#8a7d63" stroke-width="2" stroke-dasharray="6 5"/>
+        fill="none" stroke="#8a7d63" stroke-width="2" stroke-dasharray="6 5" />
   <g fill="#8a7d63">
-    <ellipse cx="456" cy="196" rx="2.2" ry="3"/><ellipse cx="460" cy="204" rx="2.2" ry="3"/>
-    <ellipse cx="451" cy="250" rx="2.2" ry="3"/><ellipse cx="455" cy="258" rx="2.2" ry="3"/>
-    <ellipse cx="420" cy="292" rx="2.2" ry="3"/><ellipse cx="424" cy="300" rx="2.2" ry="3"/>
-    <ellipse cx="360" cy="332" rx="2.2" ry="3"/><ellipse cx="364" cy="340" rx="2.2" ry="3"/>
-    <ellipse cx="350" cy="386" rx="2.2" ry="3"/><ellipse cx="354" cy="394" rx="2.2" ry="3"/>
-    <ellipse cx="350" cy="440" rx="2.2" ry="3"/><ellipse cx="354" cy="448" rx="2.2" ry="3"/>
-    <ellipse cx="316" cy="516" rx="2.2" ry="3"/><ellipse cx="320" cy="524" rx="2.2" ry="3"/>
-    <ellipse cx="252" cy="550" rx="2.2" ry="3"/><ellipse cx="256" cy="558" rx="2.2" ry="3"/>
-    <ellipse cx="190" cy="544" rx="2.2" ry="3"/><ellipse cx="194" cy="552" rx="2.2" ry="3"/>
-    <ellipse cx="164" cy="600" rx="2.2" ry="3"/><ellipse cx="168" cy="608" rx="2.2" ry="3"/>
-    <ellipse cx="186" cy="664" rx="2.2" ry="3"/><ellipse cx="190" cy="672" rx="2.2" ry="3"/>
+    <ellipse cx="456" cy="196" rx="2.2" ry="3" /><ellipse cx="460" cy="204" rx="2.2" ry="3" />
+    <ellipse cx="451" cy="250" rx="2.2" ry="3" /><ellipse cx="455" cy="258" rx="2.2" ry="3" />
+    <ellipse cx="420" cy="292" rx="2.2" ry="3" /><ellipse cx="424" cy="300" rx="2.2" ry="3" />
+    <ellipse cx="360" cy="332" rx="2.2" ry="3" /><ellipse cx="364" cy="340" rx="2.2" ry="3" />
+    <ellipse cx="350" cy="386" rx="2.2" ry="3" /><ellipse cx="354" cy="394" rx="2.2" ry="3" />
+    <ellipse cx="350" cy="440" rx="2.2" ry="3" /><ellipse cx="354" cy="448" rx="2.2" ry="3" />
+    <ellipse cx="316" cy="516" rx="2.2" ry="3" /><ellipse cx="320" cy="524" rx="2.2" ry="3" />
+    <ellipse cx="252" cy="550" rx="2.2" ry="3" /><ellipse cx="256" cy="558" rx="2.2" ry="3" />
+    <ellipse cx="190" cy="544" rx="2.2" ry="3" /><ellipse cx="194" cy="552" rx="2.2" ry="3" />
+    <ellipse cx="164" cy="600" rx="2.2" ry="3" /><ellipse cx="168" cy="608" rx="2.2" ry="3" />
+    <ellipse cx="186" cy="664" rx="2.2" ry="3" /><ellipse cx="190" cy="672" rx="2.2" ry="3" />
   </g>
 
   <!-- ═══ 竖排标签 ═══ -->
-  <g class="ip-tags" font-size="13" font-weight="600" fill="#2c3531">
-    <g transform="translate(202,172)">
-      <rect x="-12" y="-15" width="24" height="60" rx="4" fill="#fdfbf3" stroke="#2c3531" stroke-width="0.9"/>
-      <text x="0" y="0" text-anchor="middle" class="ip-serif"><tspan x="0" dy="0">见</tspan><tspan x="0" dy="16">山</tspan><tspan x="0" dy="16">楼</tspan></text>
-    </g>
-    <g transform="translate(306,268)">
-      <rect x="-12" y="-15" width="24" height="60" rx="4" fill="#fdfbf3" stroke="#2c3531" stroke-width="0.9"/>
-      <text x="0" y="0" text-anchor="middle" class="ip-serif"><tspan x="0" dy="0">远</tspan><tspan x="0" dy="16">香</tspan><tspan x="0" dy="16">堂</tspan></text>
-    </g>
-    <g transform="translate(224,388)">
-      <rect x="-12" y="-15" width="24" height="60" rx="4" fill="#fdfbf3" stroke="#2c3531" stroke-width="0.9"/>
-      <text x="0" y="0" text-anchor="middle" class="ip-serif"><tspan x="0" dy="0">小</tspan><tspan x="0" dy="16">飞</tspan><tspan x="0" dy="16">虹</tspan></text>
-    </g>
-    <g transform="translate(404,472)">
-      <rect x="-11" y="-14" width="22" height="45" rx="4" fill="#fdfbf3" stroke="#2c3531" stroke-width="0.9"/>
-      <text x="0" y="0" text-anchor="middle" class="ip-serif"><tspan x="0" dy="0">香</tspan><tspan x="0" dy="16">洲</tspan></text>
-    </g>
-    <g transform="translate(38,540)">
-      <rect x="-12" y="-15" width="24" height="94" rx="4" fill="#fdfbf3" stroke="#2c3531" stroke-width="0.9"/>
-      <text x="0" y="0" text-anchor="middle" class="ip-serif"><tspan x="0" dy="0">卅</tspan><tspan x="0" dy="16">六</tspan><tspan x="0" dy="16">鸳</tspan><tspan x="0" dy="16">鸯</tspan><tspan x="0" dy="16">馆</tspan></text>
-    </g>
-    <g transform="translate(48,268)">
-      <rect x="-12" y="-15" width="24" height="60" rx="4" fill="#fdfbf3" stroke="#2c3531" stroke-width="0.9"/>
-      <text x="0" y="0" text-anchor="middle" class="ip-serif"><tspan x="0" dy="0">天</tspan><tspan x="0" dy="16">泉</tspan><tspan x="0" dy="16">亭</tspan></text>
-    </g>
-    <g transform="translate(404,142)">
-      <rect x="-12" y="-15" width="24" height="60" rx="4" fill="#fdfbf3" stroke="#2c3531" stroke-width="0.9"/>
-      <text x="0" y="0" text-anchor="middle" class="ip-serif"><tspan x="0" dy="0">兰</tspan><tspan x="0" dy="16">雪</tspan><tspan x="0" dy="16">堂</tspan></text>
-    </g>
-    <g transform="translate(270,352)">
-      <rect x="-12" y="-15" width="24" height="60" rx="4" fill="#fdfbf3" stroke="#2c3531" stroke-width="0.9"/>
-      <text x="0" y="0" text-anchor="middle" class="ip-serif"><tspan x="0" dy="0">芙</tspan><tspan x="0" dy="16">蓉</tspan><tspan x="0" dy="16">榭</tspan></text>
-    </g>
-    <g transform="translate(150,712)">
-      <rect x="-12" y="-15" width="24" height="60" rx="4" fill="#fdfbf3" stroke="#2c3531" stroke-width="0.9"/>
-      <text x="0" y="0" text-anchor="middle" class="ip-serif"><tspan x="0" dy="0">留</tspan><tspan x="0" dy="16">听</tspan><tspan x="0" dy="16">阁</tspan></text>
-    </g>
-  </g>
+  <VTag x={202} y={172} chars="见山楼" />
+  <VTag x={306} y={268} chars="远香堂" />
+  <VTag x={404} y={142} chars="兰雪堂" />
+  <VTag x={270} y={352} chars="芙蓉榭" />
+  <VTag x={224} y={388} chars="小飞虹" />
+  <VTag x={404} y={472} chars="香洲" />
+  <VTag x={38} y={540} chars="卅六鸳鸯馆" />
+  <VTag x={48} y={268} chars="天泉亭" />
+  <VTag x={150} y={712} chars="留听阁" />
 
-  <!-- 太湖石标注 -->
   <text x="336" y="176" font-size="11" fill="#5c5548" class="ip-serif">太湖石</text>
 
-  <!-- 印章 -->
-  <g>
-    <rect x="34" y="852" width="24" height="38" rx="3" fill="#A94442" stroke="#7e2f2d" stroke-width="1"/>
-    <text x="46" y="872" text-anchor="middle" font-size="12" font-weight="700" fill="#f7f1e3" class="ip-serif">拙</text>
-    <text x="46" y="886" text-anchor="middle" font-size="12" font-weight="700" fill="#f7f1e3" class="ip-serif">政</text>
-  </g>
+  <Seal x={34} y={852} chars="拙政" />
 </svg>
 
 <style>

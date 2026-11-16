@@ -1,0 +1,9 @@
+---
+/* 海报公共件 · 朱匾标题 */
+interface Props { title: string; sub: string }
+const { title, sub } = Astro.props;
+---
+<rect x="218" y="24" width="296" height="80" rx="16" fill="#A94442" stroke="#7e2f2d" stroke-width="1.5" />
+<rect x="226" y="32" width="280" height="64" rx="12" fill="none" stroke="#f3dfc2" stroke-width="0.9" />
+<text x="366" y="64" text-anchor="middle" font-size="28" font-weight="700" fill="#f7f1e3" letter-spacing="6" class="ip-serif">{title}</text>
+<text x="366" y="90" text-anchor="middle" font-size="12.5" fill="#f3d9c7" letter-spacing="3" class="ip-serif">{sub}</text>

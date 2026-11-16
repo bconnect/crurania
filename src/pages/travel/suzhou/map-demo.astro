@@ -1,6 +1,25 @@
 ---
-/* 临时：轴测手绘样张检查页 */
+/* 手绘海报评审页：/travel/suzhou/map-demo/ */
+import Base from '../../../layouts/Base.astro';
 import IsoZhuozhengyuan from '../../../components/suzhou/garden-maps/IsoZhuozhengyuan.astro';
+import IsoShizilin from '../../../components/suzhou/garden-maps/IsoShizilin.astro';
+import IsoLiuyuan from '../../../components/suzhou/garden-maps/IsoLiuyuan.astro';
+const { site } = Astro.locals;
 ---
-<html><head><meta charset="utf-8"><style>body{margin:0;padding:20px;background:#e8e4da}</style></head>
-<body><IsoZhuozhengyuan /></body></html>
+<Base title="轴测手绘海报 · 评审 | 苏州" description="苏州园林轴测手绘海报风格样张集合。">
+  <div class="demo-wrap">
+    <h1>轴测手绘海报 · 评审页</h1>
+    <p class="demo-note">统一视觉语言：朱匾标题 / 轴测鸟瞰 / 竖排标签 / 虚线游线 / 信息栏。滚动查看各园样张。</p>
+    <section><h2>拙政园</h2><IsoZhuozhengyuan /></section>
+    <section><h2>狮子林</h2><IsoShizilin /></section>
+    <section><h2>留园</h2><IsoLiuyuan /></section>
+  </div>
+</Base>
+<style>
+  .demo-wrap { max-width: 780px; margin: 0 auto; padding: 32px 16px 64px; }
+  .demo-wrap h1 { font-size: 22px; margin: 0 0 8px; }
+  .demo-note { color: #8a7d63; font-size: 13px; margin: 0 0 24px; }
+  section { margin-bottom: 48px; }
+  section h2 { font-size: 16px; margin: 0 0 12px; color: #A94442; }
+</style>
+</html>

@@ -1,0 +1,11 @@
+---
+/* 海报公共件 · 朱砂印章（竖排） */
+interface Props { x: number; y: number; chars: string }
+const { x, y, chars } = Astro.props;
+const arr = [...chars];
+---
+<g>
+  <rect x={x} y={y} width="24" height={arr.length === 1 ? 24 : 38} rx="3" fill="#A94442" stroke="#7e2f2d" stroke-width="1" />
+  <text x={x + 12} y={y + 16} text-anchor="middle" font-size="12" font-weight="700" fill="#f7f1e3" class="ip-serif">{arr[0]}</text>
+  {arr.length > 1 && <text x={x + 12} y={y + 30} text-anchor="middle" font-size="12" font-weight="700" fill="#f7f1e3" class="ip-serif">{arr[1]}</text>}
+</g>

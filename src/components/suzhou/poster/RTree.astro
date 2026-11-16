@@ -1,0 +1,20 @@
+---
+/* 海报公共件 · 团冠树。tone: 0浅绿 1绿 2深绿 3橙 4梅 5枫 */
+interface Props { x: number; y: number; r?: number; tone?: number }
+const { x, y, r = 12, tone = 1 } = Astro.props;
+const TONES: string[][] = [
+  ['#8aa864', '#6a914d', '#7fa05a'],
+  ['#6a914d', '#8aa864', '#54763d'],
+  ['#54763d', '#6a914d', '#465f33'],
+  ['#d9a441', '#e0b45e', '#c89333'],
+  ['#e3a7b6', '#d78ba0', '#c9708a'],
+  ['#c96f4a', '#b95c3b', '#a34e30'],
+];
+const F = TONES[tone] ?? TONES[1];
+---
+<g stroke="#2c3531" stroke-width="0.7">
+  <line x1={x} y1={y + 8} x2={x} y2={y - 2} stroke="#6f5b3f" stroke-width="1.7" fill="none" />
+  <circle cx={x} cy={y - 4} r={r} fill={F[0]} />
+  <circle cx={x - r * 0.72} cy={y + 3} r={r * 0.66} fill={F[1]} />
+  <circle cx={x + r * 0.7} cy={y + 4} r={r * 0.6} fill={F[2]} />
+</g>

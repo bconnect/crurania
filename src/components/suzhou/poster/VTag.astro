@@ -1,0 +1,12 @@
+---
+/* 海报公共件 · 竖排标签 */
+interface Props { x: number; y: number; chars: string }
+const { x, y, chars } = Astro.props;
+const arr = [...chars];
+---
+<g transform={`translate(${x},${y})`}>
+  <rect x="-12" y="-15" width="24" height={arr.length * 16 + 14} rx="4" fill="#fdfbf3" stroke="#2c3531" stroke-width="0.9" />
+  <text x="0" y="0" text-anchor="middle" font-size="13" font-weight="600" fill="#2c3531" class="ip-serif">
+    {arr.map((c, i) => <tspan x="0" dy={i === 0 ? 0 : 16}>{c}</tspan>)}
+  </text>
+</g>

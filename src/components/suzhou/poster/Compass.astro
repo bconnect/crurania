@@ -1,0 +1,15 @@
+---
+/* 海报公共件 · 指北针 */
+interface Props { x: number; y: number }
+const { x, y } = Astro.props;
+---
+<g transform={`translate(${x},${y})`}>
+  <circle cx="0" cy="0" r="25" fill="#fbf7ea" stroke="#2c3531" stroke-width="1.2" />
+  <circle cx="0" cy="0" r="19" fill="none" stroke="#9c8f74" stroke-width="0.6" />
+  <path d="M 0,-19 L 4,-4 L 19,0 L 4,4 L 0,19 L -4,4 L -19,0 L -4,-4 Z" fill="#A94442" stroke="#7e2f2d" stroke-width="0.7" />
+  <circle cx="0" cy="0" r="3" fill="#fbf7ea" stroke="#2c3531" stroke-width="0.8" />
+  <text x="0" y="-30" text-anchor="middle" font-size="10" font-weight="700" fill="#2c3531" class="ip-serif">N</text>
+  <text x="0" y="36" text-anchor="middle" font-size="10" fill="#2c3531" class="ip-serif">S</text>
+  <text x="32" y="4" text-anchor="middle" font-size="10" fill="#2c3531" class="ip-serif">E</text>
+  <text x="-32" y="4" text-anchor="middle" font-size="10" fill="#2c3531" class="ip-serif">W</text>
+</g>

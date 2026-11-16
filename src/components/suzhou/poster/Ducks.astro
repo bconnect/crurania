@@ -1,0 +1,11 @@
+---
+/* 海报公共件 · 双鸭 */
+interface Props { x: number; y: number }
+const { x, y } = Astro.props;
+---
+<g stroke="#2c3531" stroke-width="0.7">
+  <ellipse cx={x} cy={y} rx="9" ry="4.5" fill="#8a857a" />
+  <circle cx={x + 9} cy={y - 4} r="3" fill="#8a857a" />
+  <ellipse cx={x + 20} cy={y + 12} rx="7.5" ry="4" fill="#6f6a5e" />
+  <circle cx={x + 28} cy={y + 8} r="2.6" fill="#6f6a5e" />
+</g>

@@ -1,0 +1,6 @@
+---
+/* 海报公共件 · 虚线分隔 */
+interface Props { y: number }
+const { y } = Astro.props;
+---
+<line x1="530" y1={y} x2="722" y2={y} stroke="#9c8f74" stroke-width="0.7" stroke-dasharray="1 3" />

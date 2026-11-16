@@ -1,0 +1,20 @@
+---
+/* 海报公共件 · 垂柳 */
+interface Props { x: number; y: number }
+const { x, y } = Astro.props;
+---
+<g>
+  <path d={`M ${x},${y + 12} C ${x - 6},${y - 10} ${x + 6},${y - 22} ${x},${y - 36}`} fill="none" stroke="#6f5b3f" stroke-width="2.4" />
+  <g stroke="#2c3531" stroke-width="0.7">
+    <circle cx={x} cy={y - 42} r="12" fill="#8aa864" />
+    <circle cx={x - 12} cy={y - 34} r="8" fill="#6a914d" />
+    <circle cx={x + 13} cy={y - 34} r="8" fill="#7fa05a" />
+  </g>
+  <g stroke="#54763d" stroke-width="0.9" fill="none">
+    <path d={`M ${x - 14},${y - 30} q -2,10 1,20`} />
+    <path d={`M ${x - 6},${y - 28} q -1,11 1,22`} />
+    <path d={`M ${x + 2},${y - 27} q 0,11 0,23`} />
+    <path d={`M ${x + 10},${y - 28} q 1,11 0,22`} />
+    <path d={`M ${x + 18},${y - 31} q 2,10 0,20`} />
+  </g>
+</g>

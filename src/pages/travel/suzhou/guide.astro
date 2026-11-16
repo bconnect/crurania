@@ -4,6 +4,7 @@ import Base from '../../../layouts/Base.astro';
 import Header from '../../../components/Header.astro';
 import Footer from '../../../components/Footer.astro';
 import IsoMap from '../../../components/suzhou/garden-maps/IsoMap.astro';
+import IsoHuqiu from '../../../components/suzhou/garden-maps/IsoHuqiu.astro';
 
 /* 地图坐标点数据 */
 const spots: Record<string, any> = {
@@ -399,6 +400,7 @@ const tips = [
         <div><dt>核心胜景</dt><dd>剑池（阖闾墓之谜）· 云岩寺塔（斜约二点三米）· 千人石 · 断梁殿 · 山塘水路</dd></div>
         <div><dt>游赏要诀</dt><dd>开门即进避人潮 · 十一月下旬正值银杏季 · 可从阊门坐船沿白居易的山塘河抵达</dd></div>
       </dl>
+      <div class="gmap-wrap"><IsoHuqiu /></div>
       <p class="deep-link"><a href="/travel/suzhou/place-huqiu/">深度阅读：虎丘长文（约 2000 字 · 附测绘图纸）→</a></p>
     </article>
   </section>

@@ -14,6 +14,7 @@ import IsoOuyuan from '../../../components/suzhou/garden-maps/IsoOuyuan.astro';
 import IsoTuisi from '../../../components/suzhou/garden-maps/IsoTuisi.astro';
 import IsoHuanxiu from '../../../components/suzhou/garden-maps/IsoHuanxiu.astro';
 import IsoYiyuan from '../../../components/suzhou/garden-maps/IsoYiyuan.astro';
+import IsoHuqiu from '../../../components/suzhou/garden-maps/IsoHuqiu.astro';
 
 const isoByGarden: Record<string, any> = {
   zhuozhengyuan: IsoZhuozhengyuan,
@@ -40,7 +41,7 @@ const typeZh: Record<string, string> = { plan: '行前计划', note: '旅行笔�
 const sectionHref: Record<string, string> = { plan: '/travel/suzhou/plan/', note: '/travel/suzhou/notes/', photo: '/travel/suzhou/photos/', place: '/travel/suzhou/places/', anecdote: '/travel/suzhou/anecdotes/', figure: '/travel/suzhou/guide/', garden: '/travel/suzhou/guide/' };
 const backLabel = typeZh[d.type] ?? '苏州三日';
 const backHref = sectionHref[d.type] ?? '/travel/suzhou/';
-const Iso = d.type === 'garden' && d.garden ? (isoByGarden[d.garden] ?? null) : null;
+const Iso = d.type === 'garden' && d.garden ? (isoByGarden[d.garden] ?? null) : (entry.id === 'place-huqiu' ? IsoHuqiu : null);
 ---
 <Base title={d.title} description={d.description}>
   <Header current="travel" />

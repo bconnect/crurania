@@ -1,0 +1,227 @@
+---
+/* 轴测手绘海报 · 虎丘（吴中第一名胜 · 山塘尽处） */
+import Frame from '../poster/Frame.astro';
+import Clouds from '../poster/Clouds.astro';
+import Plaque from '../poster/Plaque.astro';
+import PanelFrame from '../poster/PanelFrame.astro';
+import PSect from '../poster/PSect.astro';
+import Divider from '../poster/Divider.astro';
+import RouteScroll from '../poster/RouteScroll.astro';
+import Compass from '../poster/Compass.astro';
+import Disclaimer from '../poster/Disclaimer.astro';
+import VTag from '../poster/VTag.astro';
+import RTree from '../poster/RTree.astro';
+import Seal from '../poster/Seal.astro';
+---
+<svg class="ip" viewBox="0 0 760 920" role="img" aria-label="虎丘手绘游览图">
+  <Frame />
+  <Clouds />
+  <Plaque title="虎丘游览图" sub="吴中第一名胜 · 山塘尽处" />
+
+  <g>
+    <PanelFrame />
+    <PSect y={158} title="游览特点" />
+    <text x="534" y="192" font-size="13.5" font-weight="700" fill="#A94442" class="ip-serif">【吴中第一名胜】</text>
+    <text x="534" y="210" font-size="12" fill="#2c3531" class="ip-serif">苏轼：不游虎丘乃憾事</text>
+    <text x="534" y="236" font-size="13.5" font-weight="700" fill="#A94442" class="ip-serif">【春秋层积】</text>
+    <text x="534" y="254" font-size="12" fill="#2c3531" class="ip-serif">阖闾墓 · 东晋寺 · 宋代塔</text>
+
+    <Divider y={278} />
+    <PSect y={308} title="必打卡景观" />
+    <!-- 剑池小图（两崖夹水） -->
+    <g transform="translate(532,322)">
+      <path d="M 6,30 L 12,8 M 44,30 L 38,8" stroke="#8a857a" stroke-width="2.4" fill="none" />
+      <path d="M 14,28 L 34,28 L 31,12 L 17,12 Z" fill="#c3e2db" stroke="#7fa398" stroke-width="0.8" />
+      <path d="M 19,22 q 5,-3 10,0" stroke="#7fa398" stroke-width="0.7" fill="none" />
+    </g>
+    <text x="586" y="342" font-size="13" font-weight="700" fill="#2c3531" class="ip-serif">剑池</text>
+    <text x="586" y="360" font-size="11" fill="#5c5548" class="ip-serif">两崖如削，阖闾墓在其下</text>
+    <!-- 云岩寺塔小图（残砖塔身） -->
+    <g transform="translate(538,378)">
+      <polygon points="10,32 14,4 26,4 30,32" fill="#efe8d5" stroke="#2c3531" stroke-width="1" />
+      <line x1="12" y1="24" x2="28" y2="24" stroke="#2c3531" stroke-width="0.6" />
+      <line x1="13" y1="16" x2="27" y2="16" stroke="#2c3531" stroke-width="0.6" />
+      <line x1="20" y1="4" x2="21" y2="-2" stroke="#2c3531" stroke-width="1.2" />
+      <rect x="5" y="32" width="30" height="4" fill="#d9d2c0" stroke="#8a857a" stroke-width="0.6" />
+    </g>
+    <text x="586" y="394" font-size="13" font-weight="700" fill="#2c3531" class="ip-serif">云岩寺塔</text>
+    <text x="586" y="412" font-size="11" fill="#5c5548" class="ip-serif">斜约2.3米，千年不倒</text>
+
+    <Divider y={434} />
+    <PSect y={466} title="推荐路线" />
+    <RouteScroll y={486} lines={["头山门 → 断梁殿 → 试剑石", "→ 千人石 → 二仙亭 → 剑池", "→ 山顶塔下 · 俯瞰山塘", "→ 拥翠山庄 → 万景山庄"]} />
+
+    <PSect y={620} title="贴士" />
+    <text x="534" y="644" font-size="11.5" fill="#2c3531" class="ip-serif">※ 开门即进，千人石静场</text>
+    <text x="534" y="664" font-size="11.5" fill="#2c3531" class="ip-serif">※ 十一月下旬银杏金黄</text>
+    <text x="534" y="684" font-size="11.5" fill="#2c3531" class="ip-serif">※ 可从阊门坐船沿山塘抵达</text>
+
+    <Compass x={668} y={768} />
+    <Disclaimer />
+  </g>
+
+  <!-- ═══ 主景 ═══ -->
+  <!-- 山体（海涌峰） -->
+  <path d="M 96,786 C 104,710 136,662 182,620 C 218,586 236,470 260,388 C 270,358 280,348 298,346 C 316,348 328,360 338,390 C 360,470 378,586 414,620 C 460,662 492,710 500,786 Z" fill="#efe8d5" stroke="#2c3531" stroke-width="1.8" />
+  <g stroke="#9a958a" stroke-width="0.8" fill="none">
+    <path d="M 150,700 c 14,-8 30,-12 46,-10 M 330,660 c 16,-4 32,-2 46,6 M 200,580 c 10,-10 22,-16 36,-18 M 360,560 c 12,-8 24,-10 36,-8" />
+  </g>
+  <!-- 山肩虚线（读出山势） -->
+  <path d="M 138,660 C 210,600 250,480 286,382 M 462,660 C 390,600 348,480 314,384" fill="none" stroke="#c9c0aa" stroke-width="0.9" stroke-dasharray="4 4" />
+
+  <!-- 山塘河（白居易开） -->
+  <path d="M 28,812 C 130,796 300,800 505,790 L 505,852 C 300,862 130,858 28,868 Z" fill="#c3e2db" stroke="#7fa398" stroke-width="1.2" />
+  <path d="M 60,834 q 16,-5 32,0 M 240,824 q 16,-5 32,0 M 400,838 q 16,-5 32,0" stroke="#7fa398" stroke-width="0.8" fill="none" />
+  <!-- 画舫 -->
+  <g transform="translate(112,826)">
+    <path d="M 0,8 Q 20,18 40,8 L 36,0 L 4,0 Z" fill="#a0765a" stroke="#2c3531" stroke-width="0.9" />
+    <rect x="10" y="-8" width="20" height="8" fill="#4a564f" stroke="#333d38" stroke-width="0.7" />
+    <line x1="20" y1="-8" x2="20" y2="-13" stroke="#2c3531" stroke-width="0.9" />
+  </g>
+  <text x="52" y="886" font-size="11" fill="#4f7f8f" class="ip-serif">山塘河 · 白居易开，通阊门</text>
+
+  <!-- 头山门（朱匾） -->
+  <g>
+    <rect x="270" y="712" width="56" height="26" fill="#f7f1e3" stroke="#2c3531" stroke-width="1.1" />
+    <rect x="290" y="722" width="16" height="16" fill="#2c3531" />
+    <polygon points="264,714 332,714 338,708 322,696 274,696 258,708" fill="#4a564f" stroke="#333d38" stroke-width="0.9" />
+    <rect x="286" y="700" width="24" height="11" fill="#A94442" stroke="#7e2f2d" stroke-width="0.6" />
+    <text x="298" y="709" font-size="8" font-weight="700" fill="#f7f1e3" text-anchor="middle" class="ip-serif">虎丘</text>
+  </g>
+  <!-- 码头石阶 -->
+  <line x1="292" y1="762" x2="292" y2="798" stroke="#8a857a" stroke-width="3" />
+  <line x1="298" y1="762" x2="298" y2="800" stroke="#8a857a" stroke-width="3" />
+
+  <!-- 断梁殿（元代遗构） -->
+  <g>
+    <rect x="272" y="586" width="52" height="26" fill="#f7f1e3" stroke="#2c3531" stroke-width="1.1" />
+    <line x1="285" y1="586" x2="285" y2="612" stroke="#2c3531" stroke-width="0.6" />
+    <line x1="298" y1="586" x2="298" y2="612" stroke="#2c3531" stroke-width="0.6" />
+    <line x1="311" y1="586" x2="311" y2="612" stroke="#2c3531" stroke-width="0.6" />
+    <polygon points="266,588 330,588 336,582 320,570 276,570 260,582" fill="#4a564f" stroke="#333d38" stroke-width="0.9" />
+    <polygon points="276,570 320,570 312,563 284,563" fill="#67756c" stroke="#333d38" stroke-width="0.7" />
+    <line x1="290" y1="563" x2="306" y2="563" stroke="#333d38" stroke-width="1.4" />
+  </g>
+
+  <!-- 千人石（暗红大盘石） -->
+  <ellipse cx="298" cy="528" rx="58" ry="17" fill="#b9aca3" stroke="#8a7d63" stroke-width="1.1" />
+  <path d="M 262,524 c 8,-4 20,-6 30,-4 M 300,534 c 10,-3 22,-2 30,2" stroke="#8a7d63" stroke-width="0.7" fill="none" />
+
+  <!-- 二仙亭 -->
+  <g>
+    <line x1="286" y1="462" x2="286" y2="478" stroke="#2c3531" stroke-width="1" />
+    <line x1="306" y1="462" x2="306" y2="478" stroke="#2c3531" stroke-width="1" />
+    <polygon points="282,463 310,463 314,459 306,449 286,449 278,459" fill="#4a564f" stroke="#333d38" stroke-width="0.8" />
+  </g>
+  <text x="320" y="476" font-size="10.5" fill="#5c5548" class="ip-serif">二仙亭</text>
+
+  <!-- 剑池（两崖夹水） -->
+  <path d="M 284,428 L 314,428 L 310,448 L 288,448 Z" fill="#c3e2db" stroke="#7fa398" stroke-width="1" />
+  <path d="M 281,425 L 287,449 M 317,425 L 311,449" stroke="#2c3531" stroke-width="2" />
+  <path d="M 292,438 q 6,-3 12,0" stroke="#7fa398" stroke-width="0.7" fill="none" />
+
+  <!-- 山顶平台与云岩寺塔 -->
+  <rect x="258" y="378" width="84" height="12" fill="#d9d2c0" stroke="#8a857a" stroke-width="1" />
+  <polygon points="276,378 282,200 314,200 320,378" fill="#efe8d5" stroke="#2c3531" stroke-width="1.6" />
+  <g stroke="#2c3531" stroke-width="0.9">
+    <line x1="277.3" y1="352" x2="318.7" y2="352" />
+    <line x1="278.7" y1="326" x2="317.3" y2="326" />
+    <line x1="280" y1="300" x2="316" y2="300" />
+    <line x1="281.3" y1="274" x2="314.7" y2="274" />
+    <line x1="282.7" y1="248" x2="313.3" y2="248" />
+    <line x1="284" y1="222" x2="312" y2="222" />
+  </g>
+  <line x1="298" y1="200" x2="301" y2="170" stroke="#2c3531" stroke-width="1.6" />
+  <circle cx="301" cy="166" r="3" fill="#A94442" />
+  <!-- 斜而不倒标注 -->
+  <text x="346" y="222" font-size="11.5" fill="#A94442" font-weight="700" class="ip-serif">斜而不倒</text>
+  <line x1="342" y1="226" x2="320" y2="212" stroke="#A94442" stroke-width="0.7" />
+  <text x="344" y="392" font-size="10.5" fill="#8a7d63" class="ip-serif">山顶大平台 · 塔影落剑池</text>
+
+  <!-- 试剑石（一裂为二） -->
+  <g transform="translate(388,646)">
+    <path d="M 0,10 L 9,-4 L 11,10 Z" fill="#b8b3a6" stroke="#8a857a" stroke-width="0.9" />
+    <path d="M 13,10 L 15,-4 L 24,10 Z" fill="#b8b3a6" stroke="#8a857a" stroke-width="0.9" />
+  </g>
+
+  <!-- 憨憨泉（小山泉） -->
+  <path d="M 148,700 c 4,-5 12,-5 15,0 c 2,4 -2,8 -8,8 c -6,0 -9,-4 -7,-8 z" fill="#c3e2db" stroke="#7fa398" stroke-width="0.8" />
+  <path d="M 156,696 q 1,-6 5,-8" stroke="#4f7f8f" stroke-width="0.9" fill="none" />
+
+  <!-- 拥翠山庄（西） -->
+  <g>
+    <rect x="172" y="632" width="46" height="17" fill="#f7f1e3" stroke="#2c3531" stroke-width="1" />
+    <polygon points="166,634 224,634 228,630 218,620 172,620 162,630" fill="#4a564f" stroke="#333d38" stroke-width="0.8" />
+  </g>
+
+  <!-- 冷香阁（西上，小阁） -->
+  <g>
+    <line x1="216" y1="492" x2="216" y2="506" stroke="#2c3531" stroke-width="1" />
+    <line x1="232" y1="492" x2="232" y2="506" stroke="#2c3531" stroke-width="1" />
+    <rect x="212" y="502" width="24" height="7" fill="#f7f1e3" stroke="#2c3531" stroke-width="0.7" />
+    <polygon points="208,503 240,503 244,499 236,490 212,490 204,499" fill="#4a564f" stroke="#333d38" stroke-width="0.7" />
+  </g>
+  <text x="180" y="524" font-size="10" fill="#5c5548" class="ip-serif">冷香阁</text>
+
+  <!-- 万景山庄（东，盆景园） -->
+  <g>
+    <rect x="404" y="700" width="46" height="17" fill="#f7f1e3" stroke="#2c3531" stroke-width="1" />
+    <polygon points="398,702 456,702 460,698 450,688 404,688 394,698" fill="#4a564f" stroke="#333d38" stroke-width="0.8" />
+  </g>
+  <g transform="translate(410,724)">
+    <path d="M 2,6 l 8,0 l -1,4 l -6,0 z" fill="#b8621e" opacity="0.85" />
+    <path d="M 3,6 C 3,1 9,1 9,6" stroke="#54763d" stroke-width="1" fill="none" />
+  </g>
+
+  <!-- 真娘墓（小碑一冢） -->
+  <ellipse cx="428" cy="566" rx="13" ry="5" fill="#b8b3a6" stroke="#8a857a" stroke-width="0.9" />
+  <rect x="425" y="552" width="6" height="12" fill="#d9d2c0" stroke="#8a857a" stroke-width="0.8" />
+
+  <!-- 点头石（千人石东侧小石） -->
+  <ellipse cx="352" cy="584" rx="8" ry="4" fill="#b8b3a6" stroke="#8a857a" stroke-width="0.8" />
+  <text x="330" y="600" font-size="10" fill="#5c5548" class="ip-serif">点头石</text>
+
+  <!-- ═══ 林木 ═══ -->
+  <RTree x={130} y={672} r={12} tone={1} />
+  <RTree x={206} y={742} r={11} tone={2} />
+  <RTree x={376} y={742} r={13} tone={3} />
+  <text x="394" y="758" font-size="10.5" fill="#8a6a2a" class="ip-serif">古银杏</text>
+  <RTree x={238} y={560} r={10} tone={2} />
+  <RTree x={352} y={508} r={10} tone={0} />
+  <RTree x={428} y={648} r={11} tone={1} />
+  <RTree x={166} y={556} r={10} tone={5} />
+
+  <!-- ═══ 游线 ═══ -->
+  <path d="M 298,712 L 298,392 M 298,646 C 320,648 350,648 384,650 M 298,560 L 344,580 M 298,528 C 250,570 210,600 196,634 C 180,660 160,676 152,694 C 140,718 180,740 230,748 C 280,756 360,754 400,736 L 428,714"
+        fill="none" stroke="#8a7d63" stroke-width="2" stroke-dasharray="6 5" />
+  <g fill="#8a7d63">
+    <ellipse cx="294" cy="690" rx="2.2" ry="3" /><ellipse cx="302" cy="696" rx="2.2" ry="3" />
+    <ellipse cx="294" cy="660" rx="2.2" ry="3" /><ellipse cx="302" cy="666" rx="2.2" ry="3" />
+    <ellipse cx="294" cy="600" rx="2.2" ry="3" /><ellipse cx="302" cy="606" rx="2.2" ry="3" />
+    <ellipse cx="294" cy="500" rx="2.2" ry="3" /><ellipse cx="302" cy="506" rx="2.2" ry="3" />
+    <ellipse cx="294" cy="452" rx="2.2" ry="3" /><ellipse cx="302" cy="458" rx="2.2" ry="3" />
+    <ellipse cx="294" cy="412" rx="2.2" ry="3" /><ellipse cx="302" cy="418" rx="2.2" ry="3" />
+    <ellipse cx="330" cy="650" rx="2.2" ry="3" /><ellipse cx="336" cy="656" rx="2.2" ry="3" />
+    <ellipse cx="212" cy="612" rx="2.2" ry="3" /><ellipse cx="218" cy="618" rx="2.2" ry="3" />
+    <ellipse cx="320" cy="750" rx="2.2" ry="3" /><ellipse cx="326" cy="756" rx="2.2" ry="3" />
+  </g>
+
+  <!-- ═══ 竖排标签 ═══ -->
+  <VTag x={238} y={722} chars="山门" />
+  <VTag x={232} y={596} chars="断梁殿" />
+  <VTag x={212} y={516} chars="千人石" />
+  <VTag x={372} y={434} chars="剑池" />
+  <VTag x={218} y={318} chars="云岩寺塔" />
+  <VTag x={416} y={640} chars="试剑石" />
+  <VTag x={434} y={554} chars="真娘墓" />
+  <VTag x={240} y={636} chars="拥翠山庄" />
+  <VTag x={428} y={698} chars="万景山庄" />
+  <VTag x={102} y={688} chars="憨憨泉" />
+
+  <Seal x={30} y={116} chars="虎" />
+</svg>
+
+<style>
+  .ip { display: block; width: 100%; height: auto; max-width: 720px; margin: 0 auto; }
+  .ip-serif { font-family: var(--serif); }
+</style>

@@ -1,6 +1,6 @@
 # ============================================================
 # CRURANIA 内容管理后台配置（Decap CMS）
-# 你日常维护网站，只需要访问 https://crurania.com/admin
+# 你日常维护网站，只需要访问 https://crurania.cn/admin
 # ============================================================
 
 backend:
@@ -20,8 +20,8 @@ public_folder: "/images/uploads"
 locale: zh_Hans
 
 # 编辑体验：预览样式用网站同款字体
-site_url: https://crurania.com
-display_url: https://crurania.com
+site_url: https://crurania.cn
+display_url: https://crurania.cn
 logo_url: /favicon.svg
 search: true
 
@@ -128,3 +128,35 @@ collections:
       - { label: "标签", name: "tags", widget: "list", required: false }
       - { label: "草稿（不打勾 = 发布）", name: "draft", widget: "boolean", default: true }
       - { label: "正文", name: "body", widget: "markdown" }
+
+  # ---------- 07 苏州时间表（数据文件，整表编辑） ----------
+  - name: "suzhou-timetable"
+    label: "🕰 苏州时间表"
+    file: "src/data/suzhou-timeline.yaml"
+    description: "苏州三日时间表的唯一数据源。改完点右上角'发布'，网站 1-2 分钟后自动更新。"
+    fields:
+      - label: "行程信息"
+        name: "trip"
+        widget: "object"
+        fields:
+          - { label: "标题", name: "title", widget: "string" }
+          - { label: "出发日期", name: "depart", widget: "string", hint: "格式 2026-11-24" }
+          - { label: "返回日期", name: "return", widget: "string", hint: "格式 2026-11-26" }
+          - { label: "一句话主题", name: "note", widget: "string" }
+      - label: "每日安排"
+        name: "days"
+        widget: "list"
+        summary: "第 {{fields.day}} 天 · {{fields.theme}}"
+        fields:
+          - { label: "第几天", name: "day", widget: "number", value_type: "int" }
+          - { label: "日期", name: "date", widget: "string", hint: "格式 2026-11-24" }
+          - { label: "星期", name: "weekday", widget: "string" }
+          - { label: "当天主题", name: "theme", widget: "string" }
+          - label: "行程条目"
+            name: "schedule"
+            widget: "list"
+            summary: "{{fields.time}} {{fields.place}}"
+            fields:
+              - { label: "时间", name: "time", widget: "string", hint: "如 07:30" }
+              - { label: "地点 / 事项", name: "place", widget: "string" }
+              - { label: "备注", name: "note", widget: "string", required: false }
